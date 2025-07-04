@@ -1,11 +1,15 @@
+import { useTranslation } from 'react-i18next';
+
 import './global.scss';
 
 const App = () => {
+  const { t } = useTranslation();
+
   return (
     <>
-      <h1>Site do Kaio</h1>
+      <h1>{t('Home Page')}</h1>
     </>
   );
 };
 
-export default App;
+export { App };
