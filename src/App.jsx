@@ -7,7 +7,7 @@ const App = () => {
 
   return (
     <>
-      <h1>{t('Home Page')}</h1>
+      <h1>{t('Home Page Here')}</h1>
     </>
   );
 };
