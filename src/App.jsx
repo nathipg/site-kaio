@@ -1,15 +1,29 @@
-import { useTranslation } from 'react-i18next';
+import { memo } from 'react';
+import { createHashRouter, Navigate, RouterProvider } from 'react-router';
+
+import { DefaultLayout } from './layouts';
+import { AthleteArea, Home } from './pages';
 
 import './global.scss';
 
-const App = () => {
-  const { t } = useTranslation();
+const router = createHashRouter([
+  {
+    path: '/',
+    element: <DefaultLayout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: 'athlete', element: <AthleteArea /> },
+      { path: '*', element: <Navigate to="/" /> },
+    ],
+  },
+]);
 
+const App = () => {
   return (
-    <>
-      <h1>{t('Home Page Here')}</h1>
-    </>
+    <RouterProvider router={router} />
   );
 };
 
-export { App };
+const AppMemo = memo(App);
+
+export { AppMemo as App };
