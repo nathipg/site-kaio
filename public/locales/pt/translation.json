@@ -1,4 +1,9 @@
 {
   "Home": "Início",
-  "Athlete": "Atleta"
+  "Athlete": "Atleta",
+  "Exercise": "Exercício",
+  "Sets": "Séries",
+  "Reps": "Repetições",
+  "Rest": "Descanso",
+  "Status": "Status"
 }

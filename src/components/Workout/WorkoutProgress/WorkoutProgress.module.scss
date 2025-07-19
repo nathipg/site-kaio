@@ -1,7 +1,9 @@
 @use '../../../colors.scss';
 
 .WorkoutProgress {
-  
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .WorkoutProgressBar {

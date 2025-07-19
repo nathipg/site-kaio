@@ -1,19 +1,28 @@
-import { memo, useRef, useState } from 'react';
+import { memo, useCallback, useRef, useState } from 'react';
 
+import { ExerciseList } from './ExerciseList';
 import { WorkoutHeader } from './WorkoutHeader';
 
 import styles from './Workout.module.scss';
 
 const mockedExercises = [
-  {}, {}, {},
+  { id: 1, name: 'Exercício 1', sets: 1, reps: 10, rest: '1m', videoURL: 'https://www.youtube.com/embed/st1rQHX4llM?si=lmVCAcFvhzX2RIM9' },
+  { id: 2, name: 'Exercício 2', sets: 2, reps: 20, rest: '2m', videoURL: 'https://www.youtube.com/embed/st1rQHX4llM?si=lmVCAcFvhzX2RIM9' },
+  { id: 3, name: 'Exercício 3', sets: 3, reps: 30, rest: '3m', videoURL: 'https://www.youtube.com/embed/st1rQHX4llM?si=lmVCAcFvhzX2RIM9' },
 ];
 
 const Workout = (props) => {
   const { title, description } = props;
 
-  const [ exercises, setExercises ] = useState(mockedExercises);
+  const exercises = mockedExercises;
+
+  const [ isExpanded, setIsExpanded ] = useState(true);
 
   const workoutProgressFnsRef = useRef(null);
+
+  const onChangeExpandedState = useCallback((status) => {
+    setIsExpanded(status);
+  }, []);
 
   return (
     <div className={styles.Workout}>
@@ -21,11 +30,16 @@ const Workout = (props) => {
         title={title}
         description={description}
         totalExercises={exercises.length}
+        onChangeExpandedState={onChangeExpandedState}
         workoutProgressFnsRef={workoutProgressFnsRef}
       />
 
-      <button onClick={() => workoutProgressFnsRef.current?.onMarkExerciseAsComplete()}>Mark as Complete</button>
-      <button onClick={() => workoutProgressFnsRef.current?.onMarkExerciseAsIncomplete()}>Mark as Incomplete</button>
+      <div style={{ display: isExpanded ? 'block' : 'none' }}>
+        <ExerciseList
+          exercises={exercises}
+          workoutProgressFnsRef={workoutProgressFnsRef}
+        />
+      </div>
     </div>
   );
 };
