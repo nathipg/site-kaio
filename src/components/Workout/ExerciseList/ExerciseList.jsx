@@ -15,12 +15,14 @@ const ExerciseList = (props) => {
     <div className={styles.ExerciseList}>
       <table>
         <thead>
-          <td></td>
-          <th>{t('Exercise')}</th>
-          <th>{t('Sets')}</th>
-          <th>{t('Reps')}</th>
-          <th>{t('Rest')}</th>
-          <th>{t('Status')}</th>
+          <tr>
+            <th>{t('Exercise')}</th>
+            <th>{t('Sets')}</th>
+            <th>{t('Reps')}</th>
+            <th>{t('Weight')}</th>
+            <th>{t('Rest')}</th>
+            <th></th>
+          </tr>
         </thead>
         <tbody>
           {exercises.map(exercise => (

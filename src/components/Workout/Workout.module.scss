@@ -1,3 +1,7 @@
+@use '../../colors.scss';
+
 .Workout {
-  
+  border: 1px solid colors.$gray;
+  border-radius: 5px;
+  padding: 1rem;
 }

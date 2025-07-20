@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { WorkoutArrow } from '../WorkoutArrow';
+import { ExpandCollapseArrow } from '../../ExpandCollapseArrow';
 import { WorkoutProgress } from '../WorkoutProgress';
 import { WorkoutTitle } from '../WorkoutTitle';
 
@@ -8,7 +8,7 @@ import styles from './WorkoutHeader.module.scss';
 
 const WorkoutHeader = (props) => {
   const { title, description, totalExercises } = props;
-  const { onChangeExpandedState } = props;
+  const { isExpanded, onChangeExpandedState } = props;
   const { workoutProgressFnsRef } = props;
 
   return (
@@ -18,14 +18,18 @@ const WorkoutHeader = (props) => {
         description={description}
       />
 
-      <WorkoutProgress
-        totalExercises={totalExercises}
-        workoutProgressFnsRef={workoutProgressFnsRef}
-      />
+      <div className={styles.WorkoutHeaderGroup}>
+        <WorkoutProgress
+          totalExercises={totalExercises}
+          workoutProgressFnsRef={workoutProgressFnsRef}
+          onChangeExpandedState={onChangeExpandedState}
+        />
 
-      <WorkoutArrow
-        onChangeExpandedState={onChangeExpandedState}
-      />
+        <ExpandCollapseArrow
+          isExpanded={isExpanded}
+          onChangeExpandedState={onChangeExpandedState}
+        />
+      </div>
     </div>
   );
 };
