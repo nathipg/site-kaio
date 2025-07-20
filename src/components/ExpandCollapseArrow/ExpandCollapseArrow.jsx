@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { CaretDownIcon, CaretUpIcon } from '../Icons';
+import { CaretDownIcon, CaretUpIcon } from '@/components';
 
 import styles from './ExpandCollapseArrow.module.scss';
 

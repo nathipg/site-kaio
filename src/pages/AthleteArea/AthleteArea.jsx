@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Workout } from '../../components';
+import { Workout } from '@/components';
 
 const AthleteArea = () => {
   const { t } = useTranslation();

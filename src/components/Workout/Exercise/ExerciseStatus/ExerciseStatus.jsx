@@ -1,6 +1,6 @@
 import { memo, useCallback, useState } from 'react';
 
-import { CheckIcon, XIcon } from '../../Icons';
+import { CheckIcon, XIcon } from '@/components';
 
 import styles from './ExerciseStatus.module.scss';
 

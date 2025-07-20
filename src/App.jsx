@@ -4,7 +4,7 @@ import { createHashRouter, Navigate, RouterProvider } from 'react-router';
 import { DefaultLayout } from './layouts';
 import { AthleteArea, Home } from './pages';
 
-import './global.scss';
+import '@/styles/global.scss';
 
 const router = createHashRouter([
   {

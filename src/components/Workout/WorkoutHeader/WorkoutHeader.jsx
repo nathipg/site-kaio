@@ -1,6 +1,7 @@
 import { memo } from 'react';
 
-import { ExpandCollapseArrow } from '../../ExpandCollapseArrow';
+import { ExpandCollapseArrow } from '@/components';
+
 import { WorkoutProgress } from '../WorkoutProgress';
 import { WorkoutTitle } from '../WorkoutTitle';
 

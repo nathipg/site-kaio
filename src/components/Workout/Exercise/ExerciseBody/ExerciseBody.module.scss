@@ -1,0 +1,19 @@
+.ExerciseBody {
+  table {
+    width: 100%;
+  }
+
+  th {
+    text-align: left;
+  }
+
+  td {
+    white-space: nowrap;
+  }
+
+  tr {
+    &[data-is-expanded="false"] {
+      display: none;
+    }
+  }
+}
