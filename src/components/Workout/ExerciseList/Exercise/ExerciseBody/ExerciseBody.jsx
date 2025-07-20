@@ -3,14 +3,14 @@ import { useTranslation } from 'react-i18next';
 
 import { Video } from '@/components';
 
-import { ExerciseStatus } from '../ExerciseStatus';
+import { ExerciseStatus } from './ExerciseStatus';
 
 import styles from './ExerciseBody.module.scss';
 
 const ExerciseBody = (props) => {
-  const { workoutProgressFnsRef } = props;
+  const { onChangeExerciseStatus } = props;
   const { exercise, isExpanded } = props;
-  const { sets, reps, weight, rest, videoURL } = exercise;
+  const { id, sets, reps, weight, rest, videoURL } = exercise;
 
   const { t } = useTranslation();
 
@@ -45,7 +45,8 @@ const ExerciseBody = (props) => {
             </td>
             <td>
               <ExerciseStatus
-                workoutProgressFnsRef={workoutProgressFnsRef}
+                exerciseId={id}
+                onChangeExerciseStatus={onChangeExerciseStatus}
               />
             </td>
           </tr>

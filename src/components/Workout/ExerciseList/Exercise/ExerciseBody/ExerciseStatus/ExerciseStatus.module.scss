@@ -1,0 +1,17 @@
+@use '@/styles/colors.scss';
+
+.ExerciseStatus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background-color: colors.$gray;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+
+  &.ExerciseCompleted {
+    background-color: rgba(colors.$green, 0.3);
+    color: colors.$green;
+  }
+}

@@ -1,7 +1,9 @@
 @use '@/styles/colors.scss';
 
 .Workout {
+  display: flex;
+  flex-direction: column;
+
   border: 1px solid colors.$gray;
   border-radius: 5px;
-  padding: 1rem;
 }

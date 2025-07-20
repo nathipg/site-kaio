@@ -1,0 +1,9 @@
+@use '@/styles/colors.scss';
+
+.ExerciseList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border-top: 1px solid colors.$gray;
+}

@@ -1,4 +1,4 @@
-import { memo, useCallback, useRef, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 
 import { ExerciseList } from './ExerciseList';
 import { WorkoutHeader } from './WorkoutHeader';
@@ -16,12 +16,36 @@ const Workout = (props) => {
 
   const exercises = mockedExercises;
 
+  const [ completedExercises, setCompletedExercises ] = useState([]);
   const [ isExpanded, setIsExpanded ] = useState(true);
 
-  const workoutProgressFnsRef = useRef(null);
+  const completedExercisesQty = useMemo(() => {
+    return completedExercises.length;
+  }, [ completedExercises.length ]);
 
   const onChangeExpandedState = useCallback((status) => {
     setIsExpanded(status);
+  }, []);
+
+  const onChangeExerciseStatus = useCallback((data) => {
+    const { exerciseId, isCompleted } = data;
+
+    setCompletedExercises(currentCompletedExercises => {
+      if(isCompleted) {
+        return [
+          ...new Set([
+            ...currentCompletedExercises,
+            exerciseId,
+          ]),
+        ];
+      }
+
+      const arrayWithoutItem = currentCompletedExercises.filter(item => item != exerciseId);
+
+      return [
+        ...arrayWithoutItem,
+      ];
+    });
   }, []);
 
   return (
@@ -32,13 +56,13 @@ const Workout = (props) => {
         totalExercises={exercises.length}
         isExpanded={isExpanded}
         onChangeExpandedState={onChangeExpandedState}
-        workoutProgressFnsRef={workoutProgressFnsRef}
+        completedExercisesQty={completedExercisesQty}
       />
 
       <div style={{ display: isExpanded ? 'block' : 'none' }}>
         <ExerciseList
           exercises={exercises}
-          workoutProgressFnsRef={workoutProgressFnsRef}
+          onChangeExerciseStatus={onChangeExerciseStatus}
         />
       </div>
     </div>
