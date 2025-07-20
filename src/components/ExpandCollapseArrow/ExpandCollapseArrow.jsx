@@ -12,12 +12,12 @@ const ExpandCollapseArrow = (props) => {
     isExpanded ? (
       <CaretUpIcon
         className={styles.ExpandCollapseArrow}
-        onClick={() => onChangeExpandedState(false)}
+        onClick={onChangeExpandedState}
       />
     ) : (
       <CaretDownIcon
         className={styles.ExpandCollapseArrow}
-        onClick={() => onChangeExpandedState(true)}
+        onClick={onChangeExpandedState}
       />
     )
   );

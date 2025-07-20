@@ -23,8 +23,8 @@ const Workout = (props) => {
     return completedExercises.length;
   }, [ completedExercises.length ]);
 
-  const onChangeExpandedState = useCallback((status) => {
-    setIsExpanded(status);
+  const onChangeExpandedState = useCallback(() => {
+    setIsExpanded(currentStatus => !currentStatus);
   }, []);
 
   const onChangeExerciseStatus = useCallback((data) => {

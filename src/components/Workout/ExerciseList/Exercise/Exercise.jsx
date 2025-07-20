@@ -10,8 +10,8 @@ const Exercise = (props) => {
 
   const [ isExpanded, setIsExpanded ] = useState(false);
 
-  const onChangeExpandedState = useCallback((status) => {
-    setIsExpanded(status);
+  const onChangeExpandedState = useCallback(() => {
+    setIsExpanded(currentStatus => !currentStatus);
   }, []);
 
   return (
