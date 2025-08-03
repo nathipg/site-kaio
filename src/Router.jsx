@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { createHashRouter, Navigate, RouterProvider, useLocation, useNavigate, useSearchParams } from 'react-router';
 
 import { DefaultLayout } from '@/layouts';
-import { AthleteArea, Home, SignIn, SignUp, Training } from '@/pages';
+import { AddExercise, AthleteArea, Home, SignIn, SignUp, Training } from '@/pages';
 import { UserSlice } from '@/store/slices';
 
 const CheckLoginRedirectRoute = (props) => {
@@ -53,6 +53,39 @@ const ProtectedRoute = (props) => {
   return children;
 };
 
+const ProtectedAdminRoute = (props) => {
+  const { children } = props;
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [ searchParams ] = useSearchParams();
+
+  const isLoggedIn = useSelector(UserSlice.selectors.isLoggedIn);
+  const isLoginVerificationComplete = useSelector(UserSlice.selectors.isLoginVerificationComplete);
+  const isAdmin = true; // TODO Change to actually check if is admin
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      const currentPath = location.pathname + location.search;
+      const urlParam = isLoginVerificationComplete ? '' : `?url=${currentPath}`;
+
+      navigate(`/sign-in${urlParam}`, { replace: true });
+    }
+
+    if(!isAdmin) {
+      navigate('/', { replace: true });
+    }
+
+    if(isLoggedIn) {
+      const redirectUrl = searchParams.get('url') || null;
+
+      redirectUrl && navigate(redirectUrl, { replace: true });
+    }
+  }, [ isAdmin, isLoggedIn, isLoginVerificationComplete, location.pathname, location.search, navigate, searchParams ]);
+
+  return children;
+};
+
 const router = createHashRouter([
   {
     path: '/',
@@ -76,6 +109,14 @@ const router = createHashRouter([
           <ProtectedRoute>
             <Training />
           </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'add-exercise',
+        element: (
+          <ProtectedAdminRoute>
+            <AddExercise />
+          </ProtectedAdminRoute>
         ),
       },
       {

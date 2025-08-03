@@ -1,3 +1,4 @@
+export * from './AddExercise';
 export * from './AthleteArea';
 export * from './Home';
 export * from './SignIn';
