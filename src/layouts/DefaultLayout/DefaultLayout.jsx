@@ -23,11 +23,11 @@ const DefaultLayout = () => {
     <>
       <GrowlContainer />
 
-      <Link to={{ pathname: '' }}>{t('Home')}</Link>
+      <Link to={{ pathname: '/' }}>{t('Home')}</Link>
       <Link to={{ pathname: '/sign-in' }}>{t('Sign in')}</Link>
       <Link to={{ pathname: '/athlete' }}>{t('Athlete')}</Link>
       <Link to={{ pathname: '/training' }}>{t('Training')}</Link>
-      <Link to={{ pathname: '/add-exercise' }}>{t('Add Exercise')}</Link>
+      <Link to={{ pathname: '/manage/exercises' }}>{t('Manage Exercises')}</Link>
       
       {
         isLoggedIn ? (

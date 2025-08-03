@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { createHashRouter, Navigate, RouterProvider, useLocation, useNavigate, useSearchParams } from 'react-router';
 
 import { DefaultLayout } from '@/layouts';
-import { AddExercise, AthleteArea, Home, SignIn, SignUp, Training } from '@/pages';
+import { AthleteArea, Home, ManageExercises, SignIn, SignUp, Training } from '@/pages';
 import { UserSlice } from '@/store/slices';
 
 const CheckLoginRedirectRoute = (props) => {
@@ -112,14 +112,6 @@ const router = createHashRouter([
         ),
       },
       {
-        path: 'add-exercise',
-        element: (
-          <ProtectedAdminRoute>
-            <AddExercise />
-          </ProtectedAdminRoute>
-        ),
-      },
-      {
         path: 'sign-in',
         element: (
           <CheckLoginRedirectRoute>
@@ -135,9 +127,23 @@ const router = createHashRouter([
           </CheckLoginRedirectRoute>
         ),
       },
-      { path: '*', element: <Navigate to="/" /> },
     ],
   },
+  {
+    path: '/manage',
+    element: <DefaultLayout />,
+    children: [
+      {
+        path: 'exercises',
+        element: (
+          <ProtectedAdminRoute>
+            <ManageExercises />
+          </ProtectedAdminRoute>
+        ),
+      },
+    ],
+  },
+  { path: '*', element: <Navigate to="/" /> },
 ]);
 
 const Router = () => {
