@@ -1,4 +1,18 @@
 {
+  "error-message": {
+    "sign-up-user": {
+      "auth/invalid-email": "Por favor, insira um email válido",
+      "auth/email-already-in-use": "Já existe uma conta com esse email",
+      "auth/missing-password": "Por favor, insira uma senha com pelo menos 6 caracteres",
+      "auth/weak-password": "Por favor, insira uma senha com pelo menos 6 caracteres",
+      "confirm-password-does-not-match": "Sua senha e a senha de confirmação devem ser iguais"
+    },
+    "sign-in-user": {
+      "auth/invalid-email": "Usuário não encontrado",
+      "auth/missing-password": "Usuário não encontrado",
+      "auth/invalid-credential": "Usuário não encontrado"
+    }
+  },
   "Home": "Início",
   "Athlete": "Atleta",
   "Exercise": "Exercício",
@@ -6,5 +20,27 @@
   "Reps": "Repetições",
   "Weight": "Peso",
   "Rest": "Descanso",
-  "Status": "Status"
+  "Status": "Status",
+  "Email": "Email",
+  "Phone Number": "Telefone",
+  "Birthdate": "Data de Nascimento",
+  "Occupation": "Profissão",
+  "Password": "Senha",
+  "Athlete Area": "Área do Atleta",
+  "Access your content": "Acesse seus conteúdos",
+  "Sign in": "Entrar",
+  "Sign up": "Cadastrar",
+  "Don't have an account? Sign up": "Não tem uma conta? Cadastre-se",
+  "Already have an account? Sign in": "Já tem uma conta? Acesse aqui",
+  "Create an Account": "Crie uma Conta",
+  "Fullname": "Nome complete",
+  "Confirm Password": "Confirmar Senha",
+  "Anamnese": "Anamnese",
+  "In order for you to access your workouts, I'll need some information. We'll conduct a medical history to ensure training safety. Feel free to share whatever you think is relevant.": "Para que você tenha acesso aos seus treinos, precisarei de alguns dados. Faremos uma anamnese para segurança nos treinos. Sinta-se a vontade para falar o que achar pertinente.",
+  "What is your goal with training?": "Qual seu objetivo com os treinos?",
+  "Do you have any limitations when it comes to exercise?": "Você possui alguma limitação ao exercício?",
+  "Do you have any medical restrictions?": "Possui alguma restrição médica?",
+  "Are you taking any medicine?": "Toma algum remédio?",
+  "I am aware of and responsible for the information provided here": "Estou ciente e sou responsável pelas informações aqui colocadas",
+  "I recommend that you undergo a medical examination before starting training to obtain the professional's approval": "Recomendo, antes de iniciar os treinos, realizar um exame médico para ter o aval do profissional"
 }

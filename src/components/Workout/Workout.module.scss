@@ -1,9 +1,15 @@
 @use '@/styles/colors.scss';
+@use '@/styles/screen-sizes.scss' as screenSizes;
 
 .Workout {
   display: flex;
   flex-direction: column;
 
-  border: 1px solid colors.$gray;
+  border: 1px solid colors.$light-gray;
   border-radius: 5px;
+  margin: 0 auto;
+
+  @media (min-width: screenSizes.$md) {
+    max-width: screenSizes.$md;
+  }
 }

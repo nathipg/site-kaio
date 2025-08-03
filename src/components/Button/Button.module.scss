@@ -1,0 +1,61 @@
+@use 'sass:color';
+
+@use '@/styles/colors.scss';
+@use '@/styles/mixins.scss';
+
+.Button {
+  padding: 0.25rem 1rem;
+  white-space: nowrap;
+  border: 0;
+  border-radius: 5px;
+  width: fit-content;
+  cursor: pointer;
+
+  &[data-text-only="false"] {
+    &[data-category="DEFAULT"] {
+      @include mixins.background-with-hover(colors.$light-gray);
+    }
+  
+    &[data-category="DANGER"] {
+      @include mixins.background-with-hover(colors.$red);
+      color: colors.$white;
+    }
+  
+    &[data-category="PRIMARY"] {
+      @include mixins.background-with-hover(colors.$blue);
+      color: colors.$white;
+    }
+  
+    &[data-category="SUCCESS"] {
+      @include mixins.background-with-hover(colors.$green);
+      color: colors.$white;
+    }
+  }
+
+  &[data-text-only="true"] {
+    padding: 0;
+    background: none;
+
+    &[data-category="DEFAULT"] {
+      @include mixins.color-with-hover(colors.$light-gray);
+    }
+
+    &[data-category="DANGER"] {
+      @include mixins.color-with-hover(colors.$red);
+    }
+
+    &[data-category="PRIMARY"] {
+      @include mixins.color-with-hover(colors.$blue);
+    }
+
+    &[data-category="SUCCESS"] {
+      @include mixins.color-with-hover(colors.$green);
+    }
+  }
+
+  &[data-has-icon="true"] {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}

@@ -1,0 +1,11 @@
+.FieldWithLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  width: 100%;
+
+  span {
+    white-space: nowrap;
+  }
+}

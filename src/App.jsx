@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { createHashRouter, Navigate, RouterProvider } from 'react-router';
 
 import { DefaultLayout } from './layouts';
-import { AthleteArea, Home } from './pages';
+import { AthleteArea, Home, SignIn, SignUp } from './pages';
 
 import '@/styles/global.scss';
 
@@ -13,6 +13,8 @@ const router = createHashRouter([
     children: [
       { index: true, element: <Home /> },
       { path: 'athlete', element: <AthleteArea /> },
+      { path: 'sign-in', element: <SignIn /> },
+      { path: 'sign-up', element: <SignUp /> },
       { path: '*', element: <Navigate to="/" /> },
     ],
   },
