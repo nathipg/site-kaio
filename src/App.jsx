@@ -1,28 +1,28 @@
-import { memo } from 'react';
-import { createHashRouter, Navigate, RouterProvider } from 'react-router';
+import { onAuthStateChanged } from 'firebase/auth';
+import { memo, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { DefaultLayout } from './layouts';
-import { AthleteArea, Home, SignIn, SignUp } from './pages';
+import { Router } from './Router';
+import { firebaseService } from './services';
+import { UserSlice } from './store/slices';
 
 import '@/styles/global.scss';
 
-const router = createHashRouter([
-  {
-    path: '/',
-    element: <DefaultLayout />,
-    children: [
-      { index: true, element: <Home /> },
-      { path: 'athlete', element: <AthleteArea /> },
-      { path: 'sign-in', element: <SignIn /> },
-      { path: 'sign-up', element: <SignUp /> },
-      { path: '*', element: <Navigate to="/" /> },
-    ],
-  },
-]);
-
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    onAuthStateChanged(firebaseService.auth.auth, (user) => {
+      if (user) {
+        dispatch(UserSlice.actions.loadUser(user));
+      }
+
+      dispatch(UserSlice.actions.completeFirebaseOnAuthStateChangedStatus());
+    });
+  }, [ dispatch ]);
+
   return (
-    <RouterProvider router={router} />
+    <Router />
   );
 };
 
