@@ -1,4 +1,4 @@
-import { buildSlice } from '../functions';
+import { buildSlice } from '@/store/slices/functions';
 
 import { USER_SLICE_NAME } from './constants';
 import * as sliceParts from './slices';

@@ -11,6 +11,12 @@
       "auth/invalid-email": "Usuário não encontrado",
       "auth/missing-password": "Usuário não encontrado",
       "auth/invalid-credential": "Usuário não encontrado"
+    },
+    "load-exercises": {
+      "auth/network-request-failed": "Erro de Rede: Por favor, verifique a sua conexão com a internet"
+    },
+    "add-exercise": {
+      "permission-denied": "Você não tem permissão para adicionar exercícios"
     }
   },
   "Home": "Início",
@@ -45,5 +51,11 @@
   "I recommend that you undergo a medical examination before starting training to obtain the professional's approval": "Recomendo, antes de iniciar os treinos, realizar um exame médico para ter o aval do profissional",
   "Sign Out": "Sair",
   "Training": "Treino",
-  "Manage Exercises": "Gerenciar Exercícios"
+  "Manage Exercises": "Gerenciar Exercícios",
+  "Edit": "Editar",
+  "Title": "Título",
+  "YouTube URL": "URL YouTube",
+  "Save": "Salvar",
+  "Cancel": "Cancelar",
+  "Add Exercise": "Adicionar Exercício"
 }

@@ -1,20 +1,18 @@
 import { memo } from 'react';
 
-import { Exercise } from './Exercise';
+import { ExerciseItem } from './ExerciseItem';
 
 import styles from './ExerciseList.module.scss';
 
 const ExerciseList = (props) => {
-  const { exercises } = props;
-  const { onChangeExerciseStatus } = props;
+  const { items } = props;
 
   return (
     <div className={styles.ExerciseList}>
-      {exercises.map(exercise => (
-        <Exercise
-          key={exercise.id}
-          exercise={exercise}
-          onChangeExerciseStatus={onChangeExerciseStatus}
+      {items.map((item) => (
+        <ExerciseItem
+          key={item.id}
+          item={item}
         />
       ))}
     </div>

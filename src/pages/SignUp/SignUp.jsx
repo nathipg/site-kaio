@@ -91,7 +91,7 @@ const SignUp = () => {
           label={t('Email')}
           field={(
             <Input
-              type="text"
+              type="email"
               name="email"
               value={email}
               required={true}

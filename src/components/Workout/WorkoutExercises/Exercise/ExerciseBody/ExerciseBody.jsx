@@ -10,7 +10,7 @@ import styles from './ExerciseBody.module.scss';
 const ExerciseBody = (props) => {
   const { onChangeExerciseStatus } = props;
   const { exercise, isExpanded } = props;
-  const { id, sets, reps, weight, rest, videoURL } = exercise;
+  const { id, sets, reps, weight, rest, videoUrl } = exercise;
 
   const { t } = useTranslation();
 
@@ -53,7 +53,7 @@ const ExerciseBody = (props) => {
           <tr data-is-expanded={isExpanded}>
             <td colSpan={5}>
               <Video
-                url={videoURL}
+                url={videoUrl}
               />
             </td>
           </tr>

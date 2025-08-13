@@ -11,6 +11,12 @@
       "auth/invalid-email": "User not found",
       "auth/missing-password": "User not found",
       "auth/invalid-credential": "User not found"
+    },
+    "load-exercises": {
+      "auth/network-request-failed": "Network Error: Please, check your network connection"
+    },
+    "add-exercise": {
+      "permission-denied": "You don't have permission to add exercises"
     }
   }
 }

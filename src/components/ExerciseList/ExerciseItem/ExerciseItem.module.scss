@@ -1,0 +1,17 @@
+.ExerciseEditableItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.FieldSet {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ExerciseItemHeader {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}

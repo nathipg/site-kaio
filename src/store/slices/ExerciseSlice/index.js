@@ -1,2 +1,1 @@
 export * from './ExerciseSlice';
-export * from './UserSlice';

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { Router } from './Router';
 import { firebaseService } from './services';
-import { UserSlice } from './store/slices';
+import { ExerciseSlice, UserSlice } from './store/slices';
 
 import '@/styles/global.scss';
 
@@ -12,6 +12,8 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(ExerciseSlice.actions.loadExercises());
+    
     onAuthStateChanged(firebaseService.auth.auth, (user) => {
       if (user) {
         dispatch(UserSlice.actions.loadUser(user));
