@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const AthleteArea = () => {
+const AthleteAreaPage = () => {
   const { t } = useTranslation();
 
   return (
@@ -11,6 +11,6 @@ const AthleteArea = () => {
   );
 };
 
-const AthleteAreaMemo = memo(AthleteArea);
+const AthleteAreaPageMemo = memo(AthleteAreaPage);
 
-export { AthleteAreaMemo as AthleteArea };
+export { AthleteAreaPageMemo as AthleteAreaPage };

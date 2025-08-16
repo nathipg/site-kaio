@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Workout } from '@/components';
 
-const Training = () => {
+const TrainingPage = () => {
   const { t } = useTranslation();
 
   return (
@@ -18,6 +18,6 @@ const Training = () => {
   );
 };
 
-const TrainingMemo = memo(Training);
+const TrainingPageMemo = memo(TrainingPage);
 
-export { TrainingMemo as Training };
+export { TrainingPageMemo as TrainingPage };

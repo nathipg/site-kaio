@@ -1,14 +1,14 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const Home = () => {
+const HomePage = () => {
   const { t } = useTranslation();
 
   return (
-    <h1>{t('Home')}</h1>
+    <h1>{t('HomePage')}</h1>
   );
 };
 
-const HomeMemo = memo(Home);
+const HomePageMemo = memo(HomePage);
 
-export { HomeMemo as Home };
+export { HomePageMemo as HomePage };

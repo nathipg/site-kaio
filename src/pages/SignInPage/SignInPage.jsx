@@ -6,9 +6,9 @@ import { Link } from 'react-router';
 import { Button, ButtonConstants, FieldWithLabel, GrowlFns, Input, RightToBracketIcon } from '@/components';
 import { UserSlice } from '@/store/slices';
 
-import styles from './SignIn.module.scss';
+import styles from './SignInPage.module.scss';
 
-const SignIn = () => {
+const SignInPage = () => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
@@ -90,6 +90,6 @@ const SignIn = () => {
   );
 };
 
-const SignInMemo = memo(SignIn);
+const SignInPageMemo = memo(SignInPage);
 
-export { SignInMemo as SignIn };
+export { SignInPageMemo as SignInPage };

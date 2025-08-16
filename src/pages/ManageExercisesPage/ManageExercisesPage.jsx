@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, ButtonConstants, ExerciseList, GrowlFns, PlusIcon } from '@/components';
 import { ExerciseSlice } from '@/store/slices';
 
-const ManageExercises = () => {
+const ManageExercisesPage = () => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
@@ -67,6 +67,6 @@ const ManageExercises = () => {
   );
 };
 
-const ManageExercisesMemo = memo(ManageExercises);
+const ManageExercisesPageMemo = memo(ManageExercisesPage);
 
-export { ManageExercisesMemo as ManageExercises };
+export { ManageExercisesPageMemo as ManageExercisesPage };

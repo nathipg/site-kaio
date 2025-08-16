@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { createHashRouter, Navigate, RouterProvider, useLocation, useNavigate, useSearchParams } from 'react-router';
 
 import { DefaultLayout } from '@/layouts';
-import { AthleteArea, Home, ManageExercises, SignIn, SignUp, Training } from '@/pages';
+import { AthleteAreaPage, HomePage, ManageExercisesPage, SignInPage, SignUpPage, TrainingPage } from '@/pages';
 import { UserSlice } from '@/store/slices';
 
 const CheckLoginRedirectRoute = (props) => {
@@ -93,13 +93,13 @@ const router = createHashRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <HomePage />,
       },
       {
         path: 'athlete',
         element: (
           <ProtectedRoute>
-            <AthleteArea />
+            <AthleteAreaPage />
           </ProtectedRoute>
         ),
       },
@@ -107,7 +107,7 @@ const router = createHashRouter([
         path: 'training',
         element: (
           <ProtectedRoute>
-            <Training />
+            <TrainingPage />
           </ProtectedRoute>
         ),
       },
@@ -115,7 +115,7 @@ const router = createHashRouter([
         path: 'sign-in',
         element: (
           <CheckLoginRedirectRoute>
-            <SignIn />
+            <SignInPage />
           </CheckLoginRedirectRoute>
         ),
       },
@@ -123,7 +123,7 @@ const router = createHashRouter([
         path: 'sign-up',
         element: (
           <CheckLoginRedirectRoute>
-            <SignUp />
+            <SignUpPage />
           </CheckLoginRedirectRoute>
         ),
       },
@@ -137,7 +137,7 @@ const router = createHashRouter([
         path: 'exercises',
         element: (
           <ProtectedAdminRoute>
-            <ManageExercises />
+            <ManageExercisesPage />
           </ProtectedAdminRoute>
         ),
       },
