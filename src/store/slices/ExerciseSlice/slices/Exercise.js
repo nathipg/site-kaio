@@ -16,6 +16,9 @@ const initialState = {
 
   addExerciseStatus: REQUEST_STATUS.IDLE,
   addExerciseError: null,
+
+  saveExerciseStatus: REQUEST_STATUS.IDLE,
+  saveExerciseError: null,
 };
 
 // Reducers
@@ -26,12 +29,19 @@ const reducers = {
   clearAddExerciseError: (state) => {
     state.addExerciseError = null;
   },
+  clearSaveExerciseError: (state) => {
+    state.saveExerciseError = null;
+  },
+  setSaveExerciseError: (state, action) => {
+    state.saveExerciseError = action.payload;
+  },
 };
 
 // Async Thunk
 const asyncThunk = {
   loadExercises: createAsyncThunk(`${EXERCISE_SLICE_NAME}/loadExercises`, async () => await exercisesService.loadExercises()),
   addExercise: createAsyncThunk(`${EXERCISE_SLICE_NAME}/addExercise`, async (data) => await exercisesService.addExercise(data)),
+  saveExercise: createAsyncThunk(`${EXERCISE_SLICE_NAME}/saveExercise`, async (data) => await exercisesService.saveExercise(data)),
 };
 
 // Extra Reducers
@@ -51,15 +61,32 @@ const extraReducers = (builder) => {
 
   builder
     .addCase(asyncThunk.addExercise.pending, (state) => {
-      state.addExercisetatus = REQUEST_STATUS.LOADING;
+      state.addExerciseStatus = REQUEST_STATUS.LOADING;
     })
     .addCase(asyncThunk.addExercise.fulfilled, (state, action) => {
-      state.addExercisetatus = REQUEST_STATUS.SUCCEEDED;
-      state.exercises.push(action.payload);
+      state.addExerciseStatus = REQUEST_STATUS.SUCCEEDED;
+      state.exercises.unshift(action.payload);
     })
     .addCase(asyncThunk.addExercise.rejected, (state, action) => {
-      state.addExercisetatus = REQUEST_STATUS.FAILED;
+      state.addExerciseStatus = REQUEST_STATUS.FAILED;
       state.addExerciseError = t(`error-message.add-exercise.${action.error.code}`);
+    });
+
+  builder
+    .addCase(asyncThunk.saveExercise.pending, (state) => {
+      state.saveExerciseStatus = REQUEST_STATUS.LOADING;
+    })
+    .addCase(asyncThunk.saveExercise.fulfilled, (state, action) => {
+      state.saveExerciseStatus = REQUEST_STATUS.SUCCEEDED;
+
+      const updatedExercise = action.payload;
+      const existingExerciseIndex = state.exercises.findIndex(exercise => exercise.id == updatedExercise.id);
+
+      state.exercises[existingExerciseIndex] = { ...updatedExercise };
+    })
+    .addCase(asyncThunk.saveExercise.rejected, (state, action) => {
+      state.saveExerciseStatus = REQUEST_STATUS.FAILED;
+      state.saveExerciseError = t(`error-message.save-exercise.${action.error.code}`);
     });
 };
 
@@ -77,12 +104,11 @@ const selectors = {
   selectLoadExercisesStatus: (state) => {
     return state.exercises.loadExercisesStatus;
   },
-
   selectAddExerciseError: (state) => {
     return state.exercises.addExerciseError;
   },
-  selectAddExerciseStatus: (state) => {
-    return state.exercises.addExerciseStatus;
+  selectSaveErrorExerciseError: (state) => {
+    return state.exercises.saveExerciseError;
   },
 };
 

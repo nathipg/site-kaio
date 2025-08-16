@@ -1,9 +1,12 @@
 import { memo, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import styles from './Video.module.scss';
 
 const Video = (props) => {
   const { url } = props;
+
+  const { t } = useTranslation();
 
   const embedUrl = useMemo(() => {
     if(!url) {
@@ -22,14 +25,18 @@ const Video = (props) => {
 
   return (
     <div className={styles.VideoContainer}>
-      <iframe
-        className={styles.Video}
-        src={embedUrl}
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        referrerPolicy="strict-origin-when-cross-origin"
-        allowFullScreen
-      ></iframe>
+      {
+        embedUrl ? (
+          <iframe
+            className={styles.Video}
+            src={embedUrl}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          ></iframe>
+        ) : <span>{t('Video Unavailable')}</span>
+      }
     </div>
   );
 };

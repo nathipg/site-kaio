@@ -1,4 +1,4 @@
-import { getFirestore, collection, getDocs, addDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, addDoc, getDoc, doc, setDoc } from 'firebase/firestore';
 
 import { DB_KEYS } from './db-keys';
 import { app } from './firebase-app';
@@ -26,4 +26,14 @@ export const loadExercises = async () => {
       ...doc.data(),
     };
   });
+};
+
+export const saveExercise = async (data) => {
+  const { id, ...otherData } = data;
+
+  const exerciseRef = doc(db, DB_KEYS.EXERCISES, id);
+
+  await setDoc(exerciseRef, otherData);
+
+  return data;
 };

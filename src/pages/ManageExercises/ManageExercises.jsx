@@ -13,9 +13,10 @@ const ManageExercises = () => {
   const exercises = useSelector(ExerciseSlice.selectors.selectAllExercises);
   const loadExercisesError = useSelector(ExerciseSlice.selectors.selectLoadExercisesError);
   const addExerciseError = useSelector(ExerciseSlice.selectors.selectAddExerciseError);
+  const saveExerciseError = useSelector(ExerciseSlice.selectors.selectSaveErrorExerciseError);
 
   const onAddItem = useCallback(() => {
-    dispatch(ExerciseSlice.actions.addExercise({ title: 'Temp', videoUrl: 'https://www.youtube.com/watch?v=st1rQHX4llM' }));
+    dispatch(ExerciseSlice.actions.addExercise({ title: 'TEMP', videoUrl: '' }));
   }, [ dispatch ]);
 
   const onCloseLoadExercisesErrorGrowl = useCallback(() => {
@@ -24,6 +25,10 @@ const ManageExercises = () => {
 
   const onCloseAddExerciseErrorGrowl = useCallback(() => {
     dispatch(ExerciseSlice.actions.clearAddExerciseError());
+  }, [ dispatch ]);
+
+  const onCloseSaveExerciseErrorGrowl = useCallback(() => {
+    dispatch(ExerciseSlice.actions.clearSaveExerciseError());
   }, [ dispatch ]);
 
   return (
@@ -52,6 +57,11 @@ const ManageExercises = () => {
       {GrowlFns.renderErrorGrowl({
         message: addExerciseError,
         onCloseGrowl: onCloseAddExerciseErrorGrowl,
+      })}
+
+      {GrowlFns.renderErrorGrowl({
+        message: saveExerciseError,
+        onCloseGrowl: onCloseSaveExerciseErrorGrowl,
       })}
     </>
   );

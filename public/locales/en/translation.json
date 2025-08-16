@@ -17,6 +17,9 @@
     },
     "add-exercise": {
       "permission-denied": "You don't have permission to add exercises"
+    },
+    "save-exercise": {
+      "permission-denied": "You don't have permission to save exercises"
     }
   }
 }

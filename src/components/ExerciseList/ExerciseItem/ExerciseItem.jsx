@@ -1,10 +1,12 @@
 import { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 
 import { Button, ButtonConstants } from '@/components/Button';
 import { FieldWithLabel, Input } from '@/components/Forms';
 import { FloppyDiskIcon, PenToSquareIcon, XIcon } from '@/components/Icons';
 import { Video } from '@/components/Video';
+import { ExerciseSlice } from '@/store/slices';
 
 import styles from './ExerciseItem.module.scss';
 
@@ -13,21 +15,33 @@ const ExerciseItem = (props) => {
 
   const { t } = useTranslation();
 
+  const dispatch = useDispatch();
+
   const [ editMode, setEditMode ] = useState(false);
   const [ title, setTitle ] = useState(item.title);
   const [ url, setUrl ] = useState(item.videoUrl);
 
   const onSaveEdit = useCallback(() => {
+    if(!title.trim()) {
+      dispatch(ExerciseSlice.actions.setSaveExerciseError(t('Please, insert an exercise title')));
+      return;
+    }
+
     setEditMode(false);
 
-    console.log('TODO CODE TO ACTUALLY SAVE THE ITEM HERE');
-  }, []);
+    dispatch(ExerciseSlice.actions.saveExercise({
+      ...item,
+      title,
+      videoUrl: url,
+    }));
+  }, [ dispatch, item, t, title, url ]);
 
   const onCancelEdit = useCallback(() => {
     setTitle(item.title);
     setUrl(item.videoUrl);
     setEditMode(false);
-  }, [ item.title, item.videoUrl ]);
+    dispatch(ExerciseSlice.actions.clearSaveExerciseError());
+  }, [ dispatch, item.title, item.videoUrl ]);
 
   const renderItem = useCallback(() => {
     return (
