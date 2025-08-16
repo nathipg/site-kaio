@@ -17,6 +17,12 @@
     },
     "add-exercise": {
       "permission-denied": "Você não tem permissão para adicionar exercícios"
+    },
+    "save-exercise": {
+      "permission-denied": "Você não tem permissão para alterar exercícios"
+    },
+    "load-users": {
+      "permission-denied": "Você não tem permissão para carregar a lista de usuários"
     }
   },
   "Home": "Início",

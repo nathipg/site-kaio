@@ -20,6 +20,9 @@
     },
     "save-exercise": {
       "permission-denied": "You don't have permission to save exercises"
+    },
+    "load-users": {
+      "permission-denied": "You don't have permission to load users"
     }
   }
 }

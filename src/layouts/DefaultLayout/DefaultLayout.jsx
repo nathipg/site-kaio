@@ -28,6 +28,7 @@ const DefaultLayout = () => {
       <Link to={{ pathname: '/athlete' }}>{t('Athlete')}</Link>
       <Link to={{ pathname: '/training' }}>{t('Training')}</Link>
       <Link to={{ pathname: '/manage/exercises' }}>{t('Manage Exercises')}</Link>
+      <Link to={{ pathname: '/manage/workouts' }}>{t('Manage Workouts')}</Link>
       
       {
         isLoggedIn ? (
