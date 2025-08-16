@@ -5,14 +5,14 @@ $base-size: 16px;
 $scale: 1.25;
 
 // Font sizes
-$font-xs: $base-size / ($scale);        // 12.8px
-$font-sm: $base-size / ($scale * 0.85); // 14px~
-$font-base: $base-size;                  // 16px
-$font-md: $base-size * $scale;          // 20px
-$font-lg: $base-size * ($scale * 1.5);  // 24px
-$font-xl: $base-size * ($scale * 2);    // 32px
-$font-2xl: $base-size * ($scale * 2.5); // 40px
-$font-3xl: $base-size * ($scale * 3);   // 48px
+$font-xs: calc($base-size / ($scale));         // 12.8px
+$font-sm: calc($base-size / ($scale * 0.85));  // 14px~
+$font-base: $base-size;                        // 16px
+$font-md: calc($base-size * $scale);           // 20px
+$font-lg: calc($base-size * ($scale * 1.5));   // 24px
+$font-xl: calc($base-size * ($scale * 2));     // 32px
+$font-2xl: calc($base-size * ($scale * 2.5));  // 40px
+$font-3xl: calc($base-size * ($scale * 3));    // 48px
 
 // Line heights
 $leading-tight: 1.2;
