@@ -1,2 +1,1 @@
-export * from './RemoveExerciseConfirmDialog';
 export * from './RemoveWorkoutExerciseConfirmDialog';

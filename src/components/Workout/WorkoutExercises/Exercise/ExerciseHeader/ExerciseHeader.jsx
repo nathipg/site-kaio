@@ -1,7 +1,7 @@
-import { memo, useCallback, useMemo } from 'react';
+import { memo, useCallback, useMemo, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-import { ExpandCollapseArrow, RemoveIconButton, Select } from '@/components';
+import { ExpandCollapseArrow, RemoveIconButton, RemoveWorkoutExerciseConfirmDialog, Select } from '@/components';
 import { ExerciseSlice } from '@/store/slices';
 
 import styles from './ExerciseHeader.module.scss';
@@ -10,11 +10,18 @@ const ExerciseHeader = (props) => {
   const { isExpanded, exercise, editMode } = props;
   const { onChangeExpandedState, setExerciseProperty, onRemoveExercise } = props;
 
+  const removeWorkoutExerciseDialogFnsRef = useRef(null);
+
   const dbExercises = useSelector(ExerciseSlice.selectors.selectAllExercises);
 
   const onClickHeader = useMemo(() => {
     return exercise?.exerciseId ? onChangeExpandedState : () => null;
   }, [ exercise?.exerciseId, onChangeExpandedState ]);
+
+  const onClickRemoveExerciseButton = useCallback(() => {
+    const removeFn = !exercise.exerciseId ? onRemoveExercise : removeWorkoutExerciseDialogFnsRef.current?.show;
+    removeFn();
+  }, [ exercise.exerciseId, onRemoveExercise ]);
 
   const onChangeSelectedExercise = useCallback((event) => {
     setExerciseProperty('exerciseId', event.target.value);
@@ -40,12 +47,13 @@ const ExerciseHeader = (props) => {
           onChange={onChangeSelectedExercise}
           renderItems={renderExercises}
         />
+
         <RemoveIconButton
-          onClick={onRemoveExercise}
+          onClick={onClickRemoveExerciseButton}
         />
       </>
     );
-  }, [ dbExercises, editMode, exercise.exerciseId, exercise.name, onChangeSelectedExercise, onRemoveExercise ]);
+  }, [ dbExercises, editMode, exercise.exerciseId, exercise.name, onChangeSelectedExercise, onClickRemoveExerciseButton ]);
 
   const renderArrow = useCallback(() => {
     if(!exercise?.exerciseId) {
@@ -69,6 +77,13 @@ const ExerciseHeader = (props) => {
       </span>
 
       {renderArrow()}
+
+      {
+        <RemoveWorkoutExerciseConfirmDialog
+          onRemoveExercise={onRemoveExercise}
+          dialogFnsRef={removeWorkoutExerciseDialogFnsRef}
+        />
+      }
     </div>
   );
 };
