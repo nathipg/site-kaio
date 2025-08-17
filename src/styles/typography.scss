@@ -88,6 +88,11 @@ $weight-bold: 700;
   font-weight: $weight-semibold;
 }
 
+@mixin heading-5 {
+  @include text-md;
+  font-weight: $weight-semibold;
+}
+
 @mixin subtitle {
   @include text-md;
   font-weight: $weight-medium;
