@@ -13,7 +13,7 @@ const ManageExercisesPage = () => {
   const exercises = useSelector(ExerciseSlice.selectors.selectAllExercises);
   const loadExercisesError = useSelector(ExerciseSlice.selectors.selectLoadExercisesError);
   const addExerciseError = useSelector(ExerciseSlice.selectors.selectAddExerciseError);
-  const saveExerciseError = useSelector(ExerciseSlice.selectors.selectSaveErrorExerciseError);
+  const saveExerciseError = useSelector(ExerciseSlice.selectors.selectSaveExerciseError);
 
   const onAddItem = useCallback(() => {
     dispatch(ExerciseSlice.actions.addExercise({ title: 'TEMP', videoUrl: '' }));

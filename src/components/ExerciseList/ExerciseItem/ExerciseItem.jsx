@@ -1,9 +1,10 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
 import { Button, ButtonConstants } from '@/components/Button';
 import { SaveButton } from '@/components/Buttons';
+import { RemoveExerciseConfirmDialog } from '@/components/Dialogs';
 import { FieldWithLabel, Input } from '@/components/Forms';
 import { PenToSquareIcon, XIcon } from '@/components/Icons';
 import { Video } from '@/components/Video';
@@ -15,6 +16,8 @@ const ExerciseItem = (props) => {
   const { item } = props;
 
   const { t } = useTranslation();
+
+  const removeExerciseDialogFnsRef = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -55,6 +58,13 @@ const ExerciseItem = (props) => {
             onClick={() => setEditMode(true)}
           >
             {t('Edit')}
+          </Button>
+          <Button
+            category={ButtonConstants.ButtonCategories.DANGER}
+            icon={<XIcon />}
+            onClick={() => removeExerciseDialogFnsRef.current?.show()}
+          >
+            {t('Remove')}
           </Button>
         </div>
 
@@ -107,7 +117,17 @@ const ExerciseItem = (props) => {
     );
   }, [ onCancelEdit, onSaveEdit, t, title, url ]);
 
-  return editMode ? renderEditableItem() : renderItem();
+  return (
+    <>
+      {editMode ? renderEditableItem() : renderItem()}
+      {
+        <RemoveExerciseConfirmDialog
+          exercise={item}
+          dialogFnsRef={removeExerciseDialogFnsRef}
+        />
+      }
+    </>
+  );
 };
 
 const ExerciseItemMemo = memo(ExerciseItem);

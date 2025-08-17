@@ -71,5 +71,9 @@
   "Select an user": "Selecione um usuário",
   "No workout registered": "Nenhum treino registrado",
   "Add Workout": "Adicionar treino",
-  "Select an exercise": "Selecione um exercício"
+  "Select an exercise": "Selecione um exercício",
+  "Remove Exercise": "Remover Exercício",
+  "Are you sure you want to remove this exercise": "Tem certeza que você deseja remove este exercício?",
+  "This action cannot be undone": "Esta ação não pode ser desfeita",
+  "Remove": "Remover"
 }
