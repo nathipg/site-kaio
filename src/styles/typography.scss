@@ -1,0 +1,114 @@
+// Base size
+$base-size: 16px;
+
+// Type scale using a 1.25 ratio (major third)
+$scale: 1.25;
+
+// Font sizes
+$font-xs: calc($base-size / ($scale));         // 12.8px
+$font-sm: calc($base-size / ($scale * 0.85));  // 14px~
+$font-base: $base-size;                        // 16px
+$font-md: calc($base-size * $scale);           // 20px
+$font-lg: calc($base-size * ($scale * 1.5));   // 24px
+$font-xl: calc($base-size * ($scale * 2));     // 32px
+$font-2xl: calc($base-size * ($scale * 2.5));  // 40px
+$font-3xl: calc($base-size * ($scale * 3));    // 48px
+
+// Line heights
+$leading-tight: 1.2;
+$leading-normal: 1.5;
+$leading-loose: 1.8;
+
+// Font weights
+$weight-light: 300;
+$weight-regular: 400;
+$weight-medium: 500;
+$weight-semibold: 600;
+$weight-bold: 700;
+
+// Text utilities
+@mixin text-xs {
+  font-size: $font-xs;
+  line-height: $leading-normal;
+}
+
+@mixin text-sm {
+  font-size: $font-sm;
+  line-height: $leading-normal;
+}
+
+@mixin text-base {
+  font-size: $font-base;
+  line-height: $leading-normal;
+}
+
+@mixin text-md {
+  font-size: $font-md;
+  line-height: $leading-normal;
+}
+
+@mixin text-lg {
+  font-size: $font-lg;
+  line-height: $leading-tight;
+}
+
+@mixin text-xl {
+  font-size: $font-xl;
+  line-height: $leading-tight;
+}
+
+@mixin text-2xl {
+  font-size: $font-2xl;
+  line-height: $leading-tight;
+}
+
+@mixin text-3xl {
+  font-size: $font-3xl;
+  line-height: $leading-tight;
+}
+
+// Typography scale mixins
+@mixin heading-1 {
+  @include text-3xl;
+  font-weight: $weight-bold;
+}
+
+@mixin heading-2 {
+  @include text-2xl;
+  font-weight: $weight-bold;
+}
+
+@mixin heading-3 {
+  @include text-xl;
+  font-weight: $weight-semibold;
+}
+
+@mixin heading-4 {
+  @include text-lg;
+  font-weight: $weight-semibold;
+}
+
+@mixin heading-5 {
+  @include text-md;
+  font-weight: $weight-semibold;
+}
+
+@mixin subtitle {
+  @include text-md;
+  font-weight: $weight-medium;
+}
+
+@mixin body {
+  @include text-base;
+  font-weight: $weight-regular;
+}
+
+@mixin button {
+  @include text-sm;
+  font-weight: $weight-regular;
+}
+
+@mixin caption {
+  @include text-xs;
+  font-weight: $weight-regular;
+}
