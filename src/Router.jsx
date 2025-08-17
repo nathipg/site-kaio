@@ -61,8 +61,9 @@ const ProtectedAdminRoute = (props) => {
   const [ searchParams ] = useSearchParams();
 
   const isLoggedIn = useSelector(UserSlice.selectors.isLoggedIn);
+  const loggedUser = useSelector(UserSlice.selectors.selectLoggedUser);
   const isLoginVerificationComplete = useSelector(UserSlice.selectors.isLoginVerificationComplete);
-  const isAdmin = true; // TODO Change to actually check if is admin
+  const isAdmin = loggedUser?.isAdmin;
 
   useEffect(() => {
     if (!isLoggedIn) {
