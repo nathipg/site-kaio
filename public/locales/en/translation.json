@@ -23,6 +23,9 @@
     },
     "load-users": {
       "permission-denied": "You don't have permission to load users"
+    },
+    "save-user-workouts": {
+      "permission-denied": "You don't have permission to change users workouts"
     }
   }
 }

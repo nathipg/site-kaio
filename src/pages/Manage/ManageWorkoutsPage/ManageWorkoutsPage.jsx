@@ -1,15 +1,18 @@
 import { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Button, ButtonConstants, PlusIcon, SaveButton, Select, WorkoutsList } from '@/components';
+import { Button, ButtonConstants, GrowlFns, PlusIcon, SaveButton, Select, WorkoutsList } from '@/components';
 import { UserSlice } from '@/store/slices';
 import { utils } from '@/utils';
 
 const ManageWorkoutsPage = () => {
   const { t } = useTranslation();
 
+  const dispatch = useDispatch();
+
   const users = useSelector(UserSlice.selectors.selectUsers);
+  const saveUserWorkoutsError = useSelector(UserSlice.selectors.selectSaveUserWorkoutsError);
 
   const [ selectedUser, setSelectedUser ] = useState(null);
 
@@ -85,8 +88,17 @@ const ManageWorkoutsPage = () => {
   }, [ selectedUser ]);
 
   const onSaveWorkouts = useCallback(() => {
-    console.log('TODO onSaveWorkouts');
-  }, []);
+    if(!selectedUser) {
+      return;
+    }
+
+    const payload = {
+      uid: selectedUser.uid,
+      workouts: selectedUser.workouts,
+    };
+
+    dispatch(UserSlice.actions.saveUserWorkouts(payload));
+  }, [ dispatch, selectedUser ]);
 
   const getUserByUid = useCallback((uid) => {
     return utils.deepClone(users.find(user => user.uid === uid));
@@ -155,6 +167,10 @@ const ManageWorkoutsPage = () => {
     );
   }, [ onRemoveWorkout, selectedUser, onUpdateSelectedUserWorkout ]);
 
+  const onCloseSaveUserWorkoutsErrorGrowl = useCallback(() => {
+    dispatch(UserSlice.actions.clearSaveUserWorkoutsError());
+  }, [ dispatch ]);
+
   return (
     <>
       <h1>{t('Manage Workouts')}</h1>
@@ -163,6 +179,11 @@ const ManageWorkoutsPage = () => {
       {renderSaveButton()}
       {renderAddWorkoutButton()}
       {renderSelectedUserWorkouts()}
+
+      {GrowlFns.renderErrorGrowl({
+        message: saveUserWorkoutsError,
+        onCloseGrowl: onCloseSaveUserWorkoutsErrorGrowl,
+      })}
     </>
   );
 };
