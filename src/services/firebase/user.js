@@ -1,4 +1,4 @@
-import { doc, setDoc, getFirestore, getDoc, collection, getDocs } from 'firebase/firestore';
+import { doc, setDoc, getFirestore, getDoc, collection, getDocs, writeBatch } from 'firebase/firestore';
 
 import { firebaseService } from '@/services';
 
@@ -46,6 +46,29 @@ export const loadUsers = async () => {
   return users;
 };
 
+
+export const saveUserWorkouts = async (data) => {
+  const { uid, workouts } = data;
+
+  const workoutsRef = collection(db, DB_KEYS.USERS, uid, DB_KEYS.WORKOUTS);
+  const workoutsSnapshot = await getDocs(workoutsRef);
+
+  const batch = writeBatch(db);
+
+  workoutsSnapshot.docs.forEach((doc) => {
+    batch.delete(doc.ref);
+  });
+
+  const userRef = doc(db, DB_KEYS.USERS, uid);
+
+  batch.update(userRef, {
+    workouts: workouts || [],
+  });
+
+  await batch.commit();
+
+  return data;
+};
 
 export const signInUser = async (userData) => {
   const { email, password } = userData;
