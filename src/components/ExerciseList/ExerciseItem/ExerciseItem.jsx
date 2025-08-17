@@ -3,8 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
 import { Button, ButtonConstants } from '@/components/Button';
+import { SaveButton } from '@/components/Buttons';
 import { FieldWithLabel, Input } from '@/components/Forms';
-import { FloppyDiskIcon, PenToSquareIcon, XIcon } from '@/components/Icons';
+import { PenToSquareIcon, XIcon } from '@/components/Icons';
 import { Video } from '@/components/Video';
 import { ExerciseSlice } from '@/store/slices';
 
@@ -93,13 +94,7 @@ const ExerciseItem = (props) => {
           />
         </div>
 
-        <Button
-          category={ButtonConstants.ButtonCategories.SUCCESS}
-          icon={<FloppyDiskIcon />}
-          onClick={onSaveEdit}
-        >
-          {t('Save')}
-        </Button>
+        <SaveButton onClick={onSaveEdit} />
 
         <Button
           category={ButtonConstants.ButtonCategories.DANGER}

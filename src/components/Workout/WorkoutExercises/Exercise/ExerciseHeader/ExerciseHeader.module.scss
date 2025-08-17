@@ -8,5 +8,7 @@
 }
 
 .ExerciseHeaderText {
+  display: flex;
+  gap: 0.5rem;
   color: colors.$blue;
 }

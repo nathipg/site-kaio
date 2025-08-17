@@ -2,7 +2,7 @@ import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Button, ButtonConstants, ExerciseList, GrowlFns, PlusIcon } from '@/components';
+import { AddExerciseButton, ExerciseList, GrowlFns } from '@/components';
 import { ExerciseSlice } from '@/store/slices';
 
 const ManageExercisesPage = () => {
@@ -35,13 +35,7 @@ const ManageExercisesPage = () => {
     <>
       <h1>{t('Manage Exercises')}</h1>
 
-      <Button
-        category={ButtonConstants.ButtonCategories.SUCCESS}
-        icon={<PlusIcon />}
-        onClick={onAddItem}
-      >
-        {t('Add Exercise')}
-      </Button>
+      <AddExerciseButton onClick={onAddItem} />
 
       {exercises?.length ? (
         <ExerciseList

@@ -5,16 +5,9 @@ import { WorkoutHeader } from './WorkoutHeader';
 
 import styles from './Workout.module.scss';
 
-const mockedExercises = [
-  { id: 1, name: 'Exercício 1', sets: 1, reps: 10, weight: '10 Kg', rest: '1m', videoUrl: 'https://www.youtube.com/embed/st1rQHX4llM?si=lmVCAcFvhzX2RIM9' },
-  { id: 2, name: 'Exercício 2', sets: 2, reps: 20, weight: '20 Kg', rest: '2m', videoUrl: 'https://www.youtube.com/embed/st1rQHX4llM?si=lmVCAcFvhzX2RIM9' },
-  { id: 3, name: 'Exercício 3', sets: 3, reps: 30, weight: '30 Kg', rest: '3m', videoUrl: 'https://www.youtube.com/embed/st1rQHX4llM?si=lmVCAcFvhzX2RIM9' },
-];
-
 const Workout = (props) => {
-  const { title, description } = props;
-
-  const exercises = mockedExercises;
+  const { workout, editMode } = props;
+  const { setWorkoutProperty = () => null } = props;
 
   const [ completedExercises, setCompletedExercises ] = useState([]);
   const [ isExpanded, setIsExpanded ] = useState(true);
@@ -51,18 +44,21 @@ const Workout = (props) => {
   return (
     <div className={styles.Workout}>
       <WorkoutHeader
-        title={title}
-        description={description}
-        totalExercises={exercises.length}
+        workout={workout}
+        totalExercises={workout.exercises.length}
         isExpanded={isExpanded}
         onChangeExpandedState={onChangeExpandedState}
         completedExercisesQty={completedExercisesQty}
+        editMode={editMode}
+        setWorkoutProperty={setWorkoutProperty}
       />
 
       <div style={{ display: isExpanded ? 'block' : 'none' }}>
         <WorkoutExercises
-          exercises={exercises}
+          exercises={workout.exercises}
           onChangeExerciseStatus={onChangeExerciseStatus}
+          editMode={editMode}
+          setWorkoutProperty={setWorkoutProperty}
         />
       </div>
     </div>
