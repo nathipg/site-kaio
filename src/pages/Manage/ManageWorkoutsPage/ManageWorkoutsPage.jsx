@@ -13,7 +13,7 @@ const ManageWorkoutsPage = () => {
 
   const [ selectedUser, setSelectedUser ] = useState(null);
 
-  const updateSelectedUserWorkout = useCallback((workoutId, property, value) => {
+  const onUpdateSelectedUserWorkout = useCallback((workoutId, property, value) => {
     const currentWorkouts = utils.deepClone(selectedUser?.workouts) || [];
 
     const workoutIndex = currentWorkouts.findIndex(cw => cw.id == workoutId);
@@ -27,6 +27,23 @@ const ManageWorkoutsPage = () => {
     const updatedWorkoutList = [
       ...currentWorkouts.slice(0, workoutIndex),
       updatedWorkout,
+      ...currentWorkouts.slice(workoutIndex + 1),
+    ];
+
+    setSelectedUser((currentSelectedUser) => {
+      return {
+        ...currentSelectedUser,
+        workouts: updatedWorkoutList,
+      };
+    });
+  }, [ selectedUser?.workouts ]);
+
+  const onRemoveWorkout = useCallback((workoutId) => {
+    const currentWorkouts = utils.deepClone(selectedUser?.workouts) || [];
+    const workoutIndex = currentWorkouts.findIndex(cw => cw.id == workoutId);
+
+    const updatedWorkoutList = [
+      ...currentWorkouts.slice(0, workoutIndex),
       ...currentWorkouts.slice(workoutIndex + 1),
     ];
 
@@ -132,10 +149,11 @@ const ManageWorkoutsPage = () => {
       <WorkoutsList
         workouts={selectedUser?.workouts}
         editMode={true}
-        updateWorkoutData={updateSelectedUserWorkout}
+        onUpdateWorkoutData={onUpdateSelectedUserWorkout}
+        onRemoveWorkout={onRemoveWorkout}
       />
     );
-  }, [ selectedUser, updateSelectedUserWorkout ]);
+  }, [ onRemoveWorkout, selectedUser, onUpdateSelectedUserWorkout ]);
 
   return (
     <>

@@ -7,7 +7,7 @@ import styles from './WorkoutsList.module.scss';
 
 const WorkoutsList = (props) => {
   const { workouts = [], editMode = false } = props;
-  const { updateWorkoutData = () => null } = props;
+  const { onUpdateWorkoutData = () => null, onRemoveWorkout = () => null } = props;
 
   const { t } = useTranslation();
 
@@ -18,7 +18,7 @@ const WorkoutsList = (props) => {
 
     return workouts.map(workout => {
       const setWorkoutProperty = (property, value) => {
-        updateWorkoutData(workout.id, property, value);
+        onUpdateWorkoutData(workout.id, property, value);
       };
     
       return (
@@ -27,10 +27,11 @@ const WorkoutsList = (props) => {
           workout={workout}
           editMode={editMode}
           setWorkoutProperty={setWorkoutProperty}
+          onRemoveWorkout={onRemoveWorkout}
         />
       );
     });
-  }, [ editMode, updateWorkoutData, t, workouts ]);
+  }, [ editMode, onRemoveWorkout, onUpdateWorkoutData, t, workouts ]);
 
   return (
     <div className={styles.WorkoutsList}>

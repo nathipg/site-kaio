@@ -1,13 +1,14 @@
 import { memo, useCallback, useMemo, useState } from 'react';
 
 import { WorkoutExercises } from './WorkoutExercises';
+import { WorkoutFooter } from './WorkoutFooter';
 import { WorkoutHeader } from './WorkoutHeader';
 
 import styles from './Workout.module.scss';
 
 const Workout = (props) => {
   const { workout, editMode } = props;
-  const { setWorkoutProperty = () => null } = props;
+  const { setWorkoutProperty = () => null, onRemoveWorkout = () => null } = props;
 
   const [ completedExercises, setCompletedExercises ] = useState([]);
   const [ isExpanded, setIsExpanded ] = useState(true);
@@ -61,6 +62,11 @@ const Workout = (props) => {
           setWorkoutProperty={setWorkoutProperty}
         />
       </div>
+
+      <WorkoutFooter
+        workout={workout}
+        onRemoveWorkout={onRemoveWorkout}
+      />
     </div>
   );
 };

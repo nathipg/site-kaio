@@ -52,6 +52,7 @@ const ExerciseItem = (props) => {
       <div>
         <div className={styles.ExerciseItemHeader}>
           <span>{title}</span>
+          
           <Button
             category={ButtonConstants.ButtonCategories.PRIMARY}
             icon={<PenToSquareIcon />}
@@ -59,6 +60,7 @@ const ExerciseItem = (props) => {
           >
             {t('Edit')}
           </Button>
+
           <Button
             category={ButtonConstants.ButtonCategories.DANGER}
             icon={<XIcon />}
