@@ -17,6 +17,12 @@
     },
     "add-exercise": {
       "permission-denied": "Você não tem permissão para adicionar exercícios"
+    },
+    "save-exercise": {
+      "permission-denied": "Você não tem permissão para alterar exercícios"
+    },
+    "load-users": {
+      "permission-denied": "Você não tem permissão para carregar a lista de usuários"
     }
   },
   "Home": "Início",
@@ -57,5 +63,10 @@
   "YouTube URL": "URL YouTube",
   "Save": "Salvar",
   "Cancel": "Cancelar",
-  "Add Exercise": "Adicionar Exercício"
+  "Add Exercise": "Adicionar Exercício",
+  "Video Unavailable": "Video indisponível",
+  "Please, insert an exercise title": "Por favor, insira um título para o exercício",
+  "Manage Workouts": "Gerenciar Treinos",
+  "You don't have users :C'": "Você não tem usuários :C",
+  "Select an user": "Selecione um usuário"
 }

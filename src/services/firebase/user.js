@@ -1,4 +1,4 @@
-import { doc, setDoc, getFirestore, getDoc } from 'firebase/firestore';
+import { doc, setDoc, getFirestore, getDoc, collection, getDocs } from 'firebase/firestore';
 
 import { firebaseService } from '@/services';
 
@@ -35,6 +35,15 @@ export const loadUser = async (uid) => {
   }
 
   return null;
+};
+
+export const loadUsers = async () => {
+  const collectionRef = collection(db, DB_KEYS.USERS);
+  const docsSnap = await getDocs(collectionRef);
+
+  const users = docsSnap.docs.map(doc => doc.data());
+
+  return users;
 };
 
 

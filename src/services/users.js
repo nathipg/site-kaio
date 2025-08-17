@@ -5,6 +5,10 @@ export const loadUser = async (userData) => {
   return await firebaseService.user.loadUser(uid);
 };
 
+export const loadUsers = async () => {
+  return await firebaseService.user.loadUsers();
+};
+
 export const signInUser = async (userData) => {
   const { email, password } = userData;
 

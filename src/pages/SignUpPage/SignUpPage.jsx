@@ -6,9 +6,9 @@ import { Link } from 'react-router';
 import { Button, ButtonConstants, FieldWithLabel, GrowlFns, Input, UserPlusIcon } from '@/components';
 import { UserSlice } from '@/store/slices';
 
-import styles from './SignUp.module.scss';
+import styles from './SignUpPage.module.scss';
 
-const SignUp = () => {
+const SignUpPage = () => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
@@ -252,6 +252,6 @@ const SignUp = () => {
   );
 };
 
-const SignUpMemo = memo(SignUp);
+const SignUpPageMemo = memo(SignUpPage);
 
-export { SignUpMemo as SignUp };
+export { SignUpPageMemo as SignUpPage };

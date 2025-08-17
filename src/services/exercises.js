@@ -7,3 +7,7 @@ export const addExercise = async (data) => {
 export const loadExercises = async () => {
   return await firebaseService.exercise.loadExercises();
 };
+
+export const saveExercise = async (data) => {
+  return await firebaseService.exercise.saveExercise(data);
+};
