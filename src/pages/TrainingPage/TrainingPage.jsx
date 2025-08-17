@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Workout } from '@/components';
+import { WorkoutsList } from '@/components';
 
 const TrainingPage = () => {
   const { t } = useTranslation();
@@ -10,9 +10,8 @@ const TrainingPage = () => {
     <>
       <h1>{t('Training')}</h1>
 
-      <Workout
-        title="Treino A"
-        description="Foco em treinar"
+      <WorkoutsList
+        workouts={[]}
       />
     </>
   );

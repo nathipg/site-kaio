@@ -19,6 +19,9 @@ const initialState = {
 
   saveExerciseStatus: REQUEST_STATUS.IDLE,
   saveExerciseError: null,
+
+  removeExerciseStatus: REQUEST_STATUS.IDLE,
+  removeExerciseError: null,
 };
 
 // Reducers
@@ -42,6 +45,7 @@ const asyncThunk = {
   loadExercises: createAsyncThunk(`${EXERCISE_SLICE_NAME}/loadExercises`, async () => await exercisesService.loadExercises()),
   addExercise: createAsyncThunk(`${EXERCISE_SLICE_NAME}/addExercise`, async (data) => await exercisesService.addExercise(data)),
   saveExercise: createAsyncThunk(`${EXERCISE_SLICE_NAME}/saveExercise`, async (data) => await exercisesService.saveExercise(data)),
+  removeExercise: createAsyncThunk(`${EXERCISE_SLICE_NAME}/removeExercise`, async (id) => await exercisesService.removeExercise(id)),
 };
 
 // Extra Reducers
@@ -52,7 +56,13 @@ const extraReducers = (builder) => {
     })
     .addCase(asyncThunk.loadExercises.fulfilled, (state, action) => {
       state.loadExercisesStatus = REQUEST_STATUS.SUCCEEDED;
-      state.exercises = action.payload;
+
+      state.exercises = [ ...action.payload ].sort((a, b) => {
+        const titleA = a.title || '';
+        const titleB = b.title || '';
+
+        return titleA.localeCompare(titleB);
+      });
     })
     .addCase(asyncThunk.loadExercises.rejected, (state, action) => {
       state.loadExercisesStatus = REQUEST_STATUS.FAILED;
@@ -88,6 +98,21 @@ const extraReducers = (builder) => {
       state.saveExerciseStatus = REQUEST_STATUS.FAILED;
       state.saveExerciseError = t(`error-message.save-exercise.${action.error.code}`);
     });
+
+  builder
+    .addCase(asyncThunk.removeExercise.pending, (state) => {
+      state.removeExerciseStatus = REQUEST_STATUS.LOADING;
+    })
+    .addCase(asyncThunk.removeExercise.fulfilled, (state, action) => {
+      state.removeExerciseStatus = REQUEST_STATUS.SUCCEEDED;
+
+      const exerciseIndex = state.exercises.findIndex(exercise => exercise.id == action.payload.id);
+      state.exercises.splice(exerciseIndex, 1);
+    })
+    .addCase(asyncThunk.removeExercise.rejected, (state, action) => {
+      state.removeExerciseStatus = REQUEST_STATUS.FAILED;
+      state.removeExerciseError = t(`error-message.remove-exercise.${action.error.code}`);
+    });
 };
 
 // Selectors
@@ -107,8 +132,11 @@ const selectors = {
   selectAddExerciseError: (state) => {
     return state.exercises.addExerciseError;
   },
-  selectSaveErrorExerciseError: (state) => {
+  selectSaveExerciseError: (state) => {
     return state.exercises.saveExerciseError;
+  },
+  selectRemoveExerciseError: (state) => {
+    return state.exercises.removeExerciseError;
   },
 };
 

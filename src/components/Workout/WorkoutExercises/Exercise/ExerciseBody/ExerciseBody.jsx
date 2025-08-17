@@ -1,18 +1,101 @@
-import { memo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
-import { Video } from '@/components';
+import { Input, Video } from '@/components';
+import { ExerciseSlice } from '@/store/slices';
 
 import { ExerciseStatus } from './ExerciseStatus';
 
 import styles from './ExerciseBody.module.scss';
 
 const ExerciseBody = (props) => {
-  const { onChangeExerciseStatus } = props;
-  const { exercise, isExpanded } = props;
-  const { id, sets, reps, weight, rest, videoUrl } = exercise;
+  const { onChangeExerciseStatus, setExerciseProperty } = props;
+  const { exercise, isExpanded, editMode } = props;
+  const { id, sets, reps, weight, rest } = exercise;
 
   const { t } = useTranslation();
+
+  const dbExercise = useSelector(ExerciseSlice.selectors.selectExerciseById(exercise.exerciseId));
+
+  const columnsQty = useMemo(() => {
+    return editMode ? 4 : 5;
+  }, [ editMode ]);
+
+  const renderStatusColumn = useCallback(() => {
+    if(editMode) {
+      return <></>;
+    }
+
+    return (
+      <td>
+        <ExerciseStatus
+          exerciseId={id}
+          onChangeExerciseStatus={onChangeExerciseStatus}
+        />
+      </td>
+    );
+  }, [ editMode, id, onChangeExerciseStatus ]);
+
+  const renderSets = useCallback(() => {
+    if(!editMode) {
+      return sets;
+    }
+
+    return (
+      <Input
+        type="text"
+        name="sets"
+        value={sets}
+        onChange={(event) => setExerciseProperty('sets', event.target.value)}
+      />
+    );
+  }, [ editMode, setExerciseProperty, sets ]);
+
+  const renderReps = useCallback(() => {
+    if(!editMode) {
+      return reps;
+    }
+
+    return (
+      <Input
+        type="text"
+        name="reps"
+        value={reps}
+        onChange={(event) => setExerciseProperty('reps', event.target.value)}
+      />
+    );
+  }, [ editMode, setExerciseProperty, reps ]);
+
+  const renderWeight = useCallback(() => {
+    if(!editMode) {
+      return weight;
+    }
+
+    return (
+      <Input
+        type="text"
+        name="weight"
+        value={weight}
+        onChange={(event) => setExerciseProperty('weight', event.target.value)}
+      />
+    );
+  }, [ editMode, setExerciseProperty, weight ]);
+
+  const renderRest = useCallback(() => {
+    if(!editMode) {
+      return rest;
+    }
+
+    return (
+      <Input
+        type="text"
+        name="rest"
+        value={rest}
+        onChange={(event) => setExerciseProperty('rest', event.target.value)}
+      />
+    );
+  }, [ editMode, setExerciseProperty, rest ]);
 
   return (
     <div className={styles.ExerciseBody}>
@@ -29,31 +112,27 @@ const ExerciseBody = (props) => {
         <tbody>
           <tr>
             <td>
-              {sets}
+              {renderSets()}
             </td>
 
             <td>
-              {reps}
+              {renderReps()}
             </td>
 
             <td>
-              {weight}
+              {renderWeight()}
             </td>
 
             <td>
-              {rest}
+              {renderRest()}
             </td>
-            <td>
-              <ExerciseStatus
-                exerciseId={id}
-                onChangeExerciseStatus={onChangeExerciseStatus}
-              />
-            </td>
+
+            {renderStatusColumn()}
           </tr>
           <tr data-is-expanded={isExpanded}>
-            <td colSpan={5}>
+            <td colSpan={columnsQty}>
               <Video
-                url={videoUrl}
+                url={dbExercise?.videoUrl}
               />
             </td>
           </tr>

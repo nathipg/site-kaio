@@ -1,0 +1,6 @@
+@use '@/styles/colors.scss';
+
+.WorkoutFooter {
+  padding: 1rem;
+  border-top: 1px solid colors.$light-gray;
+}

@@ -1,25 +1,89 @@
-import { memo } from 'react';
+import { memo, useCallback, useMemo, useRef } from 'react';
+import { useSelector } from 'react-redux';
 
-import { ExpandCollapseArrow } from '@/components';
+import { ExpandCollapseArrow, RemoveIconButton, RemoveWorkoutExerciseConfirmDialog, Select } from '@/components';
+import { ExerciseSlice } from '@/store/slices';
 
 import styles from './ExerciseHeader.module.scss';
 
 const ExerciseHeader = (props) => {
-  const { isExpanded, name } = props;
-  const { onChangeExpandedState } = props;
+  const { isExpanded, exercise, editMode } = props;
+  const { onChangeExpandedState, setExerciseProperty, onRemoveExercise } = props;
+
+  const removeWorkoutExerciseDialogFnsRef = useRef(null);
+
+  const dbExercises = useSelector(ExerciseSlice.selectors.selectAllExercises);
+
+  const onClickHeader = useMemo(() => {
+    return exercise?.exerciseId ? onChangeExpandedState : () => null;
+  }, [ exercise?.exerciseId, onChangeExpandedState ]);
+
+  const onClickRemoveExerciseButton = useCallback(() => {
+    const removeFn = !exercise.exerciseId ? onRemoveExercise : removeWorkoutExerciseDialogFnsRef.current?.show;
+    removeFn();
+  }, [ exercise.exerciseId, onRemoveExercise ]);
+
+  const onChangeSelectedExercise = useCallback((event) => {
+    setExerciseProperty('exerciseId', event.target.value);
+  }, [ setExerciseProperty ]);
+
+  const renderExercise = useCallback(() => {
+    if(!editMode) {
+      return exercise.name;
+    }
+
+    const renderExercises = () => {
+      return dbExercises.map(dbExercise => {
+        return <option key={dbExercise.id} value={dbExercise.id}>{dbExercise.title}</option>;
+      });
+    };
+
+    return (
+      <>
+        <Select
+          name="exercises"
+          emptyItemText="Select an exercise"
+          value={exercise.exerciseId}
+          onChange={onChangeSelectedExercise}
+          renderItems={renderExercises}
+        />
+
+        <RemoveIconButton
+          onClick={onClickRemoveExerciseButton}
+        />
+      </>
+    );
+  }, [ dbExercises, editMode, exercise.exerciseId, exercise.name, onChangeSelectedExercise, onClickRemoveExerciseButton ]);
+
+  const renderArrow = useCallback(() => {
+    if(!exercise?.exerciseId) {
+      return <></>;
+    }
+
+    return (
+      <ExpandCollapseArrow
+        isExpanded={isExpanded}
+        onClick={onClickHeader}
+      />
+    );
+  }, [ exercise?.exerciseId, isExpanded, onClickHeader ]);
 
   return (
     <div
       className={styles.ExerciseHeader}
-      onClick={onChangeExpandedState}
     >
-      <ExpandCollapseArrow
-        isExpanded={isExpanded}
-      />
-
       <span className={styles.ExerciseHeaderText}>
-        {name}
+        {renderExercise()}
       </span>
+
+      {renderArrow()}
+
+      {
+        <RemoveWorkoutExerciseConfirmDialog
+          onRemoveExercise={onRemoveExercise}
+          dialogFnsRef={removeWorkoutExerciseDialogFnsRef}
+        />
+      }
     </div>
   );
 };

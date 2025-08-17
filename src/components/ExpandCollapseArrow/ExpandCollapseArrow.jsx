@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 
 import { CaretDownIcon, CaretUpIcon } from '@/components';
 
@@ -6,20 +6,17 @@ import styles from './ExpandCollapseArrow.module.scss';
 
 const ExpandCollapseArrow = (props) => {
   const { isExpanded } = props;
-  const { onChangeExpandedState = () => null } = props;
+  const { onChangeExpandedState = () => null, onClick = () => null } = props;
+
+  const onClickArrow = useCallback(() => {
+    onChangeExpandedState();
+    onClick();
+  }, [ onChangeExpandedState, onClick ]);
 
   return (
-    isExpanded ? (
-      <CaretUpIcon
-        className={styles.ExpandCollapseArrow}
-        onClick={onChangeExpandedState}
-      />
-    ) : (
-      <CaretDownIcon
-        className={styles.ExpandCollapseArrow}
-        onClick={onChangeExpandedState}
-      />
-    )
+    <div className={styles.ExpandCollapseArrow} onClick={onClickArrow}>
+      {isExpanded ? <CaretUpIcon /> : <CaretDownIcon />}
+    </div>
   );
 };
 

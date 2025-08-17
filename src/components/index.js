@@ -1,4 +1,8 @@
 export * from './Button';
+export * from './Buttons';
+export * from './ConfirmationDialog';
+export * from './Dialog';
+export * from './Dialogs';
 export * from './ExerciseList';
 export * from './ExpandCollapseArrow';
 export * from './Forms';
@@ -6,3 +10,4 @@ export * from './Growl';
 export * from './Icons';
 export * from './Video';
 export * from './Workout';
+export * from './WorkoutsList';

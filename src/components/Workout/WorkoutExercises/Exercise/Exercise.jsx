@@ -4,9 +4,8 @@ import { ExerciseBody } from './ExerciseBody';
 import { ExerciseHeader } from './ExerciseHeader';
 
 const Exercise = (props) => {
-  const { onChangeExerciseStatus } = props;
-  const { exercise } = props;
-  const { name } = exercise;
+  const { onChangeExerciseStatus, setExerciseProperty, onRemoveExercise } = props;
+  const { exercise, editMode } = props;
 
   const [ isExpanded, setIsExpanded ] = useState(false);
 
@@ -14,19 +13,34 @@ const Exercise = (props) => {
     setIsExpanded(currentStatus => !currentStatus);
   }, []);
 
-  return (
-    <div>
-      <ExerciseHeader
-        name={name}
-        isExpanded={isExpanded}
-        onChangeExpandedState={onChangeExpandedState}
-      />
+  const renderExerciseBody = useCallback(() => {
+    if(!exercise?.exerciseId) {
+      return <></>;
+    }
 
+    return (
       <ExerciseBody
         exercise={exercise}
         isExpanded={isExpanded}
         onChangeExerciseStatus={onChangeExerciseStatus}
+        editMode={editMode}
+        setExerciseProperty={setExerciseProperty}
       />
+    );
+  }, [ editMode, exercise, isExpanded, onChangeExerciseStatus, setExerciseProperty ]);
+
+  return (
+    <div>
+      <ExerciseHeader
+        exercise={exercise}
+        isExpanded={isExpanded}
+        onChangeExpandedState={onChangeExpandedState}
+        editMode={editMode}
+        setExerciseProperty={setExerciseProperty}
+        onRemoveExercise={onRemoveExercise}
+      />
+
+      {renderExerciseBody()}
     </div>
   );
 };
