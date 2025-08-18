@@ -66,15 +66,15 @@ const ProtectedAdminRoute = (props) => {
   const isAdmin = loggedUser?.isAdmin;
 
   useEffect(() => {
+    const currentPath = location.pathname + location.search;
+    const urlParam = isLoginVerificationComplete ? '' : `?url=${currentPath}`;
+    
     if (!isLoggedIn) {
-      const currentPath = location.pathname + location.search;
-      const urlParam = isLoginVerificationComplete ? '' : `?url=${currentPath}`;
-
       navigate(`/sign-in${urlParam}`, { replace: true });
     }
 
     if(!isAdmin) {
-      navigate('/', { replace: true });
+      navigate(`/sign-in${urlParam}`, { replace: true });
     }
 
     if(isLoggedIn) {
