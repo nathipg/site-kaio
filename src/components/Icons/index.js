@@ -4,6 +4,7 @@ export * from './CaretUpIcon';
 export * from './CheckIcon';
 export * from './FloppyDiskIcon';
 export * from './KaioLogo';
+export * from './PaperPlaneIcon';
 export * from './PenToSquareIcon';
 export * from './PlusIcon';
 export * from './RightToBracket';

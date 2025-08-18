@@ -54,11 +54,15 @@ const ExerciseHeader = (props) => {
 
   const renderExercise = useCallback(() => {
     if(mode != WorkoutConstants.WORKOUT_MODES.EDIT) {
-      return dbExercise?.title;
+      return (
+        <span onClick={onClickHeader}>
+          {dbExercise?.title}
+        </span>
+      );
     }
     
     return renderExerciseEditMode();
-  }, [ dbExercise?.title, mode, renderExerciseEditMode ]);
+  }, [ dbExercise?.title, mode, onClickHeader, renderExerciseEditMode ]);
 
   const renderArrow = useCallback(() => {
     if(!exercise?.exerciseId) {

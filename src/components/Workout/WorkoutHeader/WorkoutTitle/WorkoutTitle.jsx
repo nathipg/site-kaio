@@ -16,7 +16,7 @@ const WorkoutTitle = (props) => {
 
   const renderTitle = useCallback(() => {
     if(mode != WORKOUT_MODES.EDIT) {
-      return <h2>title</h2>;
+      return <h2>{title}</h2>;
     }
 
     return (
