@@ -66,7 +66,7 @@
       width: 100%;
       flex-direction: column;
       background-color: colors.$red;
-      padding: 8rem 2rem 0;
+      padding: 8rem 2rem 1rem;
       transition: right 0.3s ease;
       box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
       @include typography.subtitle;

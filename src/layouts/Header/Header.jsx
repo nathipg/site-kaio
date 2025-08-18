@@ -27,7 +27,7 @@ const Header = () => {
   return (
     <header className={styles.Header}>
       <div className={styles.logo} title='Kaio Guerrero Personal Trainer'>
-        <Link to={{ pathname: '/' }} onClick={toggleMenu}>
+        <Link to={{ pathname: '/' }} onClick={isMenuOpen ? toggleMenu : ''}>
           <KaioLogo width='1.5rem' color='white' />
           <span>Kaio Guerrero</span>
         </Link>
