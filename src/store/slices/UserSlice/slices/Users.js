@@ -51,14 +51,8 @@ const extraReducers = (builder) => {
     .addCase(asyncThunk.saveUserWorkouts.pending, (state) => {
       state.saveUserWorkoutsStatus = REQUEST_STATUS.LOADING;
     })
-    .addCase(asyncThunk.saveUserWorkouts.fulfilled, (state, action) => {
+    .addCase(asyncThunk.saveUserWorkouts.fulfilled, (state) => {
       state.saveUserWorkoutsStatus = REQUEST_STATUS.SUCCEEDED;
-
-      const userIndex = state.users.findIndex(u => u.uid == action.payload.uid);
-      state.users[userIndex] = {
-        ...state.users[userIndex],
-        workouts: action.payload.workouts,
-      };
     })
     .addCase(asyncThunk.saveUserWorkouts.rejected, (state, action) => {
       state.saveUserWorkoutsStatus = REQUEST_STATUS.FAILED;

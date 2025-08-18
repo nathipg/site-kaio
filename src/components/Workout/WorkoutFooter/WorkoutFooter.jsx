@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Button, ButtonConstants, RemoveWorkoutConfirmDialog, XIcon } from '@/components';
 
 import { WORKOUT_MODES } from '../constants';
+import { SendWorkout } from '../SendWorkout';
 
 import styles from './WorkoutFooter.module.scss';
 
@@ -42,7 +43,7 @@ const WorkoutFooter = (props) => {
 
   const renderRegisterElements = useCallback(() => {
     return (
-      <></>
+      <SendWorkout />
     );
   }, []);
 

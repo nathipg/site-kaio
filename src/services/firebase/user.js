@@ -62,12 +62,10 @@ export const saveUserWorkouts = async (data) => {
   const userRef = doc(db, DB_KEYS.USERS, uid);
 
   batch.update(userRef, {
-    workouts: workouts || [],
+    workouts,
   });
 
   await batch.commit();
-
-  return data;
 };
 
 export const signInUser = async (userData) => {

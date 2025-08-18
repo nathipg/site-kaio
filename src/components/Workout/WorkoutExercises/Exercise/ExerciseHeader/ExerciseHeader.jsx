@@ -13,6 +13,7 @@ const ExerciseHeader = (props) => {
   const removeWorkoutExerciseDialogFnsRef = useRef(null);
 
   const dbExercises = useSelector(ExerciseSlice.selectors.selectAllExercises);
+  const dbExercise = useSelector(ExerciseSlice.selectors.selectExerciseById(exercise?.exerciseId));
 
   const onClickHeader = useMemo(() => {
     return exercise?.exerciseId ? onChangeExpandedState : () => null;
@@ -27,11 +28,7 @@ const ExerciseHeader = (props) => {
     setExerciseProperty('exerciseId', event.target.value);
   }, [ setExerciseProperty ]);
 
-  const renderExercise = useCallback(() => {
-    if(mode != WorkoutConstants.WORKOUT_MODES.EDIT) {
-      return exercise.name;
-    }
-
+  const renderExerciseEditMode = useCallback(() => {
     const renderExercises = () => {
       return dbExercises.map(dbExercise => {
         return <option key={dbExercise.id} value={dbExercise.id}>{dbExercise.title}</option>;
@@ -53,7 +50,19 @@ const ExerciseHeader = (props) => {
         />
       </>
     );
-  }, [ dbExercises, exercise.exerciseId, exercise.name, mode, onChangeSelectedExercise, onClickRemoveExerciseButton ]);
+  }, [ dbExercises, exercise.exerciseId, onChangeSelectedExercise, onClickRemoveExerciseButton ]);
+
+  const renderExercise = useCallback(() => {
+    if(mode != WorkoutConstants.WORKOUT_MODES.EDIT) {
+      return (
+        <span onClick={onClickHeader}>
+          {dbExercise?.title}
+        </span>
+      );
+    }
+    
+    return renderExerciseEditMode();
+  }, [ dbExercise?.title, mode, onClickHeader, renderExerciseEditMode ]);
 
   const renderArrow = useCallback(() => {
     if(!exercise?.exerciseId) {
