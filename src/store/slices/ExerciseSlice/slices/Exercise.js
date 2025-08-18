@@ -140,7 +140,7 @@ const selectors = {
   },
 };
 
-export const LoadSongs = {
+export const Exercise = {
   initialState,
   reducers,
   asyncThunk,

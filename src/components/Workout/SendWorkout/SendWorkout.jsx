@@ -1,12 +1,47 @@
-import { memo, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Button, ButtonConstants, PaperPlaneIcon, TextArea } from '@/components';
+import { Button, ButtonConstants, GrowlFns, PaperPlaneIcon, TextArea } from '@/components';
+import { UserSlice, WorkoutSlice } from '@/store/slices';
+import { utils } from '@/utils';
 
-const SendWorkout = () => {
+const SendWorkout = (props) => {
+  const { workout } = props;
+
   const { t } = useTranslation();
 
+  const dispatch = useDispatch();
+
+  const saveWorkoutError = useSelector(WorkoutSlice.selectors.selectLoadUsersError);
+  const saveWorkoutMessage = useSelector(WorkoutSlice.selectors.selectSaveWorkoutMessage);
+  const loggedUser = useSelector(UserSlice.selectors.selectLoggedUser);
+
   const [ comment, setComment ] = useState('');
+
+  const onClickSendWorkout = useCallback(() => {
+    const now = utils.getNowUTCIsoFormat();
+
+    const workoutData = {
+      createdAt: now,
+      userUid: loggedUser.uid,
+      title: workout.title,
+      description: workout.description,
+      comment,
+    };
+
+    dispatch(WorkoutSlice.actions.saveWorkout(workoutData));
+
+    setComment('');
+  }, [ comment, dispatch, loggedUser.uid, workout.description, workout.title ]);
+
+  const onCloseSaveWorkoutErrorGrowl = useCallback(() => {
+    dispatch(WorkoutSlice.actions.clearSaveWorkoutError());
+  }, [ dispatch ]);
+
+  const onCloseSaveWorkoutSuccessGrowl = useCallback(() => {
+    dispatch(WorkoutSlice.actions.clearSaveWorkoutMessage());
+  }, [ dispatch ]);
   
   return (
     <>
@@ -18,10 +53,20 @@ const SendWorkout = () => {
       <Button
         category={ButtonConstants.ButtonCategories.SUCCESS}
         icon={<PaperPlaneIcon />}
-        onClick={() => null}
+        onClick={onClickSendWorkout}
       >
         {t('Send')}
       </Button>
+
+      {GrowlFns.renderSuccessGrowl({
+        message: saveWorkoutMessage,
+        onCloseGrowl: onCloseSaveWorkoutSuccessGrowl,
+      })}
+
+      {GrowlFns.renderErrorGrowl({
+        message: saveWorkoutError,
+        onCloseGrowl: onCloseSaveWorkoutErrorGrowl,
+      })}
     </>
   );
 };

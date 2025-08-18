@@ -43,9 +43,11 @@ const WorkoutFooter = (props) => {
 
   const renderRegisterElements = useCallback(() => {
     return (
-      <SendWorkout />
+      <SendWorkout
+        workout={workout}
+      />
     );
-  }, []);
+  }, [ workout ]);
 
   const RENDER_MODE_MAPPER = useMemo(() => {
     return {

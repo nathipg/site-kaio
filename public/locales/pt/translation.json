@@ -85,5 +85,8 @@
   "Remove Workout": "Remove Workout",
   "Are you sure you want to remove this workout?": "Tem certeza que você deseja remove este treino?",
   "Send": "Enviar",
-  "Manage Users Workouts": "Gerenciar Treinos dos Usuários"
+  "Manage Users Workouts": "Gerenciar Treinos dos Usuários",
+  "Workout saved": "Treino salvo",
+  "Comment": "Comentário",
+  "<empty>": "<vazio>"
 }

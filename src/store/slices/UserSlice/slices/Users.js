@@ -20,6 +20,9 @@ const initialState = {
 
 // Reducers
 const reducers = {
+  clearLoadUsersError: (state) => {
+    state.loadUsersError = null;
+  },
   clearSaveUserWorkoutsError: (state) => {
     state.saveUserWorkoutsError = null;
   },
