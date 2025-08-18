@@ -1,3 +1,34 @@
 {
-  "error-message": {}
+  "error-message": {
+    "sign-up-user": {
+      "auth/invalid-email": "Please, add a valid email",
+      "auth/email-already-in-use": "An account with that email already exists",
+      "auth/missing-password": "Please, insert a password with at least 6 characters",
+      "auth/weak-password": "Please, insert a password with at least 6 characters",
+      "error-message.sign-up-user.confirm-password-does-not-match": "Your password and confirmation password must match"
+    },
+    "sign-in-user": {
+      "auth/invalid-email": "User not found",
+      "auth/missing-password": "User not found",
+      "auth/invalid-credential": "User not found"
+    },
+    "load-exercises": {
+      "auth/network-request-failed": "Network Error: Please, check your network connection"
+    },
+    "add-exercise": {
+      "permission-denied": "You don't have permission to add exercises"
+    },
+    "save-exercise": {
+      "permission-denied": "You don't have permission to save exercises"
+    },
+    "load-users": {
+      "permission-denied": "You don't have permission to load users"
+    },
+    "save-user-workouts": {
+      "permission-denied": "You don't have permission to change users workouts"
+    },
+    "save-user-workout": {
+      "permission-denied": "You don't have permission to send the workout"
+    }
+  }
 }
