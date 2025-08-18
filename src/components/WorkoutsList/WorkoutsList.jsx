@@ -6,7 +6,7 @@ import { Workout } from '@/components';
 import styles from './WorkoutsList.module.scss';
 
 const WorkoutsList = (props) => {
-  const { workouts = [], editMode = false } = props;
+  const { workouts = [], mode } = props;
   const { onUpdateWorkoutData = () => null, onRemoveWorkout = () => null } = props;
 
   const { t } = useTranslation();
@@ -25,13 +25,13 @@ const WorkoutsList = (props) => {
         <Workout
           key={workout.id}
           workout={workout}
-          editMode={editMode}
+          mode={mode}
           setWorkoutProperty={setWorkoutProperty}
           onRemoveWorkout={onRemoveWorkout}
         />
       );
     });
-  }, [ editMode, onRemoveWorkout, onUpdateWorkoutData, t, workouts ]);
+  }, [ mode, onRemoveWorkout, onUpdateWorkoutData, t, workouts ]);
 
   return (
     <div className={styles.WorkoutsList}>

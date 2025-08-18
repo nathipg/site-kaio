@@ -5,7 +5,7 @@ import { ExerciseHeader } from './ExerciseHeader';
 
 const Exercise = (props) => {
   const { onChangeExerciseStatus, setExerciseProperty, onRemoveExercise } = props;
-  const { exercise, editMode } = props;
+  const { exercise, mode } = props;
 
   const [ isExpanded, setIsExpanded ] = useState(false);
 
@@ -23,11 +23,11 @@ const Exercise = (props) => {
         exercise={exercise}
         isExpanded={isExpanded}
         onChangeExerciseStatus={onChangeExerciseStatus}
-        editMode={editMode}
+        mode={mode}
         setExerciseProperty={setExerciseProperty}
       />
     );
-  }, [ editMode, exercise, isExpanded, onChangeExerciseStatus, setExerciseProperty ]);
+  }, [ mode, exercise, isExpanded, onChangeExerciseStatus, setExerciseProperty ]);
 
   return (
     <div>
@@ -35,7 +35,7 @@ const Exercise = (props) => {
         exercise={exercise}
         isExpanded={isExpanded}
         onChangeExpandedState={onChangeExpandedState}
-        editMode={editMode}
+        mode={mode}
         setExerciseProperty={setExerciseProperty}
         onRemoveExercise={onRemoveExercise}
       />

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { Input, Video } from '@/components';
+import { WORKOUT_MODES } from '@/components/Workout/constants';
 import { ExerciseSlice } from '@/store/slices';
 
 import { ExerciseStatus } from './ExerciseStatus';
@@ -11,7 +12,7 @@ import styles from './ExerciseBody.module.scss';
 
 const ExerciseBody = (props) => {
   const { onChangeExerciseStatus, setExerciseProperty } = props;
-  const { exercise, isExpanded, editMode } = props;
+  const { exercise, isExpanded, mode } = props;
   const { id, sets, reps, weight, rest } = exercise;
 
   const { t } = useTranslation();
@@ -19,11 +20,11 @@ const ExerciseBody = (props) => {
   const dbExercise = useSelector(ExerciseSlice.selectors.selectExerciseById(exercise.exerciseId));
 
   const columnsQty = useMemo(() => {
-    return editMode ? 4 : 5;
-  }, [ editMode ]);
+    return mode == WORKOUT_MODES.EDIT ? 4 : 5;
+  }, [ mode ]);
 
   const renderStatusColumn = useCallback(() => {
-    if(editMode) {
+    if(mode == WORKOUT_MODES.EDIT) {
       return <></>;
     }
 
@@ -35,10 +36,10 @@ const ExerciseBody = (props) => {
         />
       </td>
     );
-  }, [ editMode, id, onChangeExerciseStatus ]);
+  }, [ id, mode, onChangeExerciseStatus ]);
 
   const renderSets = useCallback(() => {
-    if(!editMode) {
+    if(mode != WORKOUT_MODES.EDIT) {
       return sets;
     }
 
@@ -50,10 +51,10 @@ const ExerciseBody = (props) => {
         onChange={(event) => setExerciseProperty('sets', event.target.value)}
       />
     );
-  }, [ editMode, setExerciseProperty, sets ]);
+  }, [ mode, setExerciseProperty, sets ]);
 
   const renderReps = useCallback(() => {
-    if(!editMode) {
+    if(!mode != WORKOUT_MODES.EDIT) {
       return reps;
     }
 
@@ -65,10 +66,10 @@ const ExerciseBody = (props) => {
         onChange={(event) => setExerciseProperty('reps', event.target.value)}
       />
     );
-  }, [ editMode, setExerciseProperty, reps ]);
+  }, [ mode, reps, setExerciseProperty ]);
 
   const renderWeight = useCallback(() => {
-    if(!editMode) {
+    if(mode != WORKOUT_MODES.EDIT) {
       return weight;
     }
 
@@ -80,10 +81,10 @@ const ExerciseBody = (props) => {
         onChange={(event) => setExerciseProperty('weight', event.target.value)}
       />
     );
-  }, [ editMode, setExerciseProperty, weight ]);
+  }, [ mode, setExerciseProperty, weight ]);
 
   const renderRest = useCallback(() => {
-    if(!editMode) {
+    if(mode != WORKOUT_MODES.EDIT) {
       return rest;
     }
 
@@ -95,7 +96,7 @@ const ExerciseBody = (props) => {
         onChange={(event) => setExerciseProperty('rest', event.target.value)}
       />
     );
-  }, [ editMode, setExerciseProperty, rest ]);
+  }, [ mode, setExerciseProperty, rest ]);
 
   return (
     <div className={styles.ExerciseBody}>

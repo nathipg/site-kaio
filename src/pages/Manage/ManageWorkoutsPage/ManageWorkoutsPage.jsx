@@ -2,7 +2,7 @@ import { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Button, ButtonConstants, GrowlFns, PlusIcon, SaveButton, Select, WorkoutsList } from '@/components';
+import { Button, ButtonConstants, GrowlFns, PlusIcon, SaveButton, Select, WorkoutConstants, WorkoutsList } from '@/components';
 import { UserSlice } from '@/store/slices';
 import { utils } from '@/utils';
 
@@ -160,7 +160,7 @@ const ManageWorkoutsPage = () => {
     return (
       <WorkoutsList
         workouts={selectedUser?.workouts}
-        editMode={true}
+        mode={WorkoutConstants.WORKOUT_MODES.EDIT}
         onUpdateWorkoutData={onUpdateSelectedUserWorkout}
         onRemoveWorkout={onRemoveWorkout}
       />

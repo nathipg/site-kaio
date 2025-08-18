@@ -61,6 +61,9 @@ const selectors = {
   isFirebaseOnAuthStateChangedStatusComplete: (state) => {
     return state.users.firebaseOnAuthStateChangedStatus != REQUEST_STATUS.IDLE;
   },
+  selectLoggedUserWorkouts: (state) => {
+    return state.users?.loggedUser?.workouts || [];
+  },
 };
 
 export const LoggedUser = {

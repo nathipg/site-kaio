@@ -3,12 +3,14 @@ import { memo, useCallback } from 'react';
 import { AddExerciseButton } from '@/components/Buttons/AddExerciseButton';
 import { utils } from '@/utils';
 
+import { WORKOUT_MODES } from '../constants';
+
 import { Exercise } from './Exercise';
 
 import styles from './WorkoutExercises.module.scss';
 
 const WorkoutExercises = (props) => {
-  const { exercises, editMode } = props;
+  const { exercises, mode } = props;
   const { onChangeExerciseStatus, setWorkoutProperty } = props;
 
   const onAddExercise = useCallback(() => {
@@ -28,14 +30,14 @@ const WorkoutExercises = (props) => {
   }, [ exercises, setWorkoutProperty ]);
 
   const renderAddExerciseButton = useCallback(() => {
-    if(!editMode) {
+    if(mode != WORKOUT_MODES.EDIT) {
       return <></>;
     }
 
     return (
       <AddExerciseButton onClick={onAddExercise} />
     );
-  }, [ editMode, onAddExercise ]);
+  }, [ mode, onAddExercise ]);
 
   return (
     <div className={styles.WorkoutExercises}>
@@ -75,7 +77,7 @@ const WorkoutExercises = (props) => {
             key={exercise.id}
             exercise={exercise}
             onChangeExerciseStatus={onChangeExerciseStatus}
-            editMode={editMode}
+            mode={mode}
             setExerciseProperty={setExerciseProperty}
             onRemoveExercise={onRemoveExercise}
           />

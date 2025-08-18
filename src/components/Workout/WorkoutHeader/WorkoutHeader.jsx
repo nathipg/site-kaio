@@ -2,17 +2,19 @@ import { memo, useCallback } from 'react';
 
 import { ExpandCollapseArrow } from '@/components';
 
+import { WORKOUT_MODES } from '../constants';
+
 import { WorkoutProgress } from './WorkoutProgress';
 import { WorkoutTitle } from './WorkoutTitle';
 
 import styles from './WorkoutHeader.module.scss';
 
 const WorkoutHeader = (props) => {
-  const { workout, completedExercisesQty, totalExercises, isExpanded, editMode } = props;
+  const { workout, completedExercisesQty, totalExercises, isExpanded, mode } = props;
   const { onChangeExpandedState, setWorkoutProperty = () => null } = props;
 
   const renderWorkoutProgress = useCallback(() => {
-    if(editMode) {
+    if(mode != WORKOUT_MODES.EDIT) {
       return <></>;
     }
 
@@ -23,13 +25,13 @@ const WorkoutHeader = (props) => {
         onChangeExpandedState={onChangeExpandedState}
       />
     );
-  }, [ completedExercisesQty, editMode, onChangeExpandedState, totalExercises ]);
+  }, [ completedExercisesQty, mode, onChangeExpandedState, totalExercises ]);
 
   return (
     <div className={styles.WorkoutHeader}>
       <WorkoutTitle
         workout={workout}
-        editMode={editMode}
+        mode={mode}
         setWorkoutProperty={setWorkoutProperty}
       />
 

@@ -7,7 +7,7 @@ import { WorkoutHeader } from './WorkoutHeader';
 import styles from './Workout.module.scss';
 
 const Workout = (props) => {
-  const { workout, editMode } = props;
+  const { workout, mode } = props;
   const { setWorkoutProperty = () => null, onRemoveWorkout = () => null } = props;
 
   const [ completedExercises, setCompletedExercises ] = useState([]);
@@ -50,7 +50,7 @@ const Workout = (props) => {
         isExpanded={isExpanded}
         onChangeExpandedState={onChangeExpandedState}
         completedExercisesQty={completedExercisesQty}
-        editMode={editMode}
+        mode={mode}
         setWorkoutProperty={setWorkoutProperty}
       />
 
@@ -58,13 +58,14 @@ const Workout = (props) => {
         <WorkoutExercises
           exercises={workout.exercises}
           onChangeExerciseStatus={onChangeExerciseStatus}
-          editMode={editMode}
+          mode={mode}
           setWorkoutProperty={setWorkoutProperty}
         />
       </div>
 
       <WorkoutFooter
         workout={workout}
+        mode={mode}
         onRemoveWorkout={onRemoveWorkout}
       />
     </div>

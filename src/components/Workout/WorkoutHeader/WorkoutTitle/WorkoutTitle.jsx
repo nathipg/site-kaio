@@ -3,17 +3,19 @@ import { useTranslation } from 'react-i18next';
 
 import { FieldWithLabel, Input } from '@/components/Forms';
 
+import { WORKOUT_MODES } from '../../constants';
+
 import styles from './WorkoutTitle.module.scss';
 
 const WorkoutTitle = (props) => {
-  const { workout, editMode } = props;
+  const { workout, mode } = props;
   const { title, description } = workout;
   const { setWorkoutProperty = () => null } = props;
 
   const { t } = useTranslation();
 
   const renderTitle = useCallback(() => {
-    if(!editMode) {
+    if(mode != WORKOUT_MODES.EDIT) {
       return <h2>title</h2>;
     }
 
@@ -30,10 +32,10 @@ const WorkoutTitle = (props) => {
         )}
       />
     );
-  }, [ editMode, setWorkoutProperty, t, title ]);
+  }, [ mode, setWorkoutProperty, t, title ]);
 
   const renderDescription = useCallback(() => {
-    if(!editMode) {
+    if(!mode != WORKOUT_MODES.EDIT) {
       return <p>{description}</p>;
     }
 
@@ -50,7 +52,7 @@ const WorkoutTitle = (props) => {
         )}
       />
     );
-  }, [ description, editMode, setWorkoutProperty, t ]);
+  }, [ description, mode, setWorkoutProperty, t ]);
 
   return (
     <div className={styles.WorkoutTitle}>
