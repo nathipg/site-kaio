@@ -35,7 +35,7 @@ const WorkoutTitle = (props) => {
   }, [ mode, setWorkoutProperty, t, title ]);
 
   const renderDescription = useCallback(() => {
-    if(!mode != WORKOUT_MODES.EDIT) {
+    if(mode != WORKOUT_MODES.EDIT) {
       return <p>{description}</p>;
     }
 

@@ -92,12 +92,30 @@ const ManageWorkoutsPage = () => {
       return;
     }
 
+    const workoutsWithoutEmptyExercises = selectedUser?.workouts?.map(workout => {
+      const normalizedExercises = workout.exercises.filter(exercise => exercise.exerciseId);
+    
+      return {
+        ...workout,
+        exercises: normalizedExercises,
+      };
+    }) || [];
+    
+    const normalizedWorkouts = workoutsWithoutEmptyExercises.filter(workout => workout.exercises.length > 0);
+
     const payload = {
       uid: selectedUser.uid,
-      workouts: selectedUser.workouts,
+      workouts: normalizedWorkouts,
     };
 
     dispatch(UserSlice.actions.saveUserWorkouts(payload));
+
+    setSelectedUser((currentSelectedUser) => {
+      return {
+        ...currentSelectedUser,
+        workouts: normalizedWorkouts,
+      };
+    });
   }, [ dispatch, selectedUser ]);
 
   const getUserByUid = useCallback((uid) => {

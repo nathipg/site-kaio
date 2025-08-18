@@ -54,7 +54,7 @@ const ExerciseBody = (props) => {
   }, [ mode, setExerciseProperty, sets ]);
 
   const renderReps = useCallback(() => {
-    if(!mode != WORKOUT_MODES.EDIT) {
+    if(mode != WORKOUT_MODES.EDIT) {
       return reps;
     }
 
