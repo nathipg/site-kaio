@@ -1,18 +1,25 @@
 // Base size
-$base-size: 16px;
+$base-size: 1rem;
 
 // Type scale using a 1.25 ratio (major third)
 $scale: 1.25;
 
+// Major Third type scale function
+// base: starting size (default: 1rem = 16px)
+// ratio: scale factor (default: 1.25)
+// step: position on the scale (0 = base, positive = larger, negative = smaller)
+@function type-scale($step, $base: $base-size, $ratio: $scale) {
+  @return $base * pow($ratio, $step);
+}
+
 // Font sizes
-$font-xs: calc($base-size / ($scale));         // 12.8px
-$font-sm: calc($base-size / ($scale * 0.85));  // 14px~
-$font-base: $base-size;                        // 16px
-$font-md: calc($base-size * $scale);           // 20px
-$font-lg: calc($base-size * ($scale * 1.5));   // 24px
-$font-xl: calc($base-size * ($scale * 2));     // 32px
-$font-2xl: calc($base-size * ($scale * 2.5));  // 40px
-$font-3xl: calc($base-size * ($scale * 3));    // 48px
+$font-sm: type-scale(-1);  // 12.8px
+$font-base: type-scale(0); // 16px
+$font-md: type-scale(1);   // 20px
+$font-lg: type-scale(2);   // 24px
+$font-xl: type-scale(3);   // 31.25px
+$font-2xl: type-scale(4);  // 39.06px
+$font-3xl: type-scale(5);  // 48.83px
 
 // Line heights
 $leading-tight: 1.2;
@@ -27,11 +34,6 @@ $weight-semibold: 600;
 $weight-bold: 700;
 
 // Text utilities
-@mixin text-xs {
-  font-size: $font-xs;
-  line-height: $leading-normal;
-}
-
 @mixin text-sm {
   font-size: $font-sm;
   line-height: $leading-normal;
@@ -103,12 +105,7 @@ $weight-bold: 700;
   font-weight: $weight-regular;
 }
 
-@mixin button {
-  @include text-sm;
-  font-weight: $weight-regular;
-}
-
 @mixin caption {
-  @include text-xs;
+  @include text-sm;
   font-weight: $weight-regular;
 }
