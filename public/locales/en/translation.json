@@ -26,6 +26,9 @@
     },
     "save-user-workouts": {
       "permission-denied": "You don't have permission to change users workouts"
+    },
+    "save-user-workout": {
+      "permission-denied": "You don't have permission to send the workout"
     }
   }
 }

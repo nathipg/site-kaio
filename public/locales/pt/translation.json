@@ -26,6 +26,9 @@
     },
     "save-user-workouts": {
       "permission-denied": "Você não tem permissão para alterar os treinos dos usuários"
+    },
+    "save-user-workout": {
+      "permission-denied": "Você não tem permissão pra enviar o treino"
     }
   },
   "Home": "Início",
