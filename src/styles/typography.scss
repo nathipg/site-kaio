@@ -13,13 +13,13 @@ $scale: 1.25;
 }
 
 // Font sizes
-$font-sm: type-scale(-1);  // 12.8px
-$font-base: type-scale(0); // 16px
-$font-md: type-scale(1);   // 20px
-$font-lg: type-scale(2);   // 24px
-$font-xl: type-scale(3);   // 31.25px
-$font-2xl: type-scale(4);  // 39.06px
-$font-3xl: type-scale(5);  // 48.83px
+$font-sm: type-scale(-1);  // 12.8px / 0.8rem
+$font-base: type-scale(0); // 16px / 1rem
+$font-md: type-scale(1);   // 20px / 1.25rem
+$font-lg: type-scale(2);   // 25px / 1.56rem
+$font-xl: type-scale(3);   // 31.25px / 1.95rem
+$font-2xl: type-scale(4);  // 39.06px / 2.44rem
+$font-3xl: type-scale(5);  // 48.83px / 3.05rem
 
 // Line heights
 $leading-tight: 1.2;
