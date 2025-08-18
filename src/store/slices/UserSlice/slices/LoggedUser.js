@@ -62,7 +62,7 @@ const selectors = {
     return state.users.firebaseOnAuthStateChangedStatus != REQUEST_STATUS.IDLE;
   },
   selectLoggedUserWorkouts: (state) => {
-    return state.users?.loggedUser?.workouts || [];
+    return state.users?.loggedUser?.workouts;
   },
 };
 
