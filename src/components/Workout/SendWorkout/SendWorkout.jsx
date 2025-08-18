@@ -13,7 +13,7 @@ const SendWorkout = (props) => {
 
   const dispatch = useDispatch();
 
-  const saveWorkoutError = useSelector(WorkoutSlice.selectors.selectLoadUsersError);
+  const saveWorkoutError = useSelector(WorkoutSlice.selectors.selectLoadWorkoutsError);
   const saveWorkoutMessage = useSelector(WorkoutSlice.selectors.selectSaveWorkoutMessage);
   const loggedUser = useSelector(UserSlice.selectors.selectLoggedUser);
 
