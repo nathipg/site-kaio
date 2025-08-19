@@ -1,10 +1,8 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
 
 import { Button, ButtonConstants, Image } from '@/components';
 import kaioImg from '@/images/kaio-hero-section.png';
-
 
 import styles from './HeroSection.module.scss';
 
