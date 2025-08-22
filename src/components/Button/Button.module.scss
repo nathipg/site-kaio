@@ -1,7 +1,7 @@
 @use 'sass:color';
 
-@use '@/styles/colors.scss';
-@use '@/styles/mixins.scss';
+@use '@/styles/colors';
+@use '@/styles/mixins';
 
 .Button {
   padding: 0.25rem 1rem;

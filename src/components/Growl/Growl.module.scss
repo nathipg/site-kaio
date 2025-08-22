@@ -1,7 +1,7 @@
 @use 'sass:color';
 
-@use '@/styles/colors.scss';
-@use '@/styles/mixins.scss';
+@use '@/styles/colors';
+@use '@/styles/mixins';
 
 @mixin growl-color($color) {
   border-color: $color;
