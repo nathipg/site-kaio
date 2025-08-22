@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { About, HeroSection, Services } from '@/layouts';
+import { About, HeroSection, Services, Testimonials } from '@/layouts';
 
 const HomePage = () => {
   const { t } = useTranslation();
@@ -11,6 +11,7 @@ const HomePage = () => {
       <HeroSection />
       <About />
       <Services />
+      <Testimonials />
     </>
   );
 };
