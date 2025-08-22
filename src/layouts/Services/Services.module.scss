@@ -1,0 +1,40 @@
+@use '@/styles/colors';
+@use '@/styles/typography';
+
+.Services {
+  background: colors.$light-gray;
+  padding: 4rem 1rem;
+  color: colors.$black;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .card {
+    @include typography.body;
+    background: colors.$white;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
+    border: 1px solid #e2e8f0;
+
+    h3 { margin-bottom: 0.5rem; }
+    p { color: colors.$black; }
+  }
+
+  @media (max-width: 800px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+}

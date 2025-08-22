@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { About, HeroSection } from '@/layouts';
+import { About, HeroSection, Services } from '@/layouts';
 
 const HomePage = () => {
   const { t } = useTranslation();
@@ -10,6 +10,7 @@ const HomePage = () => {
     <>
       <HeroSection />
       <About />
+      <Services />
     </>
   );
 };
