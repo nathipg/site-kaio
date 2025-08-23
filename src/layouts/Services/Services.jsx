@@ -9,7 +9,7 @@ const Services = () => {
   // TO ADD NEW ITEMS, CHANGE THIS items OBJECT. REMEMBER TO UPDATE THE TEXTS IN translation.json
   const items = [
     { title: t('Train'), desc: t('I will teach you how to train safely and efficiently to achieve the best results.') },
-    { title: t('Create consistency'), desc: t('No magic formulas! Results come from consistency and well-designed training — I will show you how.') },
+    { title: t('Create consistency'), desc: t('No magic formulas! Results come from consistency and well-done training — I will show you how.') },
     { title: t('Respect your limits'), desc: t('Train smart: discover what works for you and progress safely.') },
   ];
 

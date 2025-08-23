@@ -21,7 +21,10 @@ const Header = () => {
   }, [ dispatch ]);
 
   const toggleMenu = useCallback(() => {
-    setIsMenuOpen(prev => !prev);
+    setIsMenuOpen(currentIsMenuOpen => {
+      document.body.style.overflow = !currentIsMenuOpen ? 'hidden' : '';
+      return !currentIsMenuOpen;
+    });
   }, []);
 
   return (

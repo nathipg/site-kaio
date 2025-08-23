@@ -4,7 +4,7 @@
 .Header {
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,7 +14,7 @@
   @include typography.body;
 
   .logo {
-    z-index: 2;
+    z-index: 3;
     a {
       display: flex;
       gap: 1rem;
@@ -65,7 +65,7 @@
       height: 100vh;
       width: 100%;
       flex-direction: column;
-      background-color: colors.$red;
+      background-color: colors.$dark-red;
       padding: 8rem 2rem 1rem;
       transition: right 0.3s ease;
       box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
