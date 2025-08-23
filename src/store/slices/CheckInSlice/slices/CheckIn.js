@@ -58,11 +58,9 @@ const extraReducers = (builder) => {
     .addCase(asyncThunk.saveCheckIn.pending, (state) => {
       state.saveCheckInStatus = REQUEST_STATUS.LOADING;
     })
-    .addCase(asyncThunk.saveCheckIn.fulfilled, (state, action) => {
+    .addCase(asyncThunk.saveCheckIn.fulfilled, (state) => {
       state.saveCheckInStatus = REQUEST_STATUS.SUCCEEDED;
       state.saveCheckInMessage = t('Check-in saved');
-
-      state.checkIns.unshift(action.payload);
     })
     .addCase(asyncThunk.saveCheckIn.rejected, (state, action) => {
       state.saveCheckInStatus = REQUEST_STATUS.FAILED;
@@ -73,7 +71,7 @@ const extraReducers = (builder) => {
 // Selectors
 const selectors = {
   selectAllCheckIns: (state) => {
-    return state.checkIns.checkIns;
+    return state.checkIns.checkIns || [];
   },
   selectLoadCheckInsError: (state) => {
     return state.checkIns.loadCheckInsError;

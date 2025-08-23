@@ -15,6 +15,7 @@ const ManageWorkoutsPage = () => {
 
   const users = useSelector(UserSlice.selectors.selectUsers);
   const saveUserWorkoutsError = useSelector(UserSlice.selectors.selectSaveUserWorkoutsError);
+  const saveUserWorkoutsMessage = useSelector(UserSlice.selectors.selectSaveUserWorkoutsMessage);
 
   const [ selectedUser, setSelectedUser ] = useState(null);
 
@@ -187,6 +188,10 @@ const ManageWorkoutsPage = () => {
     );
   }, [ onRemoveWorkout, selectedUser, onUpdateSelectedUserWorkout ]);
 
+  const onCloseSaveUserWorkoutsSuccessGrowl = useCallback(() => {
+    dispatch(UserSlice.actions.clearSaveUserWorkoutsMessage());
+  }, [ dispatch ]);
+
   const onCloseSaveUserWorkoutsErrorGrowl = useCallback(() => {
     dispatch(UserSlice.actions.clearSaveUserWorkoutsError());
   }, [ dispatch ]);
@@ -205,6 +210,11 @@ const ManageWorkoutsPage = () => {
       </div>
       
       {renderSelectedUserWorkouts()}
+
+      {GrowlFns.renderSuccessGrowl({
+        message: saveUserWorkoutsMessage,
+        onCloseGrowl: onCloseSaveUserWorkoutsSuccessGrowl,
+      })}
 
       {GrowlFns.renderErrorGrowl({
         message: saveUserWorkoutsError,

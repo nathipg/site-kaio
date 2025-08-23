@@ -16,6 +16,7 @@ const initialState = {
 
   saveUserWorkoutsStatus: REQUEST_STATUS.IDLE,
   saveUserWorkoutsError: null,
+  saveUserWorkoutsMessage: null,
 };
 
 // Reducers
@@ -25,6 +26,9 @@ const reducers = {
   },
   clearSaveUserWorkoutsError: (state) => {
     state.saveUserWorkoutsError = null;
+  },
+  clearSaveUserWorkoutsMessage: (state) => {
+    state.saveUserWorkoutsMessage = null;
   },
 };
 
@@ -56,6 +60,7 @@ const extraReducers = (builder) => {
     })
     .addCase(asyncThunk.saveUserWorkouts.fulfilled, (state) => {
       state.saveUserWorkoutsStatus = REQUEST_STATUS.SUCCEEDED;
+      state.saveUserWorkoutsMessage = t('Workout saved');
     })
     .addCase(asyncThunk.saveUserWorkouts.rejected, (state, action) => {
       state.saveUserWorkoutsStatus = REQUEST_STATUS.FAILED;
@@ -74,6 +79,9 @@ const selectors = {
   },
   selectSaveUserWorkoutsError: (state) => {
     return state.users.saveUserWorkoutsError;
+  },
+  selectSaveUserWorkoutsMessage: (state) => {
+    return state.users.saveUserWorkoutsMessage;
   },
 };
 
