@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AddExerciseButton, ExerciseList, GrowlFns } from '@/components';
 import { ExerciseSlice } from '@/store/slices';
 
+import styles from './ManageExercisesPage.module.scss';
+
 const ManageExercisesPage = () => {
   const { t } = useTranslation();
 
@@ -32,7 +34,7 @@ const ManageExercisesPage = () => {
   }, [ dispatch ]);
 
   return (
-    <>
+    <div className={styles.ManageExercisesPage}>
       <h1>{t('Manage Exercises')}</h1>
 
       <AddExerciseButton onClick={onAddItem} />
@@ -57,7 +59,7 @@ const ManageExercisesPage = () => {
         message: saveExerciseError,
         onCloseGrowl: onCloseSaveExerciseErrorGrowl,
       })}
-    </>
+    </div>
   );
 };
 

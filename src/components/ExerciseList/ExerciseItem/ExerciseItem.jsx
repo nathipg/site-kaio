@@ -49,37 +49,39 @@ const ExerciseItem = (props) => {
 
   const renderItem = useCallback(() => {
     return (
-      <div>
+      <>
         <div className={styles.ExerciseItemHeader}>
           <span>{title}</span>
-          
-          <Button
-            category={ButtonConstants.ButtonCategories.PRIMARY}
-            icon={<PenToSquareIcon />}
-            onClick={() => setEditMode(true)}
-          >
-            {t('Edit')}
-          </Button>
 
-          <Button
-            category={ButtonConstants.ButtonCategories.DANGER}
-            icon={<XIcon />}
-            onClick={() => removeExerciseDialogFnsRef.current?.show()}
-          >
-            {t('Remove')}
-          </Button>
+          <div className={styles.ExerciseItemButtonsContainer}>
+            <Button
+              category={ButtonConstants.ButtonCategories.PRIMARY}
+              icon={<PenToSquareIcon />}
+              onClick={() => setEditMode(true)}
+            >
+              {t('Edit')}
+            </Button>
+
+            <Button
+              category={ButtonConstants.ButtonCategories.DANGER}
+              icon={<XIcon />}
+              onClick={() => removeExerciseDialogFnsRef.current?.show()}
+            >
+              {t('Remove')}
+            </Button>
+          </div>
         </div>
 
         <Video
           url={url}
         />
-      </div>
+      </>
     );
   }, [ t, title, url ]);
 
   const renderEditableItem = useCallback(() => {
     return (
-      <div className={styles.ExerciseEditableItem}>
+      <>
         <div className={styles.FieldSet}>
           <FieldWithLabel
             label={t('Title')}
@@ -106,21 +108,23 @@ const ExerciseItem = (props) => {
           />
         </div>
 
-        <SaveButton onClick={onSaveEdit} />
+        <div className={styles.ExerciseItemButtonsContainer}>
+          <SaveButton onClick={onSaveEdit} />
 
-        <Button
-          category={ButtonConstants.ButtonCategories.DANGER}
-          icon={<XIcon />}
-          onClick={onCancelEdit}
-        >
-          {t('Cancel')}
-        </Button>
-      </div>
+          <Button
+            category={ButtonConstants.ButtonCategories.DANGER}
+            icon={<XIcon />}
+            onClick={onCancelEdit}
+          >
+            {t('Cancel')}
+          </Button>
+        </div>
+      </>
     );
   }, [ onCancelEdit, onSaveEdit, t, title, url ]);
 
   return (
-    <>
+    <div className={styles.ExerciseItem}>
       {editMode ? renderEditableItem() : renderItem()}
       {
         <RemoveExerciseConfirmDialog
@@ -128,7 +132,7 @@ const ExerciseItem = (props) => {
           dialogFnsRef={removeExerciseDialogFnsRef}
         />
       }
-    </>
+    </div>
   );
 };
 
