@@ -1,3 +1,3 @@
+export * from './ManageCheckInsPage';
 export * from './ManageExercisesPage';
-export * from './ManageUsersWorkoutsPage';
 export * from './ManageWorkoutsPage';

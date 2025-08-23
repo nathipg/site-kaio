@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { UserSlice, WorkoutSlice } from '@/store/slices';
 import { utils } from '@/utils';
 
-const ManageUsersWorkoutsPage = () => {
+const ManageCheckInsPage = () => {
   const { t } = useTranslation();
 
   const usersWorkouts = useSelector(WorkoutSlice.selectors.selectAllWorkouts);
@@ -13,7 +13,7 @@ const ManageUsersWorkoutsPage = () => {
 
   return (
     <>
-      <h1>{t('Manage Users Workouts')}</h1>
+      <h1>{t('Manage Check-ins')}</h1>
 
       {usersWorkouts.map(userWorkout => {
         const user = users.find(u => u.uid == userWorkout.userUid);
@@ -33,6 +33,6 @@ const ManageUsersWorkoutsPage = () => {
   );
 };
 
-const ManageUsersWorkoutsPageMemo = memo(ManageUsersWorkoutsPage);
+const ManageCheckInsPageMemo = memo(ManageCheckInsPage);
 
-export { ManageUsersWorkoutsPageMemo as ManageUsersWorkoutsPage };
+export { ManageCheckInsPageMemo as ManageCheckInsPage };

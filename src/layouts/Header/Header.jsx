@@ -80,7 +80,7 @@ const Header = () => {
         <Link to={{ pathname: '/training' }} onClick={closeMenu}>{t('Training')}</Link>
         <Link to={{ pathname: '/manage/exercises' }} onClick={closeMenu}>{t('Manage Exercises')}</Link>
         <Link to={{ pathname: '/manage/workouts' }} onClick={closeMenu}>{t('Manage Workouts')}</Link>
-        <Link to={{ pathname: '/manage/users-workouts' }} onClick={closeMenu}>{t('Manage Users Workouts')}</Link>
+        <Link to={{ pathname: '/manage/check-ins' }} onClick={closeMenu}>{t('Manage Check-ins')}</Link>
 
         {isLoggedIn && (
           <Button
