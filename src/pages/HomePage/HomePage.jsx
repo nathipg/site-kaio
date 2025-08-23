@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { About, FAQ, HeroSection, Services, Testimonials } from '@/layouts';
+import { About, Contact, FAQ, HeroSection, Partnerships, Services, Testimonials } from '@/layouts';
 
 import styles from './HomePage.module.scss';
 
@@ -11,6 +11,7 @@ const HomePage = () => {
       <About />
       <Services />
       <Testimonials />
+      <Contact />
       <FAQ />
     </div>
   );
