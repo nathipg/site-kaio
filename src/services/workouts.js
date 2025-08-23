@@ -1,7 +1,7 @@
 import { firebaseService } from './firebase';
 
-export const loadWorkouts = async () => {
-  return await firebaseService.workout.loadWorkouts();
+export const loadWorkouts = async (date) => {
+  return await firebaseService.workout.loadWorkouts(date);
 };
 
 export const saveWorkout = async (data) => {

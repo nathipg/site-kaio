@@ -34,7 +34,7 @@ const reducers = {
 
 // Async Thunk
 const asyncThunk = {
-  loadWorkouts: createAsyncThunk(`${WORKOUT_SLICE_NAME}/loadWorkouts`, async () => await workoutsService.loadWorkouts()),
+  loadWorkouts: createAsyncThunk(`${WORKOUT_SLICE_NAME}/loadWorkouts`, async (date) => await workoutsService.loadWorkouts(date)),
   saveWorkout: createAsyncThunk(`${WORKOUT_SLICE_NAME}/saveWorkout`, async (data) => await workoutsService.saveWorkout(data)),
 };
 

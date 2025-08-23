@@ -1,34 +1,44 @@
-import { memo } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { UserSlice, WorkoutSlice } from '@/store/slices';
+import { FieldWithLabel, Input } from '@/components';
+import { WorkoutSlice } from '@/store/slices';
 import { utils } from '@/utils';
+
+import { CheckInList } from './CheckInList';
 
 const ManageCheckInsPage = () => {
   const { t } = useTranslation();
 
-  const usersWorkouts = useSelector(WorkoutSlice.selectors.selectAllWorkouts);
-  const users = useSelector(UserSlice.selectors.selectUsers);
+  const dispatch = useDispatch();
+
+  const [ selectedDate, setSelectedDate ] = useState(utils.getDateFormattedForInput(new Date()));
+
+  useEffect(() => {
+    if(selectedDate) {
+      const date = new Date(`${selectedDate} 00:00:00`);
+      dispatch(WorkoutSlice.actions.loadWorkouts(utils.getDateIsoFormat(date)));
+    }
+  }, [ dispatch, selectedDate ]);
 
   return (
     <>
       <h1>{t('Manage Check-ins')}</h1>
 
-      {usersWorkouts.map(userWorkout => {
-        const user = users.find(u => u.uid == userWorkout.userUid);
+      <FieldWithLabel
+        label={t('Date')}
+        field={(
+          <Input
+            type="date"
+            name="date"
+            value={selectedDate}
+            onChange={(event) => setSelectedDate(event.target.value)}
+          />
+        )}
+      />
 
-        const description = userWorkout.description ? `(${userWorkout.description})` : '';
-        const comment = userWorkout.comment || t('<empty>');
-
-        return (
-          <div key={userWorkout.id}>
-            <h2>{user.fullName} ({utils.getFullDateString(userWorkout.createdAt)})</h2>
-            <p>{userWorkout.title} {description}</p>
-            <p>{t('Comment')}: {comment}</p>
-          </div>
-        );
-      })}
+      <CheckInList />
     </>
   );
 };

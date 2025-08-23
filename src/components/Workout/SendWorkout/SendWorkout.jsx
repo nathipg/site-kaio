@@ -22,7 +22,7 @@ const SendWorkout = (props) => {
   const [ comment, setComment ] = useState('');
 
   const onClickSendWorkout = useCallback(() => {
-    const now = utils.getNowUTCIsoFormat();
+    const now = utils.getDateIsoFormat(new Date());
 
     const exercisesByStatus = workout.exercises.reduce((acc, exercise) => {
       const { id, exerciseId, ...otherExerciseData } = exercise;

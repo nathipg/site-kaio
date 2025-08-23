@@ -9,7 +9,6 @@ import { ExerciseSlice, UserSlice, WorkoutSlice } from './store/slices';
 
 import '@/styles/global.scss';
 
-
 const App = () => {
   const dispatch = useDispatch();
 
@@ -22,7 +21,6 @@ const App = () => {
   useEffect(() => {
     if(loggedUser && loggedUser.isAdmin) {
       dispatch(UserSlice.actions.loadUsers());
-      dispatch(WorkoutSlice.actions.loadWorkouts());
     }
   }, [ dispatch, loggedUser ]);
 
