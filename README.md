@@ -2,9 +2,6 @@
 
 ## TODO
 
-Pendente
-- Os growls de sucesso estão feios
-
 Seria legal
 - Cadastrar categorias de exercício
 - Poder filtrar os exercícios por categoria
