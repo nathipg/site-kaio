@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { Outlet } from 'react-router';
 
-import { GrowlContainer } from '@/components';
+import { ContentContainer, GrowlContainer } from '@/components';
 
 import { Header } from '../Header';
 
@@ -11,8 +11,10 @@ const DefaultLayout = () => {
       <GrowlContainer />
 
       <Header />
-      
-      <Outlet />
+
+      <ContentContainer>
+        <Outlet />
+      </ContentContainer>
     </>
   );
 };

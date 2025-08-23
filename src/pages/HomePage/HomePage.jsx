@@ -1,19 +1,18 @@
 import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { About, FAQ, HeroSection, Services, Testimonials } from '@/layouts';
 
-const HomePage = () => {
-  const { t } = useTranslation();
+import styles from './HomePage.module.scss';
 
+const HomePage = () => {
   return (
-    <>
+    <div className={styles.HomePage}>
       <HeroSection />
       <About />
       <Services />
       <Testimonials />
       <FAQ />
-    </>
+    </div>
   );
 };
 
