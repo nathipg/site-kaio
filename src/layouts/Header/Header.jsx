@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router';
@@ -10,10 +10,14 @@ import styles from './Header.module.scss';
 
 const Header = () => {
   const { t } = useTranslation();
+
   const dispatch = useDispatch();
-  const [ isMenuOpen, setIsMenuOpen ] = useState(false);
 
   const isLoggedIn = useSelector(UserSlice.selectors.isLoggedIn);
+
+  const [ isMenuOpen, setIsMenuOpen ] = useState(false);
+
+  const toggleMenuRef = useRef(null);
 
   const onLogout = useCallback((event) => {
     event.preventDefault();
@@ -27,16 +31,43 @@ const Header = () => {
     });
   }, []);
 
+  const closeMenu = useCallback(() => {
+    document.body.style.overflow = '';
+    setIsMenuOpen(false);
+  }, []);
+
+  useEffect(() => {
+    const onResizeWindow = () => {
+      if(!toggleMenuRef.current) {
+        return;
+      }
+
+      if(!toggleMenuRef.current.checkVisibility()) {
+        document.body.style.overflow = '';
+      }
+    };
+
+    window.addEventListener('resize', onResizeWindow);
+
+    return () => {
+      window.removeEventListener('resize', onResizeWindow);
+    };
+  }, []);
+
   return (
     <header className={styles.Header}>
       <div className={styles.logo} title='Kaio Guerrero Personal Trainer'>
-        <Link to={{ pathname: '/' }} onClick={isMenuOpen ? toggleMenu : ''}>
+        <Link to={{ pathname: '/' }} onClick={closeMenu}>
           <KaioLogo width='1.5rem' color='white' />
           <span>Kaio Guerrero</span>
         </Link>
       </div>
       
-      <button className={styles.menuToggle} onClick={toggleMenu}>
+      <button
+        ref={toggleMenuRef}
+        className={styles.menuToggle}
+        onClick={toggleMenu}
+      >
         {isMenuOpen ?
           <XIcon color='white' /> :
           <BarsIcon color='white' />
@@ -44,12 +75,12 @@ const Header = () => {
       </button>
 
       <nav className={`${styles.nav} ${isMenuOpen ? styles.active : ''}`}>
-        <Link to={{ pathname: '/sign-in' }} onClick={toggleMenu}>{t('Sign in')}</Link>
-        <Link to={{ pathname: '/athlete' }} onClick={toggleMenu}>{t('Athlete')}</Link>
-        <Link to={{ pathname: '/training' }} onClick={toggleMenu}>{t('Training')}</Link>
-        <Link to={{ pathname: '/manage/exercises' }} onClick={toggleMenu}>{t('Manage Exercises')}</Link>
-        <Link to={{ pathname: '/manage/workouts' }} onClick={toggleMenu}>{t('Manage Workouts')}</Link>
-        <Link to={{ pathname: '/manage/users-workouts' }} onClick={toggleMenu}>{t('Manage Users Workouts')}</Link>
+        <Link to={{ pathname: '/sign-in' }} onClick={closeMenu}>{t('Sign in')}</Link>
+        <Link to={{ pathname: '/athlete' }} onClick={closeMenu}>{t('Athlete')}</Link>
+        <Link to={{ pathname: '/training' }} onClick={closeMenu}>{t('Training')}</Link>
+        <Link to={{ pathname: '/manage/exercises' }} onClick={closeMenu}>{t('Manage Exercises')}</Link>
+        <Link to={{ pathname: '/manage/workouts' }} onClick={closeMenu}>{t('Manage Workouts')}</Link>
+        <Link to={{ pathname: '/manage/users-workouts' }} onClick={closeMenu}>{t('Manage Users Workouts')}</Link>
 
         {isLoggedIn && (
           <Button
