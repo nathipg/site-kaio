@@ -1,5 +1,6 @@
 @use '@/styles/colors';
 @use '@/styles/typography';
+@use '@/styles/screen-sizes.scss' as screenSizes;
 
 .About {
   padding: 4rem 1rem;
@@ -44,7 +45,7 @@
     aspect-ratio: 4 / 3;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: screenSizes.$md) {
     .container {
       grid-template-columns: 1fr;
     }

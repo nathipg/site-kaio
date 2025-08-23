@@ -1,5 +1,6 @@
 @use '@/styles/colors';
 @use '@/styles/typography';
+@use '@/styles/screen-sizes.scss' as screenSizes;
 
 .Header {
   position: sticky;
@@ -52,7 +53,7 @@
     padding: 0.5rem;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: screenSizes.$md) {
     .menuToggle {
       display: block;
       z-index: 2;

@@ -1,5 +1,6 @@
 @use '@/styles/colors';
 @use '@/styles/typography';
+@use '@/styles/screen-sizes.scss' as screenSizes;
 
 .Services {
   background: colors.$light-gray;
@@ -34,7 +35,7 @@
     p { color: colors.$black; }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: screenSizes.$lg) {    
     .grid { grid-template-columns: 1fr; }
   }
 }

@@ -9,7 +9,7 @@ const Contact = () => {
   const { t } = useTranslation();
 
   return (
-    <section className={styles.Contact} id="contact">
+    <section className={styles.Contact}>
       <div className={styles.container}>
         <h2>{t('Ready to Start?')}</h2>
         <Button className={styles.button} category={ButtonConstants.ButtonCategories.PRIMARY}>
