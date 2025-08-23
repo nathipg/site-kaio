@@ -1,23 +1,21 @@
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 
 import { CheckIcon, XIcon } from '@/components';
 
 import styles from './ExerciseStatus.module.scss';
 
 const ExerciseStatus = (props) => {
-  const { exerciseId } = props;
+  const { completedExercises, exerciseId } = props;
   const { onChangeExerciseStatus } = props;
 
-  const [ isCompleted, setCompleted ] = useState(false);
+  const isCompleted = useMemo(() => {
+    return completedExercises.includes(exerciseId);
+  }, [ completedExercises, exerciseId ]);
 
   const onChangeCompleteStatus = useCallback(() => {
-    setCompleted((currentStatus) => !currentStatus);
-  }, []);
-
-  useEffect(() => {
     onChangeExerciseStatus({
       exerciseId,
-      isCompleted,
+      isCompleted: !isCompleted,
     });
   }, [ exerciseId, isCompleted, onChangeExerciseStatus ]);
 

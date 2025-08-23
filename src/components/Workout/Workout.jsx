@@ -1,4 +1,5 @@
 import { memo, useCallback, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router';
 
 import { WorkoutExercises } from './WorkoutExercises';
 import { WorkoutFooter } from './WorkoutFooter';
@@ -9,6 +10,8 @@ import styles from './Workout.module.scss';
 const Workout = (props) => {
   const { workout, mode } = props;
   const { setWorkoutProperty = () => null, onRemoveWorkout = () => null } = props;
+
+  const navigate = useNavigate();
 
   const [ completedExercises, setCompletedExercises ] = useState([]);
   const [ isExpanded, setIsExpanded ] = useState(true);
@@ -42,6 +45,10 @@ const Workout = (props) => {
     });
   }, []);
 
+  const onCompleteWorkout = useCallback(() => {
+    navigate('/athlete', { replace: true });
+  }, [ navigate ]);
+
   return (
     <div className={styles.Workout}>
       <WorkoutHeader
@@ -57,6 +64,7 @@ const Workout = (props) => {
       <div style={{ display: isExpanded ? 'block' : 'none' }}>
         <WorkoutExercises
           exercises={workout.exercises}
+          completedExercises={completedExercises}
           onChangeExerciseStatus={onChangeExerciseStatus}
           mode={mode}
           setWorkoutProperty={setWorkoutProperty}
@@ -68,6 +76,7 @@ const Workout = (props) => {
         completedExercises={completedExercises}
         mode={mode}
         onRemoveWorkout={onRemoveWorkout}
+        onCompleteWorkout={onCompleteWorkout}
       />
     </div>
   );

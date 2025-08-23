@@ -10,7 +10,7 @@ import styles from './WorkoutFooter.module.scss';
 
 const WorkoutFooter = (props) => {
   const { workout, mode, completedExercises } = props;
-  const { onRemoveWorkout = () => null } = props;
+  const { onRemoveWorkout = () => null, onCompleteWorkout = () => null } = props;
 
   const removeWorkoutDialogFnsRef = useRef(null);
 
@@ -46,9 +46,10 @@ const WorkoutFooter = (props) => {
       <SendWorkout
         workout={workout}
         completedExercises={completedExercises}
+        onCompleteWorkout={onCompleteWorkout}
       />
     );
-  }, [ completedExercises, workout ]);
+  }, [ completedExercises, onCompleteWorkout, workout ]);
 
   const RENDER_MODE_MAPPER = useMemo(() => {
     return {

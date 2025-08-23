@@ -12,7 +12,7 @@ import styles from './ExerciseBody.module.scss';
 
 const ExerciseBody = (props) => {
   const { onChangeExerciseStatus, setExerciseProperty } = props;
-  const { exercise, isExpanded, mode } = props;
+  const { exercise, completedExercises, isExpanded, mode } = props;
   const { id, sets, reps, weight, rest } = exercise;
 
   const { t } = useTranslation();
@@ -36,12 +36,13 @@ const ExerciseBody = (props) => {
     return (
       <div className={styles.StatusArea}>
         <ExerciseStatus
+          completedExercises={completedExercises}
           exerciseId={id}
           onChangeExerciseStatus={onChangeExerciseStatus}
         />
       </div>
     );
-  }, [ id, mode, onChangeExerciseStatus ]);
+  }, [ completedExercises, id, mode, onChangeExerciseStatus ]);
 
   const renderVideo = useCallback(() => {
     return isExpanded ? (

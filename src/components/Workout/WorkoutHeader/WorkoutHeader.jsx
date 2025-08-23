@@ -14,7 +14,7 @@ const WorkoutHeader = (props) => {
   const { onChangeExpandedState, setWorkoutProperty = () => null } = props;
 
   const renderWorkoutProgress = useCallback(() => {
-    if(mode != WORKOUT_MODES.EDIT) {
+    if(mode == WORKOUT_MODES.EDIT) {
       return <></>;
     }
 

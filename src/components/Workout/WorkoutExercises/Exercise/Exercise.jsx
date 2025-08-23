@@ -7,7 +7,7 @@ import styles from './Exercise.module.scss';
 
 const Exercise = (props) => {
   const { onChangeExerciseStatus, setExerciseProperty, onRemoveExercise } = props;
-  const { exercise, mode } = props;
+  const { exercise, completedExercises, mode } = props;
 
   const [ isExpanded, setIsExpanded ] = useState(false);
 
@@ -23,13 +23,14 @@ const Exercise = (props) => {
     return (
       <ExerciseBody
         exercise={exercise}
+        completedExercises={completedExercises}
         isExpanded={isExpanded}
         onChangeExerciseStatus={onChangeExerciseStatus}
         mode={mode}
         setExerciseProperty={setExerciseProperty}
       />
     );
-  }, [ mode, exercise, isExpanded, onChangeExerciseStatus, setExerciseProperty ]);
+  }, [ exercise, completedExercises, isExpanded, onChangeExerciseStatus, mode, setExerciseProperty ]);
 
   return (
     <div className={styles.Exercise}>

@@ -10,7 +10,7 @@ import { Exercise } from './Exercise';
 import styles from './WorkoutExercises.module.scss';
 
 const WorkoutExercises = (props) => {
-  const { exercises, mode } = props;
+  const { exercises, completedExercises, mode } = props;
   const { onChangeExerciseStatus, setWorkoutProperty } = props;
 
   const onAddExercise = useCallback(() => {
@@ -76,6 +76,7 @@ const WorkoutExercises = (props) => {
           <Exercise
             key={exercise.id}
             exercise={exercise}
+            completedExercises={completedExercises}
             onChangeExerciseStatus={onChangeExerciseStatus}
             mode={mode}
             setExerciseProperty={setExerciseProperty}
