@@ -24,7 +24,7 @@ const ManageCheckInsPage = () => {
         return (
           <div key={userWorkout.id}>
             <h2>{user.fullName} ({utils.getFullDateString(userWorkout.createdAt)})</h2>
-            <p>{userWorkout.title} ({description})</p>
+            <p>{userWorkout.title} {description}</p>
             <p>{t('Comment')}: {comment}</p>
           </div>
         );

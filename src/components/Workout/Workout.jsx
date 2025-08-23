@@ -65,6 +65,7 @@ const Workout = (props) => {
 
       <WorkoutFooter
         workout={workout}
+        completedExercises={completedExercises}
         mode={mode}
         onRemoveWorkout={onRemoveWorkout}
       />

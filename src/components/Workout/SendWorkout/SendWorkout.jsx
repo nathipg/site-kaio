@@ -7,7 +7,7 @@ import { UserSlice, WorkoutSlice } from '@/store/slices';
 import { utils } from '@/utils';
 
 const SendWorkout = (props) => {
-  const { workout } = props;
+  const { workout, completedExercises } = props;
 
   const { t } = useTranslation();
 
@@ -22,18 +22,42 @@ const SendWorkout = (props) => {
   const onClickSendWorkout = useCallback(() => {
     const now = utils.getNowUTCIsoFormat();
 
+    const exercisesByStatus = workout.exercises.reduce((acc, exercise) => {
+      const isCompleted = completedExercises.includes(exercise.id);
+
+      const completed = isCompleted ?
+        [ ...acc.completed, exercise ]
+        : acc.completed;
+
+      const missing = !isCompleted ?
+        [ ...acc.missing, exercise ]
+        : acc.missing;
+
+      return {
+        completed,
+        missing,
+      };
+    }, {
+      completed: [],
+      missing: [],
+    });
+
+
     const workoutData = {
       createdAt: now,
       userUid: loggedUser.uid,
       title: workout.title,
       description: workout.description,
       comment,
+      exercises: {
+        ...exercisesByStatus,
+      },
     };
 
     dispatch(WorkoutSlice.actions.saveWorkout(workoutData));
 
     setComment('');
-  }, [ comment, dispatch, loggedUser.uid, workout.description, workout.title ]);
+  }, [ comment, completedExercises, dispatch, loggedUser.uid, workout.description, workout.exercises, workout.title ]);
 
   const onCloseSaveWorkoutErrorGrowl = useCallback(() => {
     dispatch(WorkoutSlice.actions.clearSaveWorkoutError());
