@@ -1,4 +1,4 @@
-import { getFirestore, collection, getDocs, addDoc, getDoc, doc, setDoc, deleteDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, addDoc, getDoc, doc, setDoc, deleteDoc, orderBy, query } from 'firebase/firestore';
 
 import { DB_KEYS } from './db-keys';
 import { app } from './firebase-app';
@@ -18,7 +18,8 @@ export const addExercise = async (data) => {
 
 export const loadExercises = async () => {
   const exercisesRef = collection(db, DB_KEYS.EXERCISES);
-  const exercisesSnapshot = await getDocs(exercisesRef);
+  const q = query(exercisesRef, orderBy('title', 'asc'));
+  const exercisesSnapshot = await getDocs(q);
 
   return exercisesSnapshot.docs.map(doc => {
     return {

@@ -56,13 +56,7 @@ const extraReducers = (builder) => {
     })
     .addCase(asyncThunk.loadExercises.fulfilled, (state, action) => {
       state.loadExercisesStatus = REQUEST_STATUS.SUCCEEDED;
-
-      state.exercises = [ ...action.payload ].sort((a, b) => {
-        const titleA = a.title || '';
-        const titleB = b.title || '';
-
-        return titleA.localeCompare(titleB);
-      });
+      state.exercises = action.payload;
     })
     .addCase(asyncThunk.loadExercises.rejected, (state, action) => {
       state.loadExercisesStatus = REQUEST_STATUS.FAILED;
