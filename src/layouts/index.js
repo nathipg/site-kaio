@@ -3,5 +3,6 @@ export * from './Contact';
 export * from './DefaultLayout';
 export * from './FAQ';
 export * from './HeroSection';
+export * from './Partnerships';
 export * from './Services';
 export * from './Testimonials';
