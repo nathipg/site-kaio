@@ -1,3 +1,5 @@
+@use '@/styles/margins';
+
 .ContentContainer {
-  margin: 0.5rem 1rem; /* If you change this margin, also change the one in HomePage */
+  margin: margins.$content-container-vertical-margin margins.$content-container-horizontal-margin;
 }

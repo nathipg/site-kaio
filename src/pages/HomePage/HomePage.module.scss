@@ -1,3 +1,8 @@
+@use '@/styles/margins';
+
+$remove-horizontal-margin: margins.$content-container-horizontal-margin * -1;
+$remove-vertical-margin: margins.$content-container-vertical-margin * -1;
+
 .HomePage {
-  margin: -0.5rem -1rem; /* If you change this margin, also change the one in ContentContainer */
+  margin: $remove-vertical-margin $remove-horizontal-margin;
 }
