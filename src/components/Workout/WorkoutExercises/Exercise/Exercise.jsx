@@ -3,6 +3,8 @@ import { memo, useCallback, useState } from 'react';
 import { ExerciseBody } from './ExerciseBody';
 import { ExerciseHeader } from './ExerciseHeader';
 
+import styles from './Exercise.module.scss';
+
 const Exercise = (props) => {
   const { onChangeExerciseStatus, setExerciseProperty, onRemoveExercise } = props;
   const { exercise, mode } = props;
@@ -30,7 +32,7 @@ const Exercise = (props) => {
   }, [ mode, exercise, isExpanded, onChangeExerciseStatus, setExerciseProperty ]);
 
   return (
-    <div>
+    <div className={styles.Exercise}>
       <ExerciseHeader
         exercise={exercise}
         isExpanded={isExpanded}

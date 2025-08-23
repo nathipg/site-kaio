@@ -6,6 +6,8 @@ import { Button, ButtonConstants, GrowlFns, PlusIcon, SaveButton, Select, Workou
 import { UserSlice } from '@/store/slices';
 import { utils } from '@/utils';
 
+import styles from './ManageWorkoutsPage.module.scss';
+
 const ManageWorkoutsPage = () => {
   const { t } = useTranslation();
 
@@ -190,19 +192,25 @@ const ManageWorkoutsPage = () => {
   }, [ dispatch ]);
 
   return (
-    <>
+    <div className={styles.ManageWorkoutsPage}>
       <h1>{t('Manage Workouts')}</h1>
 
-      {renderUsers()}
-      {renderSaveButton()}
-      {renderAddWorkoutButton()}
+      <div>
+        {renderUsers()}
+      </div>
+
+      <div className={styles.ManageWorkoutsPageButtonsContainer}>
+        {renderAddWorkoutButton()}
+        {renderSaveButton()}
+      </div>
+      
       {renderSelectedUserWorkouts()}
 
       {GrowlFns.renderErrorGrowl({
         message: saveUserWorkoutsError,
         onCloseGrowl: onCloseSaveUserWorkoutsErrorGrowl,
       })}
-    </>
+    </div>
   );
 };
 

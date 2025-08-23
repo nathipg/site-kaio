@@ -2,10 +2,10 @@ import { memo, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { Input, Video } from '@/components';
-import { WORKOUT_MODES } from '@/components/Workout/constants';
+import { Video, WorkoutConstants } from '@/components';
 import { ExerciseSlice } from '@/store/slices';
 
+import { ExerciseDetail } from './ExerciseDetail';
 import { ExerciseStatus } from './ExerciseStatus';
 
 import styles from './ExerciseBody.module.scss';
@@ -19,126 +19,56 @@ const ExerciseBody = (props) => {
 
   const dbExercise = useSelector(ExerciseSlice.selectors.selectExerciseById(exercise.exerciseId));
 
-  const columnsQty = useMemo(() => {
-    return mode == WORKOUT_MODES.EDIT ? 4 : 5;
-  }, [ mode ]);
+  const detailItems = useMemo(() => {
+    return [
+      { key: 'sets', text: t('Sets'), value: sets },
+      { key: 'reps', text: t('Reps'), value: reps },
+      { key: 'weight', text: t('Weight'), value: weight },
+      { key: 'rest', text: t('Rest'), value: rest },
+    ];
+  }, [ reps, rest, sets, t, weight ]);
 
-  const renderStatusColumn = useCallback(() => {
-    if(mode == WORKOUT_MODES.EDIT) {
+  const renderStatus = useCallback(() => {
+    if(mode == WorkoutConstants.WORKOUT_MODES.EDIT) {
       return <></>;
     }
 
     return (
-      <td>
+      <div className={styles.StatusArea}>
         <ExerciseStatus
           exerciseId={id}
           onChangeExerciseStatus={onChangeExerciseStatus}
         />
-      </td>
+      </div>
     );
   }, [ id, mode, onChangeExerciseStatus ]);
 
-  const renderSets = useCallback(() => {
-    if(mode != WORKOUT_MODES.EDIT) {
-      return sets;
-    }
-
-    return (
-      <Input
-        type="text"
-        name="sets"
-        value={sets}
-        onChange={(event) => setExerciseProperty('sets', event.target.value)}
+  const renderVideo = useCallback(() => {
+    return isExpanded ? (
+      <Video
+        url={dbExercise?.videoUrl}
       />
-    );
-  }, [ mode, setExerciseProperty, sets ]);
-
-  const renderReps = useCallback(() => {
-    if(mode != WORKOUT_MODES.EDIT) {
-      return reps;
-    }
-
-    return (
-      <Input
-        type="text"
-        name="reps"
-        value={reps}
-        onChange={(event) => setExerciseProperty('reps', event.target.value)}
-      />
-    );
-  }, [ mode, reps, setExerciseProperty ]);
-
-  const renderWeight = useCallback(() => {
-    if(mode != WORKOUT_MODES.EDIT) {
-      return weight;
-    }
-
-    return (
-      <Input
-        type="text"
-        name="weight"
-        value={weight}
-        onChange={(event) => setExerciseProperty('weight', event.target.value)}
-      />
-    );
-  }, [ mode, setExerciseProperty, weight ]);
-
-  const renderRest = useCallback(() => {
-    if(mode != WORKOUT_MODES.EDIT) {
-      return rest;
-    }
-
-    return (
-      <Input
-        type="text"
-        name="rest"
-        value={rest}
-        onChange={(event) => setExerciseProperty('rest', event.target.value)}
-      />
-    );
-  }, [ mode, setExerciseProperty, rest ]);
+    ) : <></>;
+  }, [ dbExercise?.videoUrl, isExpanded ]);
 
   return (
-    <div className={styles.ExerciseBody}>
-      <table>
-        <thead>
-          <tr>
-            <th>{t('Sets')}</th>
-            <th>{t('Reps')}</th>
-            <th>{t('Weight')}</th>
-            <th>{t('Rest')}</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              {renderSets()}
-            </td>
+    <div className={styles.ExerciseBody} data-mode={mode}>
+      {detailItems.map(item => (
+        <ExerciseDetail
+          key={item.key}
+          property={item.key}
+          text={item.text}
+          value={item.value}
+          mode={mode}
+          setExerciseProperty={setExerciseProperty}
+        />
+      ))}
 
-            <td>
-              {renderReps()}
-            </td>
+      {renderStatus()}
 
-            <td>
-              {renderWeight()}
-            </td>
-
-            <td>
-              {renderRest()}
-            </td>
-
-            {renderStatusColumn()}
-          </tr>
-          <tr data-is-expanded={isExpanded}>
-            <td colSpan={columnsQty}>
-              <Video
-                url={dbExercise?.videoUrl}
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div className={styles.VideoArea}>
+        {renderVideo()}
+      </div>
     </div>
   );
 };
