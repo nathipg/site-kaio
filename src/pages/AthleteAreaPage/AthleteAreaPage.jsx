@@ -3,17 +3,17 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { GrowlFns } from '@/components';
-import { WorkoutSlice } from '@/store/slices';
+import { CheckInSlice } from '@/store/slices';
 
 const AthleteAreaPage = () => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
 
-  const saveWorkoutMessage = useSelector(WorkoutSlice.selectors.selectSaveWorkoutMessage);
+  const saveWorkoutMessage = useSelector(CheckInSlice.selectors.selectSaveCheckInMessage);
 
   const onCloseSaveWorkoutSuccessGrowl = useCallback(() => {
-    dispatch(WorkoutSlice.actions.clearSaveWorkoutMessage());
+    dispatch(CheckInSlice.actions.clearSaveCheckInMessage());
   }, [ dispatch ]);
 
   return (

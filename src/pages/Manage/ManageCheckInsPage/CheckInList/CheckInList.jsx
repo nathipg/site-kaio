@@ -2,13 +2,13 @@ import { memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { UserSlice, WorkoutSlice } from '@/store/slices';
+import { UserSlice, CheckInSlice } from '@/store/slices';
 import { utils } from '@/utils';
 
 const CheckInList = () => {
   const { t } = useTranslation();
 
-  const checkIns = useSelector(WorkoutSlice.selectors.selectAllWorkouts);
+  const checkIns = useSelector(CheckInSlice.selectors.selectAllCheckIns);
   const users = useSelector(UserSlice.selectors.selectUsers);
 
   const usersMap = useMemo(() => {

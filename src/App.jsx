@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GrowlFns } from './components';
 import { Router } from './Router';
 import { firebaseService } from './services';
-import { ExerciseSlice, UserSlice, WorkoutSlice } from './store/slices';
+import { ExerciseSlice, UserSlice, CheckInSlice } from './store/slices';
 
 import '@/styles/global.scss';
 
@@ -13,7 +13,6 @@ const App = () => {
   const dispatch = useDispatch();
 
   const loadExercisesError = useSelector(ExerciseSlice.selectors.selectLoadExercisesError);
-  const loadWorkoutsError = useSelector(WorkoutSlice.selectors.selectLoadWorkoutsError);
   const loadUsersError = useSelector(UserSlice.selectors.selectLoadUsersError);
 
   const loggedUser = useSelector(UserSlice.selectors.selectLoggedUser);
@@ -36,10 +35,6 @@ const App = () => {
     });
   }, [ dispatch ]);
 
-  const onCloseLoadWorkoutsErrorGrowl = useCallback(() => {
-    dispatch(WorkoutSlice.actions.clearLoadWorkoutsError());
-  }, [ dispatch ]);
-
   const onCloseLoadUsersErrorGrowl = useCallback(() => {
     dispatch(UserSlice.actions.clearLoadUsersError());
   }, [ dispatch ]);
@@ -51,11 +46,6 @@ const App = () => {
   return (
     <>
       <Router />
-
-      {GrowlFns.renderErrorGrowl({
-        message: loadWorkoutsError,
-        onCloseGrowl: onCloseLoadWorkoutsErrorGrowl,
-      })}
 
       {GrowlFns.renderErrorGrowl({
         message: loadUsersError,

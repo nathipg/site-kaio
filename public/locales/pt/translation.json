@@ -27,8 +27,11 @@
     "save-user-workouts": {
       "permission-denied": "Você não tem permissão para alterar os treinos dos usuários"
     },
-    "save-user-workout": {
-      "permission-denied": "Você não tem permissão pra enviar o treino"
+    "save-check-in": {
+      "permission-denied": "Você não tem permissão para enviar o check-in"
+    },
+    "load-check-ins": {
+      "permission-denied": "Você não tem permissão para carregar os check-ins"
     }
   },
   "Home": "Início",
@@ -87,7 +90,7 @@
   "Are you sure you want to remove this workout?": "Tem certeza que você deseja remove este treino?",
   "Send": "Enviar",
   "Manage Check-ins": "Gerenciar Check-ins",
-  "Workout saved": "Treino salvo",
+  "Check-in saved": "Check-in salvo",
   "Comment": "Comentário",
   "Science-based training": "Treinos baseados em ciência",
   "More than 10 years combining scientific evidence and practice to transform health and performance.": "Mais de 10 anos unindo evidência científica e prática para transformar saúde e performance.",

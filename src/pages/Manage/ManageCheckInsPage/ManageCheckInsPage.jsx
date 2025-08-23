@@ -1,9 +1,9 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { FieldWithLabel, Input } from '@/components';
-import { WorkoutSlice } from '@/store/slices';
+import { FieldWithLabel, GrowlFns, Input } from '@/components';
+import { CheckInSlice } from '@/store/slices';
 import { utils } from '@/utils';
 
 import { CheckInList } from './CheckInList';
@@ -13,12 +13,18 @@ const ManageCheckInsPage = () => {
 
   const dispatch = useDispatch();
 
+  const loadCheckInsError = useSelector(CheckInSlice.selectors.selectLoadCheckInsError);
+
   const [ selectedDate, setSelectedDate ] = useState(utils.getDateFormattedForInput(new Date()));
+
+  const onCloseLoadCheckInsErrorGrowl = useCallback(() => {
+    dispatch(CheckInSlice.actions.clearLoadCheckInsError());
+  }, [ dispatch ]);
 
   useEffect(() => {
     if(selectedDate) {
       const date = new Date(`${selectedDate} 00:00:00`);
-      dispatch(WorkoutSlice.actions.loadWorkouts(utils.getDateIsoFormat(date)));
+      dispatch(CheckInSlice.actions.loadCheckIns(utils.getDateIsoFormat(date)));
     }
   }, [ dispatch, selectedDate ]);
 
@@ -39,6 +45,11 @@ const ManageCheckInsPage = () => {
       />
 
       <CheckInList />
+
+      {GrowlFns.renderErrorGrowl({
+        message: loadCheckInsError,
+        onCloseGrowl: onCloseLoadCheckInsErrorGrowl,
+      })}
     </>
   );
 };

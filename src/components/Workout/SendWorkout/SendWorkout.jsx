@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Button, ButtonConstants, GrowlFns, PaperPlaneIcon, TextArea } from '@/components';
-import { ExerciseSlice, UserSlice, WorkoutSlice } from '@/store/slices';
+import { ExerciseSlice, UserSlice, CheckInSlice } from '@/store/slices';
 import { utils } from '@/utils';
 
 const SendWorkout = (props) => {
@@ -15,8 +15,8 @@ const SendWorkout = (props) => {
   const dispatch = useDispatch();
 
   const dbExercises = useSelector(ExerciseSlice.selectors.selectAllExercises);
-  const saveWorkoutError = useSelector(WorkoutSlice.selectors.selectLoadWorkoutsError);
-  const saveWorkoutMessage = useSelector(WorkoutSlice.selectors.selectSaveWorkoutMessage);
+  const saveCheckInError = useSelector(CheckInSlice.selectors.selectSaveCheckInError);
+  const saveCheckInMessage = useSelector(CheckInSlice.selectors.selectSaveCheckInMessage);
   const loggedUser = useSelector(UserSlice.selectors.selectLoggedUser);
 
   const [ comment, setComment ] = useState('');
@@ -63,20 +63,20 @@ const SendWorkout = (props) => {
       },
     };
 
-    dispatch(WorkoutSlice.actions.saveWorkout(workoutData));
+    dispatch(CheckInSlice.actions.saveCheckIn(workoutData));
 
     setComment('');
   }, [ comment, completedExercises, dbExercises, dispatch, loggedUser.uid, workout.description, workout.exercises, workout.title ]);
 
-  const onCloseSaveWorkoutErrorGrowl = useCallback(() => {
-    dispatch(WorkoutSlice.actions.clearSaveWorkoutError());
+  const onCloseSaveCheckInErrorGrowl = useCallback(() => {
+    dispatch(CheckInSlice.actions.clearSaveCheckInError());
   }, [ dispatch ]);
 
   useEffect(() => {
-    if(saveWorkoutMessage != null) {
+    if(saveCheckInMessage != null) {
       onCompleteWorkout();
     }
-  }, [ onCompleteWorkout, saveWorkoutMessage ]);
+  }, [ onCompleteWorkout, saveCheckInMessage ]);
   
   return (
     <>
@@ -94,8 +94,8 @@ const SendWorkout = (props) => {
       </Button>
 
       {GrowlFns.renderErrorGrowl({
-        message: saveWorkoutError,
-        onCloseGrowl: onCloseSaveWorkoutErrorGrowl,
+        message: saveCheckInError,
+        onCloseGrowl: onCloseSaveCheckInErrorGrowl,
       })}
     </>
   );
