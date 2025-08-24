@@ -35,6 +35,15 @@ const reducers = {
 // Async Thunk
 const asyncThunk = {
   loadCheckIns: createAsyncThunk(`${CHECK_IN_SLICE_NAME}/loadCheckIns`, async (date) => await checkInsService.loadCheckIns(date)),
+  loadUserCheckIns: createAsyncThunk(`${CHECK_IN_SLICE_NAME}/loadUserCheckIns`, async (date, { getState }) => {
+    const state = await getState();
+
+    if(!state.users.loggedUser) {
+      return [];
+    }
+
+    return await checkInsService.loadUserCheckIns(date, state.users.loggedUser.uid);
+  }),
   saveCheckIn: createAsyncThunk(`${CHECK_IN_SLICE_NAME}/saveCheckIn`, async (data) => await checkInsService.saveCheckIn(data)),
 };
 
@@ -50,6 +59,20 @@ const extraReducers = (builder) => {
       state.checkIns = action.payload;
     })
     .addCase(asyncThunk.loadCheckIns.rejected, (state, action) => {
+      state.loadCheckInsStatus = REQUEST_STATUS.FAILED;
+      state.loadCheckInsError = t(`error-message.load-check-ins.${action.error.code}`);
+    });
+
+  builder
+    .addCase(asyncThunk.loadUserCheckIns.pending, (state) => {
+      state.loadCheckInsStatus = REQUEST_STATUS.LOADING;
+    })
+    .addCase(asyncThunk.loadUserCheckIns.fulfilled, (state, action) => {
+      state.loadCheckInsStatus = REQUEST_STATUS.SUCCEEDED;
+
+      state.checkIns = action.payload;
+    })
+    .addCase(asyncThunk.loadUserCheckIns.rejected, (state, action) => {
       state.loadCheckInsStatus = REQUEST_STATUS.FAILED;
       state.loadCheckInsError = t(`error-message.load-check-ins.${action.error.code}`);
     });
@@ -71,6 +94,9 @@ const extraReducers = (builder) => {
 // Selectors
 const selectors = {
   selectAllCheckIns: (state) => {
+    return state.checkIns.checkIns || [];
+  },
+  selectUserCheckIns: (state) => {
     return state.checkIns.checkIns || [];
   },
   selectLoadCheckInsError: (state) => {

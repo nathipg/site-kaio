@@ -1,12 +1,11 @@
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FieldWithLabel, GrowlFns, Input } from '@/components';
-import { CheckInSlice } from '@/store/slices';
+import { CheckInList } from '@/components/CheckInList';
+import { CheckInSlice, UserSlice } from '@/store/slices';
 import { utils } from '@/utils';
-
-import { CheckInList } from './CheckInList';
 
 import styles from './ManageCheckInsPage.module.scss';
 
@@ -16,8 +15,44 @@ const ManageCheckInsPage = () => {
   const dispatch = useDispatch();
 
   const loadCheckInsError = useSelector(CheckInSlice.selectors.selectLoadCheckInsError);
+  const checkIns = useSelector(CheckInSlice.selectors.selectAllCheckIns);
+  const users = useSelector(UserSlice.selectors.selectUsers);
 
   const [ selectedDate, setSelectedDate ] = useState(utils.getDateFormattedForInput(new Date()));
+
+  const usersMap = useMemo(() => {
+    if(utils.isArrayEmpty(users)) {
+      return new Map();
+    }
+
+    const map = new Map();
+
+    users.forEach(user => {
+      map.set(user.uid, user);
+    });
+
+    return map;
+  }, [ users ]);
+
+  const normalizedCheckIns = useMemo(() => {
+    return checkIns.map((checkIn) => {
+      const user = usersMap.get(checkIn.userUid);
+
+      const normalizedUser = user || {
+        fullName: t('<user not found>'),
+      };
+
+      const normalizedDescription = checkIn.description ? `(${checkIn.description})` : '';
+
+      const workoutData = {
+        ...checkIn,
+        title: `${normalizedUser.fullName} (${utils.getDateFormatted(new Date(checkIn.createdAt), { weekday: 'long' })})`,
+        description: `${checkIn.title} ${normalizedDescription}`,
+      };
+
+      return workoutData;
+    });
+  }, [ checkIns, t, usersMap ]);
 
   const onCloseLoadCheckInsErrorGrowl = useCallback(() => {
     dispatch(CheckInSlice.actions.clearLoadCheckInsError());
@@ -46,7 +81,9 @@ const ManageCheckInsPage = () => {
         )}
       />
 
-      <CheckInList />
+      <CheckInList
+        checkIns={normalizedCheckIns}
+      />
 
       {GrowlFns.renderErrorGrowl({
         message: loadCheckInsError,

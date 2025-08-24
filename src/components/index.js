@@ -1,5 +1,6 @@
 export * from './Button';
 export * from './Buttons';
+export * from './CheckInList';
 export * from './ConfirmationDialog';
 export * from './ContentContainer';
 export * from './Dialog';

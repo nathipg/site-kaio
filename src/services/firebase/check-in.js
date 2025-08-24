@@ -5,13 +5,14 @@ import { app } from './firebase-app';
 
 const db = getFirestore(app);
 
-export const loadCheckIns = async (date) => {
+const internalLoadCheckIns = async (date, userUid = null) => {
   const start = date;
   const end = new Date((new Date(date)).getTime() + 24 * 60 * 60 * 1000).toISOString(); // add 24 hours to date
 
-  const workoutsRef = collection(db, DB_KEYS.CHECK_INS);
+  const checkInsRef = collection(db, DB_KEYS.CHECK_INS);
   const q = query(
-    workoutsRef,
+    checkInsRef,
+    userUid ? where('userUid', '==', userUid) : null,
     where('createdAt', '>=', start),
     where('createdAt', '<=', end),
     orderBy('createdAt', 'desc'),
@@ -26,8 +27,16 @@ export const loadCheckIns = async (date) => {
   });
 };
 
-export const saveCheckIn = async (data) => {
-  const workoutsRef = collection(db, DB_KEYS.CHECK_INS);
+export const loadCheckIns = async (date) => {
+  return internalLoadCheckIns(date);
+};
 
-  await addDoc(workoutsRef, data);
+export const loadUserCheckIns = async (date, userUid) => {
+  return internalLoadCheckIns(date, userUid);
+};
+
+export const saveCheckIn = async (data) => {
+  const checkInsRef = collection(db, DB_KEYS.CHECK_INS);
+
+  await addDoc(checkInsRef, data);
 };
