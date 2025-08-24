@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Button, ButtonConstants, GrowlFns, PaperPlaneIcon, TextArea } from '@/components';
-import { ExerciseSlice, UserSlice, CheckInSlice } from '@/store/slices';
+import { UserSlice, CheckInSlice } from '@/store/slices';
 import { utils } from '@/utils';
 
 const SendWorkout = (props) => {
@@ -14,7 +14,6 @@ const SendWorkout = (props) => {
 
   const dispatch = useDispatch();
 
-  const dbExercises = useSelector(ExerciseSlice.selectors.selectAllExercises);
   const saveCheckInError = useSelector(CheckInSlice.selectors.selectSaveCheckInError);
   const saveCheckInMessage = useSelector(CheckInSlice.selectors.selectSaveCheckInMessage);
   const loggedUser = useSelector(UserSlice.selectors.selectLoggedUser);
@@ -24,49 +23,20 @@ const SendWorkout = (props) => {
   const onClickSendWorkout = useCallback(() => {
     const now = utils.getDateIsoFormat(new Date());
 
-    const exercisesByStatus = workout.exercises.reduce((acc, exercise) => {
-      const { id, exerciseId, ...otherExerciseData } = exercise;
-      const isCompleted = completedExercises.includes(id);
-      const dbExercise = dbExercises.find(de => de.id == exerciseId);
-
-      const exerciseToSave = {
-        ...otherExerciseData,
-        ...dbExercise,
-      };
-
-      const completed = isCompleted ?
-        [ ...acc.completed, exerciseToSave ]
-        : acc.completed;
-
-      const missing = !isCompleted ?
-        [ ...acc.missing, exerciseToSave ]
-        : acc.missing;
-
-      return {
-        completed,
-        missing,
-      };
-    }, {
-      completed: [],
-      missing: [],
-    });
-
+    const { id: _, ...otherWorkoutData } = workout;
 
     const workoutData = {
+      ...otherWorkoutData,
       createdAt: now,
       userUid: loggedUser.uid,
-      title: workout.title,
-      description: workout.description,
       comment,
-      exercises: {
-        ...exercisesByStatus,
-      },
+      completedExercises,
     };
 
     dispatch(CheckInSlice.actions.saveCheckIn(workoutData));
 
     setComment('');
-  }, [ comment, completedExercises, dbExercises, dispatch, loggedUser.uid, workout.description, workout.exercises, workout.title ]);
+  }, [ comment, completedExercises, dispatch, loggedUser.uid, workout ]);
 
   const onCloseSaveCheckInErrorGrowl = useCallback(() => {
     dispatch(CheckInSlice.actions.clearSaveCheckInError());

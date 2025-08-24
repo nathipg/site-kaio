@@ -1,9 +1,8 @@
 import { memo, useCallback, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Button, ButtonConstants, RemoveWorkoutConfirmDialog, XIcon } from '@/components';
+import { Button, ButtonConstants, RemoveWorkoutConfirmDialog, WorkoutConstants, XIcon } from '@/components';
 
-import { WORKOUT_MODES } from '../constants';
 import { SendWorkout } from '../SendWorkout';
 
 import styles from './WorkoutFooter.module.scss';
@@ -51,12 +50,21 @@ const WorkoutFooter = (props) => {
     );
   }, [ completedExercises, onCompleteWorkout, workout ]);
 
+  const renderHistoryElements = useCallback(() => {
+    const normalizedComment = workout.comment || t('<empty>');
+
+    return (
+      <p><span className={styles.WorkoutComment}>{t('Comment')}:</span> {normalizedComment}</p>
+    );
+  }, [ t, workout.comment ]);
+
   const RENDER_MODE_MAPPER = useMemo(() => {
     return {
-      [WORKOUT_MODES.EDIT]: renderRemoveElements,
-      [WORKOUT_MODES.REGISTER]: renderRegisterElements,
+      [WorkoutConstants.WORKOUT_MODES.EDIT]: renderRemoveElements,
+      [WorkoutConstants.WORKOUT_MODES.REGISTER]: renderRegisterElements,
+      [WorkoutConstants.WORKOUT_MODES.HISTORY]: renderHistoryElements,
     };
-  }, [ renderRegisterElements, renderRemoveElements ]);
+  }, [ renderHistoryElements, renderRegisterElements, renderRemoveElements ]);
 
   const render = RENDER_MODE_MAPPER[mode] || (() => <></>);
   

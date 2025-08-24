@@ -8,13 +8,13 @@ import { WorkoutHeader } from './WorkoutHeader';
 import styles from './Workout.module.scss';
 
 const Workout = (props) => {
-  const { workout, mode } = props;
+  const { workout, mode, isExpanded: initialIsExpanded = true } = props;
   const { setWorkoutProperty = () => null, onRemoveWorkout = () => null } = props;
 
   const navigate = useNavigate();
 
-  const [ completedExercises, setCompletedExercises ] = useState([]);
-  const [ isExpanded, setIsExpanded ] = useState(true);
+  const [ completedExercises, setCompletedExercises ] = useState(workout.completedExercises || []);
+  const [ isExpanded, setIsExpanded ] = useState(initialIsExpanded);
 
   const completedExercisesQty = useMemo(() => {
     return completedExercises.length;

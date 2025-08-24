@@ -39,6 +39,7 @@ const ExerciseBody = (props) => {
           completedExercises={completedExercises}
           exerciseId={id}
           onChangeExerciseStatus={onChangeExerciseStatus}
+          mode={mode}
         />
       </div>
     );

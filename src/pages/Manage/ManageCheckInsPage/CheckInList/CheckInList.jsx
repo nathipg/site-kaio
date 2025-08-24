@@ -2,6 +2,7 @@ import { memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
+import { Workout, WorkoutConstants } from '@/components';
 import { UserSlice, CheckInSlice } from '@/store/slices';
 import { utils } from '@/utils';
 
@@ -31,21 +32,29 @@ const CheckInList = () => {
 
   return (
     <>
-      {checkIns.map(userWorkout => {
-        const user = usersMap.get(userWorkout.userUid);
+      {checkIns.map(checkIn => {
+        const user = usersMap.get(checkIn.userUid);
+
         const normalizedUser = user || {
           fullName: t('<user not found>'),
         };
 
-        const description = userWorkout.description ? `(${userWorkout.description})` : '';
-        const comment = userWorkout.comment || t('<empty>');
+        const normalizedDescription = checkIn.description ? `(${checkIn.description})` : '';
+
+        const workoutData = {
+          ...checkIn,
+          title: `${normalizedUser.fullName} (${utils.getDateFormatted(new Date(checkIn.createdAt), { weekday: 'long' })})`,
+          description: `${checkIn.title} ${normalizedDescription}`,
+        };
 
         return (
-          <div key={userWorkout.id}>
-            <h2>{normalizedUser.fullName} ({utils.getDateFormatted(new Date(userWorkout.createdAt), { weekday: 'long' })})</h2>
-            <p>{userWorkout.title} {description}</p>
-            <p>{t('Comment')}: {comment}</p>
-          </div>
+          <Workout
+            key={checkIn.id}
+            workout={workoutData}
+            user={user}
+            mode={WorkoutConstants.WORKOUT_MODES.HISTORY}
+            isExpanded={false}
+          />
         );
       })}
     </>

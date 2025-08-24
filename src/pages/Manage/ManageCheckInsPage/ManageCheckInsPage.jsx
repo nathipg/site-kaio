@@ -8,6 +8,8 @@ import { utils } from '@/utils';
 
 import { CheckInList } from './CheckInList';
 
+import styles from './ManageCheckInsPage.module.scss';
+
 const ManageCheckInsPage = () => {
   const { t } = useTranslation();
 
@@ -29,7 +31,7 @@ const ManageCheckInsPage = () => {
   }, [ dispatch, selectedDate ]);
 
   return (
-    <>
+    <div className={styles.ManageCheckInsPage}>
       <h1>{t('Manage Check-ins')}</h1>
 
       <FieldWithLabel
@@ -50,7 +52,7 @@ const ManageCheckInsPage = () => {
         message: loadCheckInsError,
         onCloseGrowl: onCloseLoadCheckInsErrorGrowl,
       })}
-    </>
+    </div>
   );
 };
 

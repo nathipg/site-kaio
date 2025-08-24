@@ -8,7 +8,7 @@
     '. .'
     'video video';
 
-  &[data-mode="REGISTER"] {
+  &:not([data-mode="EDIT"]) {
     grid-template-columns: 1fr 1fr auto;
     grid-template-areas: 
     '. . status'

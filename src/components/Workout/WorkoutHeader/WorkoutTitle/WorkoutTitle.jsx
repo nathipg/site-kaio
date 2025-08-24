@@ -1,9 +1,7 @@
 import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { FieldWithLabel, Input } from '@/components/Forms';
-
-import { WORKOUT_MODES } from '../../constants';
+import { FieldWithLabel, Input, WorkoutConstants } from '@/components';
 
 import styles from './WorkoutTitle.module.scss';
 
@@ -15,7 +13,7 @@ const WorkoutTitle = (props) => {
   const { t } = useTranslation();
 
   const renderTitle = useCallback(() => {
-    if(mode != WORKOUT_MODES.EDIT) {
+    if(mode != WorkoutConstants.WORKOUT_MODES.EDIT) {
       return <h2>{title}</h2>;
     }
 
@@ -35,7 +33,7 @@ const WorkoutTitle = (props) => {
   }, [ mode, setWorkoutProperty, t, title ]);
 
   const renderDescription = useCallback(() => {
-    if(mode != WORKOUT_MODES.EDIT) {
+    if(mode != WorkoutConstants.WORKOUT_MODES.EDIT) {
       return <p>{description}</p>;
     }
 

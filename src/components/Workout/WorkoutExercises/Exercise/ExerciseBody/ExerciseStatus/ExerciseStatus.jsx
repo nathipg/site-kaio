@@ -1,11 +1,11 @@
 import { memo, useCallback, useMemo } from 'react';
 
-import { CheckIcon, XIcon } from '@/components';
+import { CheckIcon, WorkoutConstants, XIcon } from '@/components';
 
 import styles from './ExerciseStatus.module.scss';
 
 const ExerciseStatus = (props) => {
-  const { completedExercises, exerciseId } = props;
+  const { completedExercises, exerciseId, mode } = props;
   const { onChangeExerciseStatus } = props;
 
   const isCompleted = useMemo(() => {
@@ -13,16 +13,21 @@ const ExerciseStatus = (props) => {
   }, [ completedExercises, exerciseId ]);
 
   const onChangeCompleteStatus = useCallback(() => {
+    if(mode === WorkoutConstants.WORKOUT_MODES.HISTORY) {
+      return;
+    }
+
     onChangeExerciseStatus({
       exerciseId,
       isCompleted: !isCompleted,
     });
-  }, [ exerciseId, isCompleted, onChangeExerciseStatus ]);
+  }, [ exerciseId, isCompleted, mode, onChangeExerciseStatus ]);
 
   return (
     <div
       className={`${styles.ExerciseStatus} ${isCompleted ? styles.ExerciseCompleted : ''}`}
       onClick={onChangeCompleteStatus}
+      data-mode={mode}
     >
       {isCompleted ? (
         <CheckIcon

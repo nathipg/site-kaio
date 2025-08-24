@@ -8,7 +8,10 @@
   background-color: colors.$light-gray;
   width: 2rem;
   height: 2rem;
-  cursor: pointer;
+
+  &:not([data-mode="HISTORY"]) {
+    cursor: pointer;
+  }
 
   &.ExerciseCompleted {
     background-color: rgba(colors.$green, 0.3);
