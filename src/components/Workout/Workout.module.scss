@@ -10,7 +10,7 @@
   border-radius: 5px;
   margin: 0 auto;
 
-  width: calc(100vw - margins.$content-container-horizontal-margin * 2);
+  width: calc(100% - margins.$content-container-horizontal-margin * 4);
 
   @media (min-width: screenSizes.$md) {
     max-width: screenSizes.$md;
