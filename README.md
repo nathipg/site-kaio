@@ -6,6 +6,7 @@ Importante
 - Adicionar lugar pra foto no form de cadastrar usuário
 - Currículo
 - Publicações
+- Página do Atleta
 
 Seria legal
 - Cadastrar categorias de exercício
