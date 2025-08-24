@@ -9,6 +9,6 @@
   padding: spacing.$content-container-vertical-sm spacing.$content-container-horizontal-sm;
 
   @media (min-width: screenSizes.$sm) {
-    padding: spacing.$content-container-vertical-md 0;
+    padding: spacing.$content-container-vertical-md spacing.$content-container-horizontal-md;
   }
 }
