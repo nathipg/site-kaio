@@ -1,6 +1,14 @@
-@use '@/styles/margins';
+@use '@/styles/spacing';
+@use '@/styles/screen-sizes' as screenSizes;
 
-.ContentContainer {
-  margin: margins.$content-container-vertical-margin margins.$content-container-horizontal-margin;
+.ContentContainer:not(:has([id="homePage"])) {
+  max-width: 1200px;
+  margin: 0 auto;
   flex: 1;
+  width: 100%;
+  padding: spacing.$content-container-vertical-sm spacing.$content-container-horizontal-sm;
+
+  @media (min-width: screenSizes.$sm) {
+    padding: spacing.$content-container-vertical-md 0;
+  }
 }

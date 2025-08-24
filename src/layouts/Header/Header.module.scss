@@ -54,6 +54,8 @@
   }
 
   @media (max-width: screenSizes.$md) {
+    padding: 1rem;
+
     .menuToggle {
       display: block;
       z-index: 2;

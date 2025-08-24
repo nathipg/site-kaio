@@ -1,5 +1,12 @@
+@use '@/styles/screen-sizes' as screenSizes;
+
 .SignInContainer {
+  max-width: 350px;
   margin: 0 auto;
+
+  @media (min-width: screenSizes.$sm) {
+    // width: 350px;
+  }
 }
 
 .SignInPage {

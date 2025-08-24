@@ -1,8 +1,11 @@
-@use '@/styles/margins';
+@use '@/styles/spacing';
 
-$remove-horizontal-margin: margins.$content-container-horizontal-margin * -1;
-$remove-vertical-margin: margins.$content-container-vertical-margin * -1;
+$remove-horizontal-spacing: spacing.$content-container-horizontal-sm * -1;
+$remove-vertical-spacing: spacing.$content-container-vertical-sm * -1;
 
 .HomePage {
-  margin: $remove-vertical-margin $remove-horizontal-margin;
+  background-color: aliceblue;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
