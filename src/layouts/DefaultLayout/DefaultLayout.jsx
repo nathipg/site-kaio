@@ -3,6 +3,7 @@ import { Outlet } from 'react-router';
 
 import { ContentContainer, GrowlContainer } from '@/components';
 
+import { Footer } from '../Footer';
 import { Header } from '../Header';
 
 const DefaultLayout = () => {
@@ -15,6 +16,8 @@ const DefaultLayout = () => {
       <ContentContainer>
         <Outlet />
       </ContentContainer>
+
+      <Footer />
     </>
   );
 };

@@ -33,6 +33,7 @@
   }
 
   .primary {
+    @include typography.subtitle;
     padding: 0.75rem 1rem;
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(colors.$black, 0.5);
@@ -45,7 +46,7 @@
 
   .secondary {
     border: 2px solid #94a3b8;
-    color: #ffffff;
+    color: colors.$white;
     text-decoration: none;
     padding: 0.75rem 1rem;
     border-radius: 10px;

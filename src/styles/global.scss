@@ -16,3 +16,9 @@ body, input, textarea, button {
   font-family: 'InterVariable', sans-serif;
   font-size: 1rem;
 }
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
