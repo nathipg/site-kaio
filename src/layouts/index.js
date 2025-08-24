@@ -2,6 +2,7 @@ export * from './About';
 export * from './Contact';
 export * from './DefaultLayout';
 export * from './FAQ';
+export * from './Footer';
 export * from './HeroSection';
 export * from './Partnerships';
 export * from './Services';

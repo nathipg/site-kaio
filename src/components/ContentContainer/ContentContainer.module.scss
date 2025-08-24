@@ -2,4 +2,5 @@
 
 .ContentContainer {
   margin: margins.$content-container-vertical-margin margins.$content-container-horizontal-margin;
+  flex: 1;
 }
