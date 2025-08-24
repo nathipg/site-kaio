@@ -14,6 +14,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const isLoggedIn = useSelector(UserSlice.selectors.isLoggedIn);
+  const loggedUser = useSelector(UserSlice.selectors.selectLoggedUser);
 
   const [ isMenuOpen, setIsMenuOpen ] = useState(false);
 
@@ -75,19 +76,35 @@ const Header = () => {
       </button>
 
       <nav className={`${styles.nav} ${isMenuOpen ? styles.active : ''}`}>
-        <Link to={{ pathname: '/sign-in' }} onClick={closeMenu}>{t('Sign in')}</Link>
-        <Link to={{ pathname: '/athlete' }} onClick={closeMenu}>{t('Athlete')}</Link>
-        <Link to={{ pathname: '/manage' }} onClick={closeMenu}>{t('Manage')}</Link>
+        {
+          !isLoggedIn ? (
+            <Link to={{ pathname: '/sign-in' }} onClick={closeMenu}>{t('Sign in')}</Link>
+          ) : <></>
+        }
 
-        {isLoggedIn && (
-          <Button
-            category={ButtonConstants.ButtonCategories.DANGER}
-            textOnly={true}
-            onClick={onLogout}
-          >
-            {t('Sign Out')}
-          </Button>
-        )}
+        {
+          isLoggedIn ? (
+            <Link to={{ pathname: '/athlete' }} onClick={closeMenu}>{t('Athlete')}</Link>
+          ) : <></>
+        }
+
+        {
+          isLoggedIn && loggedUser?.isAdmin ? (
+            <Link to={{ pathname: '/manage' }} onClick={closeMenu}>{t('Manage')}</Link>
+          ) : <></>
+        }
+
+        {
+          isLoggedIn ? (
+            <Button
+              category={ButtonConstants.ButtonCategories.DANGER}
+              textOnly={true}
+              onClick={onLogout}
+            >
+              {t('Sign Out')}
+            </Button>
+          ) : <></>
+        }
       </nav>
     </header>
   );
