@@ -6,7 +6,7 @@ import styles from './HomePage.module.scss';
 
 const HomePage = () => {
   return (
-    <div className={styles.HomePage}>
+    <div className={styles.HomePage} id='homePage'>
       <HeroSection />
       <About />
       <Services />

@@ -1,5 +1,5 @@
 @use '@/styles/colors';
-@use '@/styles/margins';
+@use '@/styles/spacing';
 @use '@/styles/screen-sizes.scss' as screenSizes;
 
 .Workout {
@@ -10,7 +10,7 @@
   border-radius: 5px;
   margin: 0 auto;
 
-  width: calc(100% - margins.$content-container-horizontal-margin * 4);
+  width: calc(100% - spacing.$content-container-horizontal-sm * 4);
 
   @media (min-width: screenSizes.$md) {
     max-width: screenSizes.$md;

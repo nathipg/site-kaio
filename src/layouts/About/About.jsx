@@ -2,6 +2,7 @@ import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Button, Image } from '@/components';
+import teamKaioImg from '@/images/kaio-aulao.jpg';
 
 import styles from './About.module.scss';
 
@@ -20,11 +21,12 @@ const About = () => {
             <li>{t('Evidence-based method and practice')}</li>
             <li>{t('Weekly adjustments and close follow-up')}</li>
           </ul>
-          <Button>
+          {/* TODO: After create the "Currículo" page change this button */}
+          {/* <Button>
             {t('Learn More About Me')}
-          </Button>
+          </Button> */}
         </div>
-        <Image className={styles.image} src='' alt={t('Kaio in action')} />
+        <Image className={styles.image} src={teamKaioImg} alt={t('Team Kaio')} />
       </div>
     </section>
   );
