@@ -1,0 +1,16 @@
+@use '@/styles/colors';
+
+.ManagePageItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 2px solid colors.$blue;
+  border-radius: 5px;
+  color: colors.$blue;
+  text-decoration: none;
+}
+
+.ManagePageItemText {
+  font-size: 2rem;
+}
