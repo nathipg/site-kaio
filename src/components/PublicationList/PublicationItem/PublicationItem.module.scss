@@ -1,5 +1,5 @@
 @use '@/styles/colors';
-@use '@/styles/margins';
+@use '@/styles/spacing';
 
 .PublicationItem {
   display: flex;
@@ -9,5 +9,5 @@
   border-radius: 5px;
   margin: 0 auto;
 
-  width: calc(100% - margins.$content-container-horizontal-margin * 4);
+  width: calc(100% - spacing.$content-container-horizontal-sm * 4);
 }
