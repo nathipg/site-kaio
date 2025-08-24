@@ -15,7 +15,7 @@
     '. . status'
     'video video video';
 
-    @media(min-width: 23rem) {
+    @media(min-width: 26rem) {
       grid-template-columns: 1fr 1fr 1fr 1fr auto;
       grid-template-rows: auto auto;
       grid-template-areas: 
@@ -24,7 +24,7 @@
     }
   }
 
-  @media(min-width: 23rem) {
+  @media(min-width: 26rem) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto auto;
     grid-template-areas: 
