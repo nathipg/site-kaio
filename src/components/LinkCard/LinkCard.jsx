@@ -1,26 +1,26 @@
 import { memo } from 'react';
 import { Link } from 'react-router';
 
-import styles from './ManagePageItem.module.scss';
+import styles from './LinkCard.module.scss';
 
-const ManagePageItem = (props) => {
+const LinkCard = (props) => {
   const { text, to } = props;
   const { renderIcon = () => null } = props;
 
   return (
     <Link
-      className={styles.ManagePageItem}
+      className={styles.LinkCard}
       to={to}
     >
       {renderIcon({ size: '5x', width: '6rem' })}
 
-      <span className={styles.ManagePageItemText}>
+      <span className={styles.LinkCardText}>
         {text}
       </span>
     </Link>
   );
 };
 
-const ManagePageItemMemo = memo(ManagePageItem);
+const LinkCardMemo = memo(LinkCard);
 
-export { ManagePageItemMemo as ManagePageItem };
+export { LinkCardMemo as LinkCard };

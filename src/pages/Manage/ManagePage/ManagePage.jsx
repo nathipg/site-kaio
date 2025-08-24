@@ -1,9 +1,7 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ClipboardCheckIcon, ClipboardListIcon, DumbbellIcon } from '@/components';
-
-import { ManagePageItem } from './ManagePageItem';
+import { ClipboardCheckIcon, ClipboardListIcon, DumbbellIcon, LinkCard } from '@/components';
 
 import styles from './ManagePage.module.scss';
 
@@ -12,19 +10,19 @@ const ManagePage = () => {
 
   return (
     <div className={styles.ManagePage}>
-      <ManagePageItem
+      <LinkCard
         text={t('Manage Exercises')}
         to={{ pathname: '/manage/exercises' }}
         renderIcon={(props) => <DumbbellIcon {...props} />}
       />
 
-      <ManagePageItem
+      <LinkCard
         text={t('Manage Workouts')}
         to={{ pathname: '/manage/workouts' }}
         renderIcon={(props) => <ClipboardListIcon {...props} />}
       />
 
-      <ManagePageItem
+      <LinkCard
         text={t('Manage Check-ins')}
         to={{ pathname: '/manage/check-ins' }}
         renderIcon={(props) => <ClipboardCheckIcon {...props} />}

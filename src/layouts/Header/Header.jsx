@@ -77,8 +77,6 @@ const Header = () => {
       <nav className={`${styles.nav} ${isMenuOpen ? styles.active : ''}`}>
         <Link to={{ pathname: '/sign-in' }} onClick={closeMenu}>{t('Sign in')}</Link>
         <Link to={{ pathname: '/athlete' }} onClick={closeMenu}>{t('Athlete')}</Link>
-        <Link to={{ pathname: '/training' }} onClick={closeMenu}>{t('Training')}</Link>
-        <Link to={{ pathname: '/check-ins' }} onClick={closeMenu}>{t('Check-ins')}</Link>
         <Link to={{ pathname: '/manage' }} onClick={closeMenu}>{t('Manage')}</Link>
 
         {isLoggedIn && (

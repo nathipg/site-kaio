@@ -4,4 +4,4 @@ export * from './HomePage';
 export * from './Manage';
 export * from './SignInPage';
 export * from './SignUpPage';
-export * from './TrainingPage';
+export * from './WorkoutPage';

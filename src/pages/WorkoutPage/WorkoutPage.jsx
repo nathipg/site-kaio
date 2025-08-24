@@ -5,14 +5,14 @@ import { useSelector } from 'react-redux';
 import { WorkoutConstants, WorkoutsList } from '@/components';
 import { UserSlice } from '@/store/slices';
 
-const TrainingPage = () => {
+const WorkoutPage = () => {
   const { t } = useTranslation();
 
   const workouts = useSelector(UserSlice.selectors.selectLoggedUserWorkouts);
 
   return (
     <>
-      <h1>{t('Training')}</h1>
+      <h1>{t('Workout')}</h1>
 
       <WorkoutsList
         workouts={workouts}
@@ -22,6 +22,6 @@ const TrainingPage = () => {
   );
 };
 
-const TrainingPageMemo = memo(TrainingPage);
+const WorkoutPageMemo = memo(WorkoutPage);
 
-export { TrainingPageMemo as TrainingPage };
+export { WorkoutPageMemo as WorkoutPage };
