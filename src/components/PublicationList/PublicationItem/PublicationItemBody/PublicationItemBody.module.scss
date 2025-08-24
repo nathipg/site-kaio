@@ -1,0 +1,6 @@
+@use '@/styles/colors';
+
+.PublicationItemBody {
+  padding: 1rem;
+  border-top: 1px solid colors.$light-gray;
+}

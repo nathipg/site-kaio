@@ -1,0 +1,15 @@
+@use '@/styles/colors';
+
+.PublicationItemFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border-top: 1px solid colors.$light-gray;
+
+  & > div {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+}

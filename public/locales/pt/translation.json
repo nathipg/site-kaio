@@ -32,6 +32,15 @@
     },
     "load-check-ins": {
       "permission-denied": "Você não tem permissão para carregar os check-ins"
+    },
+    "load-publications": {
+      "auth/network-request-failed": "Erro de Rede: Por favor, verifique a sua conexão com a internet"
+    },
+    "add-publication": {
+      "permission-denied": "Você não tem permissão para adicionar publicações"
+    },
+    "save-publication": {
+      "permission-denied": "Você não tem permissão para salvar publicações"
     }
   },
   "Home": "Início",
@@ -136,5 +145,13 @@
   "(click to be redirected)": "(clique para ser redirecionado)",
   "Kaio Borges Guerrero Personal Training. All rights reserved.": "Kaio Borges Guerrero Personal Training. Todos os direitos reservados.",
   "Workout": "Treino",
-  "Workouts": "Treinos"
+  "Workouts": "Treinos",
+  "Manage Publications": "Gerenciar Publicações",
+  "Add Publication": "Adicionar Publicação",
+  "English": "Inglês",
+  "Portuguese": "Português",
+  "Unpublish": "Despublicar",
+  "Remove Publication": "Remover Publicação",
+  "Remove Language": "Remover língua",
+  "Are you sure you want to remove this publication?": "Tem certeza que deseja remover está publicação?"
 }

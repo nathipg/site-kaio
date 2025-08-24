@@ -12,6 +12,8 @@ export * from './Growl';
 export * from './Icons';
 export * from './Image';
 export * from './LinkCard';
+export * from './PublicationList';
+export * from './Quill';
 export * from './Video';
 export * from './Workout';
 export * from './WorkoutsList';

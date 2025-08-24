@@ -1,0 +1,13 @@
+@use '@/styles/colors';
+@use '@/styles/margins';
+
+.PublicationItem {
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid colors.$light-gray;
+  border-radius: 5px;
+  margin: 0 auto;
+
+  width: calc(100% - margins.$content-container-horizontal-margin * 4);
+}

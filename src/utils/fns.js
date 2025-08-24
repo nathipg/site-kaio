@@ -35,6 +35,16 @@ export const getDateIsoFormat = (date) => {
   return date.toISOString();
 };
 
+export const getMainUserLanguage = () => {
+  const language = navigator.languages !== undefined ? navigator.languages[0] : navigator.language;
+  
+  if(language.includes('-')) {
+    return language.split('-')[0];
+  }
+
+  return language;
+};
+
 export const getUniqueId = () => {
   return uuid();
 };

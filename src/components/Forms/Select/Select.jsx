@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import styles from './Select.module.scss';
 
 const Select = (props) => {
-  const { renderItems = () => null, emptyItemText = 'Select item', value, ...otherProps } = props;
+  const { renderItems = () => null, emptyItemText = 'Select item', value, noEmptyOption = false, ...otherProps } = props;
 
   const { t } = useTranslation();
 
@@ -14,7 +14,12 @@ const Select = (props) => {
       className={styles.Select}
       {...otherProps}
     >
-      <option value="">{t(emptyItemText)}</option>
+      {
+        !noEmptyOption ? (
+          <option value="">{t(emptyItemText)}</option>
+        ) : <></>
+      }
+      
       {renderItems()}
     </select>
   );

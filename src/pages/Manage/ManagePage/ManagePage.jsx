@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ClipboardCheckIcon, ClipboardListIcon, DumbbellIcon, LinkCard } from '@/components';
+import { ClipboardCheckIcon, ClipboardListIcon, DumbbellIcon, LinkCard, FileLinesIcon } from '@/components';
 
 import styles from './ManagePage.module.scss';
 
@@ -26,6 +26,12 @@ const ManagePage = () => {
         text={t('Manage Check-ins')}
         to={{ pathname: '/manage/check-ins' }}
         renderIcon={(props) => <ClipboardCheckIcon {...props} />}
+      />
+
+      <LinkCard
+        text={t('Manage Publications')}
+        to={{ pathname: '/manage/publications' }}
+        renderIcon={(props) => <FileLinesIcon {...props} />}
       />
     </div>
   );
