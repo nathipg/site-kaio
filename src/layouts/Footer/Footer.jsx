@@ -12,7 +12,7 @@ const Footer = () => {
     <footer className={styles.Footer}>
       <div className={styles.container}>
         <div className={styles.logoSection}>
-          <KaioLogo width='1rem' color='white' />
+          <KaioLogo width='1rem' color='#393939cc' />
           <p className={styles.name}>Kaio Guerrero</p>
         </div>
         <div>
