@@ -98,7 +98,6 @@ const Header = () => {
           isLoggedIn ? (
             <Button
               category={ButtonConstants.ButtonCategories.DANGER}
-              textOnly={true}
               onClick={onLogout}
             >
               {t('Sign Out')}

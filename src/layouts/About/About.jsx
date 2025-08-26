@@ -22,7 +22,7 @@ const About = () => {
             <li>{t('Evidence-based method and practice')}</li>
             <li>{t('Weekly adjustments and close follow-up')}</li>
           </ul>
-          <Link className='' to={{ pathname: '/resume' }}>{t('Learn More About Me')}</Link>
+          <Link className={styles.link} to={{ pathname: '/resume' }}>{t('Learn More About Me')}</Link>
         </div>
         <Image className={styles.image} src={teamKaioImg} alt={t('Team Kaio')} />
       </div>
