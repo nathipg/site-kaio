@@ -7,7 +7,6 @@
   place-items: center;
   text-align: center;
   background: linear-gradient(120deg, colors.$dark-blue 0%, #0a5f7e 60%, colors.$blue 100%);
-  color: colors.$white;
   padding: 4rem 0 0;
 
   .content {
@@ -19,6 +18,7 @@
   h1 {
     font-size: clamp(1.95rem, 1.6962rem + 1.1282vw, 3.05rem);
     margin-bottom: 1rem;
+    color: colors.$white;
   }
 
   p {

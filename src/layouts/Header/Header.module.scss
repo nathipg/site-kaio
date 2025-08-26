@@ -21,8 +21,11 @@
       gap: 1rem;
       align-items: center;
       text-decoration: none;
-      color: colors.$white;
       @include typography.heading-5;
+      
+      span {
+        color: colors.$white;
+      }
     }
   }
 

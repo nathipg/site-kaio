@@ -1,7 +1,8 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router';
 
-import { Button, Image } from '@/components';
+import { Image } from '@/components';
 import teamKaioImg from '@/images/kaio-aulao.jpg';
 
 import styles from './About.module.scss';
@@ -21,10 +22,7 @@ const About = () => {
             <li>{t('Evidence-based method and practice')}</li>
             <li>{t('Weekly adjustments and close follow-up')}</li>
           </ul>
-          {/* TODO: After create the "Currículo" page change this button */}
-          {/* <Button>
-            {t('Learn More About Me')}
-          </Button> */}
+          <Link className='' to={{ pathname: '/resume' }}>{t('Learn More About Me')}</Link>
         </div>
         <Image className={styles.image} src={teamKaioImg} alt={t('Team Kaio')} />
       </div>

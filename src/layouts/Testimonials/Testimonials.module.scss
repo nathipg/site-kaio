@@ -4,7 +4,6 @@
 .Testimonials {
   padding: 4rem 1rem;
   background: linear-gradient(180deg, colors.$dark-blue 0%, #0a5f7e 60%, colors.$blue 100%);
-  color: colors.$white;
 
   .container {
     max-width: 1200px;
@@ -15,6 +14,7 @@
     font-size: clamp(1.5rem, 4vw, 2.25rem);
     margin-bottom: 2rem;
     text-align: center;
+    color: colors.$white;
   }
 
   .swiper {

@@ -1,0 +1,45 @@
+@use '@/styles/colors';
+@use '@/styles/screen-sizes.scss' as screenSizes;
+
+.Section {
+  &:not(:first-child) {
+    margin: 2rem 0;
+  }
+  padding: 1rem;
+  background: colors.$white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid colors.$light-gray;
+
+  h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    text-align: center;
+    margin-bottom: 2rem;
+    color: colors.$red;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+  }
+
+  @media (min-width: screenSizes.$md) {
+    padding: 2rem;
+
+    h2 {
+      text-align: left;
+    }
+
+  }
+
+  // &:first-child {
+  //   margin-top: 2rem;
+  // }
+}

@@ -4,7 +4,6 @@
 
 .Footer {
   background: colors.$light-gray;
-  color: rgba(colors.$black, 0.8);
   padding: 1rem 2rem;
 
   .container {
@@ -24,10 +23,14 @@
       display: flex;
       place-items: center;
       gap: 0.5rem;
+      p {
+        color: rgba(colors.$black, 0.8);
+      }
     }
   }
 
   .copy {
     @include typography.caption;
+    color: rgba(colors.$black, 0.8);
   }
 }

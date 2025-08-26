@@ -1,0 +1,28 @@
+@use '@/styles/colors';
+@use '@/styles/typography';
+
+.ResumePage {
+  .ObservationNote {
+    @include typography.body;
+    margin: 2.5rem auto;
+    max-width: 800px;
+    font-style: italic;
+    text-align: center;
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(colors.$black, 0.05);
+    position: relative;
+    border: 1px solid colors.$light-gray;
+  }
+
+  // TODO CHANGE THIS FOR CONSTANTS
+  @media (max-width: 768px) {
+    // padding: 1rem;
+
+    .ObservationNote {
+      margin: 1.5rem auto;
+      padding: 1.5rem 1rem;
+      font-size: 0.85rem;
+    }
+  }
+}
