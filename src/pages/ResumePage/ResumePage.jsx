@@ -172,7 +172,6 @@ const ResumePage = () => {
           image="https://kaioguerrero.com/galeria/maple.png"
         />
 
-        {/* Times de Basquete Universitário */}
         <ExperienceCard
           title="Liga das Engenharias da Unicamp (masculino)"
           period="2019-2023"
