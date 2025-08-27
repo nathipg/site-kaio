@@ -20,7 +20,7 @@ const HeroSection = () => {
           </a>
         </Button>
       </div>
-      <Image className={styles.img} src={kaioImg} width='240px' />
+      <Image className={styles.img} src={kaioImg} width='320px' />
     </section>
   );
 };
