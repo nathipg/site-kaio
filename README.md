@@ -16,3 +16,7 @@ O que falta:
 - Publicações (Falta ajusta o layout)
 - Cadastro e exibição de cursos
 - Página do Atleta (alguns ajustes / criação de componentes)
+
+
+Conversar com Kaio
+- Histórico de avaliações
