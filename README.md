@@ -7,6 +7,7 @@ Seria legal
 - Poder filtrar os exercícios por categoria
 - Página pro usuário poder atualizar o próprio perfil
 - Página onde dá pra ver e editar todos os usuários
+- Página pra gerenciar os usuários
 
 
 O que falta:
