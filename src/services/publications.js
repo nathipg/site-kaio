@@ -8,6 +8,10 @@ export const loadPublications = async () => {
   return await firebaseService.publication.loadPublications();
 };
 
+export const loadPublishedPublications = async () => {
+  return await firebaseService.publication.loadPublishedPublications();
+};
+
 export const removePublication = async (id) => {
   return await firebaseService.publication.removePublication(id);
 };

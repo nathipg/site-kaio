@@ -1,4 +1,4 @@
-import { getFirestore, collection, getDocs, addDoc, getDoc, doc, setDoc, deleteDoc, orderBy, query } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, addDoc, getDoc, doc, setDoc, deleteDoc, orderBy, query, where } from 'firebase/firestore';
 
 import { DB_KEYS } from './db-keys';
 import { app } from './firebase-app';
@@ -19,6 +19,23 @@ export const addPublication = async (data) => {
 export const loadPublications = async () => {
   const publicationsRef = collection(db, DB_KEYS.PUBLICATIONS);
   const q = query(publicationsRef, orderBy('createdAt', 'desc'));
+  const publicationsSnapshot = await getDocs(q);
+
+  return publicationsSnapshot.docs.map(doc => {
+    return {
+      id: doc.id,
+      ...doc.data(),
+    };
+  });
+};
+
+export const loadPublishedPublications = async () => {
+  const publicationsRef = collection(db, DB_KEYS.PUBLICATIONS);
+  const q = query(
+    publicationsRef,
+    where('isPublished', '==', true),
+    orderBy('createdAt', 'desc'),
+  );
   const publicationsSnapshot = await getDocs(q);
 
   return publicationsSnapshot.docs.map(doc => {
