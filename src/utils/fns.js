@@ -35,6 +35,22 @@ export const getDateIsoFormat = (date) => {
   return date.toISOString();
 };
 
+export const getInitialsName = (name) => {
+  if (!name || typeof name !== 'string') return '';
+
+  const parts = name.trim().split(/\s+/);
+
+  if (parts.length === 1) {
+    // No last name → take first two letters
+    return parts[0].substring(0, 2).toUpperCase();
+  } else {
+    // First letter of first name + first letter of last name
+    const first = parts[0][0];
+    const last = parts[parts.length - 1][0];
+    return (first + last).toUpperCase();
+  }
+};
+
 export const getMainUserLanguage = () => {
   const language = navigator.languages !== undefined ? navigator.languages[0] : navigator.language;
   

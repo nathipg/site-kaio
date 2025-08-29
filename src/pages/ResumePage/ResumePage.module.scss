@@ -1,5 +1,6 @@
 @use '@/styles/colors';
 @use '@/styles/typography';
+@use '@/styles/screen-sizes' as screenSizes;
 
 .ResumePage {
   .ObservationNote {
@@ -15,10 +16,7 @@
     border: 1px solid colors.$light-gray;
   }
 
-  // TODO CHANGE THIS FOR CONSTANTS
-  @media (max-width: 768px) {
-    // padding: 1rem;
-
+  @media (max-width: screenSizes.$md) {
     .ObservationNote {
       margin: 1.5rem auto;
       padding: 1.5rem 1rem;

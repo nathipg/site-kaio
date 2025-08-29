@@ -1,4 +1,5 @@
 export * from './BarsIcon';
+export * from './CalendarIcon';
 export * from './CaretDownIcon';
 export * from './CaretUpIcon';
 export * from './CheckIcon';
@@ -10,9 +11,11 @@ export * from './EyeSlashIcon';
 export * from './FileLinesIcon';
 export * from './FloppyDiskIcon';
 export * from './KaioLogo';
+export * from './LocationPinIcon';
 export * from './PaperPlaneIcon';
 export * from './PenToSquareIcon';
 export * from './PlusIcon';
 export * from './RightToBracket';
+export * from './UserIcon';
 export * from './UserPlusIcon';
 export * from './XIcon';

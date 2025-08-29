@@ -1,5 +1,249 @@
+@use '@/styles/colors';
+@use '@/styles/mixins';
+@use '@/styles/typography';
+@use '@/styles/screen-sizes' as screenSizes;
+
 .AthleteAreaPage {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  /* Card styles */
+  .AthleteCard {
+    background-color: colors.$white;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    border: 2px solid colors.$light-blue;
+
+    .content {
+      padding: 2rem;
+    }
+
+    &.hoverable {
+      cursor: pointer;
+      transition: border-color 0.2s;
+
+      &:hover {
+        border-color: colors.$blue;
+
+        .icon {
+          background-color: mixins.hoverColor(colors.$blue);
+        }
+      }
+    }
+
+    .contentCompact {
+      padding: 1.5rem;
+    }
+  }
+
+  .icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    display: flex;
+    background-color: colors.$dark-red;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: colors.$white;
+    }
+  }
+
+  .card__header {
+    padding: 1.5rem 2rem 0;
+  }
+
+  .card__title {
+    font-size: 1.125rem;
+    font-weight: typography.$weight-semibold;
+    color: colors.$black;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Athlete profile specific styles */
+  .profileInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+
+    @media (min-width: screenSizes.$md) {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .profileAvatar {
+      flex-shrink: 0;
+
+      img {
+        width: 8rem;
+        height: 8rem;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid colors.$dark-red;
+      }
+    }
+  }
+
+  .profileDetails {
+    flex: 1;
+    text-align: center;
+    @media (min-width: screenSizes.$md) {
+      text-align: left;
+    }
+
+    .profileName {
+      @include typography.heading-4;
+      margin-bottom: 1rem;
+    }
+  }
+  .profileGrid {
+    @include typography.body;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+
+    @media (min-width: screenSizes.$md) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .profileField {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    @media (min-width: screenSizes.$md) {
+      justify-content: flex-start;
+    }
+
+    svg {
+      color: colors.$dark-blue;
+      width: 0.8rem;
+      height: 0.8rem;
+    }
+
+    .profileFieldLabel {
+      font-weight: typography.$weight-medium;
+    }
+  }
+
+  .objective {
+    @include typography.body;
+    background-color: #eff6ff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid colors.$light-blue;
+    text-align: center;
+
+    @media (min-width: screenSizes.$md) {
+      text-align: left;
+    }
+
+    strong {
+      color: colors.$blue;
+    }
+
+    p {
+      font-size: typography.$font-sm;
+      color: colors.$blue;
+      font-weight: typography.$weight-medium;
+    }
+
+  }
+
+  /* Grid layout */
+  .ActionsGrid {
+    display: grid;
+    gap: 1.5rem;
+
+    &.grid3Cols {
+      grid-template-columns: 1fr;
+
+      @media (min-width: screenSizes.$md) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+
+  /* Action card content */
+  .actionCardHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    .actionCardInfo {
+      h3 {
+        font-size: 1.125rem;
+        font-weight: typography.$weight-semibold;
+        color: colors.$black;
+        margin: 0 0 0.25rem 0;
+      }
+      p {
+        font-size: 0.875rem;
+        color: colors.$gray;
+        margin: 0;
+      }
+    }
+  }
+
+  .actionCardButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .actionCardMeta {
+    .label {
+      font-size: 0.75rem;
+      color: colors.$gray;
+      margin-bottom: 0.5rem;
+    }
+
+    .value {
+      font-size: 0.875rem;
+      font-weight: typography.$weight-medium;
+      color: colors.$black;
+    }
+  }
+
+  /* Button styles */
+  .button {
+    padding: 0.5rem 1rem;
+    border: 1px solid colors.$gray;
+    background-color: transparent !important;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    width: 100%;
+
+    &:hover {
+      background-color: colors.$light-gray !important;
+      border-color: colors.$blue;
+    }
+  }
+
+  /* Badge styles */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    font-size: typography.$font-sm;
+    font-weight: typography.$weight-medium;
+    border-radius: 0.375rem;
+    border: 1px solid colors.$blue;
+    color: colors.$blue;
+    background-color: transparent;
+  }
 }

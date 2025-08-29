@@ -1,0 +1,14 @@
+@use '@/styles/colors';
+@use '@/styles/typography';
+
+.AvatarPlaceholder {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  background: colors.$dark-red;
+  color: colors.$white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include typography.heading-2;
+}

@@ -1,3 +1,4 @@
+export * from './AvatarPlaceholder';
 export * from './Button';
 export * from './Buttons';
 export * from './CheckInList';
