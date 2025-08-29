@@ -52,28 +52,28 @@ const AthleteAreaPage = () => {
                 <div>
                   <div className={styles.profileField}>
                     <UserIcon />
-                    <span className={styles.profileFieldLabel}>{t('Age:')}</span>
+                    <span className={styles.profileFieldLabel}>{t('Age')}:</span>
                     <span>{athleteData.age} {t('years old')}</span>
                   </div>
                   <div className={styles.profileField}>
                     <CalendarIcon />
-                    <span className={styles.profileFieldLabel}>{t('Plan:')}</span>
+                    <span className={styles.profileFieldLabel}>{t('Plan')}:</span>
                     <span>{athleteData.plan}</span>
                   </div>
                   <div className={styles.profileField}>
                     <LocationPinIcon />
-                    <span className={styles.profileFieldLabel}>{t('Frequency:')}</span>
+                    <span className={styles.profileFieldLabel}>{t('Frequency')}:</span>
                     <span>{athleteData.frequency}</span>
                   </div>
                 </div>
 
                 <div>
                   <div className={styles.profileField}>
-                    <span className={styles.profileFieldLabel}>{t('Trainning #:')}</span>
+                    <span className={styles.profileFieldLabel}>{t('Trainning #')}:</span>
                     <span className={styles.badge}>{athleteData.trainingNumber}</span>
                   </div>
                   <div className={styles.profileField}>
-                    <span className={styles.profileFieldLabel}>{t('Production:')}</span>
+                    <span className={styles.profileFieldLabel}>{t('Production')}:</span>
                     <span>{athleteData.production}</span>
                   </div>
                 </div>
@@ -81,7 +81,7 @@ const AthleteAreaPage = () => {
 
               <div className={styles.objective}>
                 <p>
-                  <strong>{t('Objective:')}</strong> {athleteData.objective}
+                  <strong>{t('Objective')}:</strong> {athleteData.objective}
                 </p>
               </div>
             </div>
@@ -142,7 +142,7 @@ const AthleteAreaPage = () => {
               </div>
             </div>
             <div className={styles.actionCardMeta}>
-              <div className={styles.label}>{t('Latest tests:')}</div>
+              <div className={styles.label}>{t('Latest tests')}:</div>
             </div>
           </div>
         </div>
