@@ -12,7 +12,7 @@ const LinkCard = (props) => {
       className={styles.LinkCard}
       to={to}
     >
-      {renderIcon({ size: '5x', width: '6rem' })}
+      {renderIcon({ size: '2x', width: '2rem' })}
 
       <span className={styles.LinkCardText}>
         {text}

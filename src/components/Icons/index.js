@@ -15,6 +15,7 @@ export * from './LocationPinIcon';
 export * from './PaperPlaneIcon';
 export * from './PenToSquareIcon';
 export * from './PlusIcon';
+export * from './RankingStarIcon';
 export * from './RightToBracket';
 export * from './UserIcon';
 export * from './UserPlusIcon';

@@ -19,53 +19,6 @@
     .content {
       padding: 2rem;
     }
-
-    &.hoverable {
-      cursor: pointer;
-      transition: border-color 0.2s;
-
-      &:hover {
-        border-color: colors.$blue;
-
-        .icon {
-          background-color: mixins.hoverColor(colors.$blue);
-        }
-      }
-    }
-
-    .contentCompact {
-      padding: 1.5rem;
-    }
-  }
-
-  .icon {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 0.5rem;
-    display: flex;
-    background-color: colors.$dark-red;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s;
-
-    svg {
-      width: 1.5rem;
-      height: 1.5rem;
-      color: colors.$white;
-    }
-  }
-
-  .card__header {
-    padding: 1.5rem 2rem 0;
-  }
-
-  .card__title {
-    font-size: 1.125rem;
-    font-weight: typography.$weight-semibold;
-    color: colors.$black;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
   }
 
   /* Athlete profile specific styles */
@@ -105,6 +58,7 @@
       margin-bottom: 1rem;
     }
   }
+
   .profileGrid {
     @include typography.body;
     display: grid;
@@ -177,28 +131,6 @@
     }
   }
 
-  /* Action card content */
-  .actionCardHeader {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-
-    .actionCardInfo {
-      h3 {
-        font-size: 1.125rem;
-        font-weight: typography.$weight-semibold;
-        color: colors.$black;
-        margin: 0 0 0.25rem 0;
-      }
-      p {
-        font-size: 0.875rem;
-        color: colors.$gray;
-        margin: 0;
-      }
-    }
-  }
-
   .actionCardButtons {
     display: flex;
     flex-direction: column;
@@ -219,14 +151,16 @@
     }
   }
 
-  /* Button styles */
-  .button {
+  /* Link button styles */
+  .linkButton {
     padding: 0.5rem 1rem;
     border: 1px solid colors.$gray;
+    border-radius: 0.375rem;
     background-color: transparent !important;
     font-size: 0.875rem;
     transition: all 0.2s;
     width: 100%;
+    text-decoration: none;
 
     &:hover {
       background-color: colors.$light-gray !important;

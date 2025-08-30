@@ -1,0 +1,72 @@
+@use '@/styles/colors';
+@use '@/styles/mixins';
+@use '@/styles/typography';
+
+/* Export all styles from AthleteAreaPage.module.scss that we need */
+.ActionCard {
+  background-color: colors.$white;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  border: 2px solid colors.$light-blue;
+  text-decoration: none;
+  
+  .content {
+    padding: 2rem;
+  }
+  
+  &.hoverable {
+    cursor: pointer;
+    transition: border-color 0.2s;
+    
+    &:hover {
+      border-color: colors.$blue;
+      
+      .icon {
+        background-color: mixins.hoverColor(colors.$blue);
+      }
+    }
+  }
+  
+  .contentCompact {
+    padding: 1.5rem;
+  }
+  
+  .icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    display: flex;
+    background-color: colors.$dark-red;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: colors.$white;
+    }
+  }
+  
+  .actionCardHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    
+    .actionCardInfo {
+      h3 {
+        font-size: 1.125rem;
+        font-weight: typography.$weight-semibold;
+        color: colors.$black;
+        margin-bottom: 0.25rem;
+      }
+      p {
+        font-size: 0.875rem;
+        color: colors.$gray;
+        margin: 0;
+      }
+    }
+  }
+}
