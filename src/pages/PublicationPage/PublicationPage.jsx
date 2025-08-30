@@ -55,8 +55,7 @@ const PublicationPage = () => {
           <>
             <div className={styles.header}>
               <h2>{publication.title}</h2>
-              {/* TODO: Format date */}
-              <p className={styles.date}>{publication.createdAt}</p>
+              <p className={styles.date}>{utils.getDateFormatted(new Date(publication.createdAt), { weekday: 'long' })}</p>
             </div>
 
             <div
