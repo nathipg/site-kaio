@@ -27,8 +27,20 @@
     "save-user-workouts": {
       "permission-denied": "You don't have permission to change users workouts"
     },
-    "save-user-workout": {
-      "permission-denied": "You don't have permission to send the workout"
+    "save-check-in": {
+      "permission-denied": "You don't have permission to send the check-in"
+    },
+    "load-check-ins": {
+      "permission-denied": "You don't have permission to load check-ins"
+    },
+    "load-publications": {
+      "auth/network-request-failed": "Network Error: Please, check your network connection"
+    },
+    "add-publication": {
+      "permission-denied": "You don't have permission to add publications"
+    },
+    "save-publication": {
+      "permission-denied": "You don't have permission to save publications"
     }
   }
 }
