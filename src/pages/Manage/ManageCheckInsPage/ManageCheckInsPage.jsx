@@ -18,6 +18,7 @@ const ManageCheckInsPage = () => {
   const checkIns = useSelector(CheckInSlice.selectors.selectAllCheckIns);
   const users = useSelector(UserSlice.selectors.selectUsers);
 
+  const [ viewLastCheckIns, setViewLastCheckIns ] = useState(true);
   const [ selectedDate, setSelectedDate ] = useState(utils.getDateFormattedForInput(new Date()));
 
   const usersMap = useMemo(() => {
@@ -59,27 +60,48 @@ const ManageCheckInsPage = () => {
   }, [ dispatch ]);
 
   useEffect(() => {
+    if(viewLastCheckIns) {
+      dispatch(CheckInSlice.actions.loadCheckIns());
+      return;
+    }
+
     if(selectedDate) {
       const date = new Date(`${selectedDate} 00:00:00`);
-      dispatch(CheckInSlice.actions.loadCheckIns(utils.getDateIsoFormat(date)));
+      dispatch(CheckInSlice.actions.loadCheckInsByDate(utils.getDateIsoFormat(date)));
     }
-  }, [ dispatch, selectedDate ]);
+  }, [ dispatch, selectedDate, viewLastCheckIns ]);
 
   return (
     <div className={styles.ManageCheckInsPage}>
       <h1>{t('Manage Check-ins')}</h1>
 
       <FieldWithLabel
-        label={t('Date')}
+        label={t('View last 100 check-ins')}
         field={(
           <Input
-            type="date"
-            name="date"
-            value={selectedDate}
-            onChange={(event) => setSelectedDate(event.target.value)}
+            type="checkbox"
+            name="view-last-100-check-ins"
+            checked={viewLastCheckIns}
+            onChange={() => setViewLastCheckIns(currentViewLastCheckIns => !currentViewLastCheckIns)}
           />
         )}
       />
+
+      {
+        !viewLastCheckIns ? (
+          <FieldWithLabel
+            label={t('Date')}
+            field={(
+              <Input
+                type="date"
+                name="date"
+                value={selectedDate}
+                onChange={(event) => setSelectedDate(event.target.value)}
+              />
+            )}
+          />
+        ) : <></>
+      }
 
       <CheckInList
         checkIns={normalizedCheckIns}

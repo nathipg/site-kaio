@@ -8,4 +8,10 @@
   span {
     white-space: nowrap;
   }
+
+  &:has([type="checkbox"]) {
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
+  }
 }
