@@ -1,8 +1,9 @@
 import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router';
 
-import { AvatarPlaceholder, Button, CalendarIcon, ClipboardCheckIcon, ClipboardListIcon, GrowlFns, Image, LinkCard, LocationPinIcon, UserIcon } from '@/components';
+import { ActionCard, AvatarPlaceholder, Button, CalendarIcon, ClipboardCheckIcon, ClipboardListIcon, GrowlFns, Image, LinkCard, LocationPinIcon, RankingStarIcon, UserIcon } from '@/components';
 import { CheckInSlice } from '@/store/slices';
 
 import styles from './AthleteAreaPage.module.scss';
@@ -34,7 +35,6 @@ const AthleteAreaPage = () => {
     <div className={styles.AthleteAreaPage}>
       <h1>{t('Athlete')}</h1>
 
-      {/* Athlete Info Card - TODO: Create new component for this */}
       <div className={styles.AthleteCard}>
         <div className={styles.content}>
           <div className={styles.profileInfo}>
@@ -89,76 +89,43 @@ const AthleteAreaPage = () => {
         </div>
       </div>
 
-      {/* Action Cards Grid - TODO: Create new component for this */}
       <div className={`${styles.ActionsGrid} ${styles.grid3Cols}`}>
-        {/* Training Card */}
-        <div className={`${styles.AthleteCard} ${styles.hoverable}`}>
-          <div className={`${styles.content} ${styles.contentCompact}`}>
-            <div className={styles.actionCardHeader}>
-              <div className={styles.icon}>
-                <ClipboardListIcon />
-              </div>
-              <div className={styles.actionCardInfo}>
-                <h3>{t('Training')}</h3>
-                <p>{t('Access your workouts')}</p>
-              </div>
-            </div>
-            <div className={styles.actionCardButtons}>
-              <Button className={styles.button}>Treino A</Button>
-              <Button className={styles.button}>Treino B</Button>
-            </div>
+        <ActionCard
+          renderIcon={(props) => <ClipboardListIcon {...props} />}
+          title={t('Training')}
+          description={t('Access your workouts')}
+          to={{ pathname: '/workout' }}
+        >
+          <div className={styles.actionCardButtons}>
+            {/* TODO: Get workout data (name / link) and change from Button to Link component */}
+            <Link className={styles.linkButton}>Treino A</Link>
+            <Link className={styles.linkButton}>Treino B</Link>
           </div>
-        </div>
+        </ActionCard>
 
-        {/* Check-ins Card */}
-        <div className={`${styles.AthleteCard} ${styles.hoverable}`}>
-          <div className={`${styles.content} ${styles.contentCompact}`}>
-            <div className={styles.actionCardHeader}>
-              <div className={styles.icon}>
-                <ClipboardCheckIcon />
-              </div>
-              <div className={styles.actionCardInfo}>
-                <h3>Check-ins</h3>
-                <p>{t('Check-in history')}</p>
-              </div>
-            </div>
-            <div className={styles.actionCardMeta}>
-              <div className={styles.label}>{t('Last check-in')}:</div>
-              <div className={styles.value}>15 de Janeiro, 2025</div>
-            </div>
+        <ActionCard
+          renderIcon={(props) => <ClipboardCheckIcon {...props} />}
+          title="Check-ins"
+          description={t('Check-in history')}
+          to={{ pathname: '/check-ins' }}
+        >
+          <div className={styles.actionCardMeta}>
+            <div className={styles.label}>{t('Last check-in')}:</div>
+            <div className={styles.value}>15 de Janeiro, 2025</div>
           </div>
-        </div>
+        </ActionCard>
 
-        {/* Tests Card */}
-        <div className={`${styles.AthleteCard} ${styles.hoverable}`}>
-          <div className={`${styles.content} ${styles.contentCompact}`}>
-            <div className={styles.actionCardHeader}>
-              <div className={styles.icon}>
-                {/* <Target /> */}
-              </div>
-              <div className={styles.actionCardInfo}>
-                <h3>{t('Physical Assessment')}</h3>
-                <p>{t('Assessment history')}</p>
-              </div>
-            </div>
-            <div className={styles.actionCardMeta}>
-              <div className={styles.label}>{t('Latest tests')}:</div>
-            </div>
+        {/* TODO: Confirm with Kaio how the Physical Assessment page will look. */}
+        {/* <ActionCard
+          renderIcon={(props) => <RankingStarIcon className='CSJ' {...props} />}
+          title={t('Physical Assessment')}
+          description={t('Assessment history')}
+        >
+          <div className={styles.actionCardMeta}>
+            <div className={styles.label}>{t('Latest tests')}:</div>
           </div>
-        </div>
+        </ActionCard> */}
       </div>
-
-      <LinkCard
-        text={t('Workout')}
-        to={{ pathname: '/workout' }}
-        renderIcon={(props) => <ClipboardListIcon {...props} />}
-      />
-
-      <LinkCard
-        text={t('Check-ins')}
-        to={{ pathname: '/check-ins' }}
-        renderIcon={(props) => <ClipboardCheckIcon {...props} />}
-      />
 
       {GrowlFns.renderSuccessGrowl({
         message: saveWorkoutMessage,

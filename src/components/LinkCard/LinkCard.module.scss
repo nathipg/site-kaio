@@ -1,16 +1,24 @@
 @use '@/styles/colors';
+@use '@/styles/typography';
+@use '@/styles/mixins';
 
 .LinkCard {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  border: 2px solid colors.$blue;
+  border: 2px solid colors.$light-blue;
   border-radius: 5px;
   color: colors.$blue;
   text-decoration: none;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: colors.$blue;
+  }
 }
 
-.LinkCardText {
-  font-size: 2rem;
+.LinkCardText {  
+  font-size: typography.$font-md;
+  font-weight: typography.$weight-medium;
 }
