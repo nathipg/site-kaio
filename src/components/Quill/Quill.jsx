@@ -1,6 +1,9 @@
+import ImageResize from 'quill-image-resize-module-react';
 import { memo } from 'react';
-import ReactQuill from 'react-quill-new';
+import ReactQuill, { Quill } from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
+
+Quill.register('modules/imageResize', ImageResize);
 
 const modules = {
   toolbar: [
@@ -10,9 +13,13 @@ const modules = {
     [ 'link', 'image' ],
     [ 'clean' ],
   ],
+  imageResize: {
+    parchment: Quill.import('parchment'),
+    modules: [ 'Resize', 'DisplaySize', 'Toolbar' ],
+  },
 };
 
-const Quill = (props) => {
+const QuillComponent = (props) => {
   const { value } = props;
   const { quillRef } = props;
   
@@ -22,10 +29,11 @@ const Quill = (props) => {
       theme="snow"
       value={value}
       modules={modules}
+      formats={[ 'image', 'width', 'height' ]}
     />
   );
 };
 
-const QuillMemo = memo(Quill);
+const QuillMemo = memo(QuillComponent);
 
 export { QuillMemo as Quill };
