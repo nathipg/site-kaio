@@ -15,6 +15,7 @@ export * from './Image';
 export * from './LinkCard';
 export * from './PublicationList';
 export * from './Quill';
+export * from './UsersList';
 export * from './Video';
 export * from './Workout';
 export * from './WorkoutsList';

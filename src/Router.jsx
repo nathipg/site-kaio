@@ -18,6 +18,7 @@ import {
   ResumePage,
   PublicationsPage,
   PublicationPage,
+  ManageUsersPage,
 } from '@/pages';
 import { UserSlice } from '@/store/slices';
 
@@ -212,6 +213,14 @@ const router = createHashRouter([
         element: (
           <ProtectedAdminRoute>
             <ManagePublicationsPage />
+          </ProtectedAdminRoute>
+        ),
+      },
+      {
+        path: 'users',
+        element: (
+          <ProtectedAdminRoute>
+            <ManageUsersPage />
           </ProtectedAdminRoute>
         ),
       },

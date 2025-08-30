@@ -5,9 +5,7 @@
 Seria legal
 - Cadastrar categorias de exercício
 - Poder filtrar os exercícios por categoria
-- Página pro usuário poder atualizar o próprio perfil
-- Página onde dá pra ver e editar os usuários
-- Página pra gerenciar os usuários
+- Alterar página do atleta pra ele mesmo e o admin poderem editar ele
 
 
 O que falta:

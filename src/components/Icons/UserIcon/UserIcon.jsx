@@ -2,9 +2,12 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { memo } from 'react';
 
-const UserIcon = () => {
+const UserIcon = (props) => {
   return (
-    <FontAwesomeIcon icon={faUser} />
+    <FontAwesomeIcon
+      icon={faUser}
+      {...props}
+    />
   );
 };
 
