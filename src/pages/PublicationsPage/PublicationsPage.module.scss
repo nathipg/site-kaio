@@ -1,21 +1,22 @@
+@use '@/styles/colors';
+@use '@/styles/typography';
+@use '@/styles/screen-sizes' as screenSizes;
+
 .PublicationsPage {
-  
-}
-
-.PublicationCard {
-  border: 1px solid black;
-  padding: 1rem;
-}
-
-.PublicationCardContent {
-  width: 100%;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-
-  p:has(img) {
-    display: none;
+  .header {
+    border-bottom: 2px solid colors.$dark-red;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    @include typography.heading-3;
+  }
+  .publicationsGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    
+    @media (min-width: screenSizes.$md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 }
 

@@ -1,9 +1,9 @@
 import { memo, useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useSearchParams } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
 
-import { GrowlFns } from '@/components';
+import { ArrowLeftLongIcon, Button, GrowlFns } from '@/components';
 import { REQUEST_STATUS } from '@/constants';
 import { PublicationSlice } from '@/store/slices';
 import { utils } from '@/utils';
@@ -53,12 +53,23 @@ const PublicationPage = () => {
       {
         publication ? (
           <>
-            <h2>{publication.title}</h2>
+            <div className={styles.header}>
+              <h2>{publication.title}</h2>
+              {/* TODO: Format date */}
+              <p className={styles.date}>{publication.createdAt}</p>
+            </div>
 
             <div
               className={styles.PublicationCardContent}
               dangerouslySetInnerHTML={{ __html: content }}
             />
+            
+            <Link className={styles.btnBack} to={{ pathname: '/publications' }}>
+              <Button>
+                <ArrowLeftLongIcon />
+                {t('Back')}
+              </Button>
+            </Link>
           </>
         ) : <p>{t(isPublicationLoading ? 'Loading...' : 'Publication not found')}</p>
       }

@@ -14,6 +14,7 @@ export * from './Growl';
 export * from './Icons';
 export * from './Image';
 export * from './LinkCard';
+export * from './PublicationCard';
 export * from './PublicationList';
 export * from './Quill';
 export * from './UsersList';

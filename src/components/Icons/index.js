@@ -1,3 +1,4 @@
+export * from './ArrowLeftLongIcon';
 export * from './BarsIcon';
 export * from './CalendarIcon';
 export * from './CaretDownIcon';
