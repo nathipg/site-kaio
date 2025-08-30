@@ -67,13 +67,14 @@ const SignUpPage = () => {
           <Button
             category={ButtonConstants.ButtonCategories.PRIMARY}
             textOnly={true}
+            className={styles.btnSignIn}
           >
             {t('Already have an account? Sign in')}
           </Button>
         </Link>
       </div>
 
-      <form onSubmit={onSubmitSignUp}>
+      <form onSubmit={onSubmitSignUp} className={styles.form}>
         <FieldWithLabel
           label={t('Fullname')}
           field={(
@@ -106,6 +107,7 @@ const SignUpPage = () => {
             <Input
               type="text"
               name="phone-number"
+              maxLength="15"
               value={phoneNumber}
               required={true}
               onChange={(event) => setPhoneNumber(event.target.value)}
@@ -165,83 +167,86 @@ const SignUpPage = () => {
           )}
         />
 
-        <h3>{t('Anamnese')}</h3>
+        <div className={styles.Anamnese}>
+          <h3>{t('Anamnese')}</h3>
 
-        <p>{t('In order for you to access your workouts, I\'ll need some information. We\'ll conduct a medical history to ensure training safety. Feel free to share whatever you think is relevant.')}</p>
+          <p>{t('In order for you to access your workouts, I\'ll need some information. We\'ll conduct a medical history to ensure training safety. Feel free to share whatever you think is relevant.')}</p>
 
-        <FieldWithLabel
-          label={t('What is your goal with training?')}
-          field={(
-            <Input
-              type="text"
-              name="goal"
-              value={goal}
-              required={true}
-              onChange={(event) => setGoal(event.target.value)}
-            />
-          )}
-        />
+          <FieldWithLabel
+            label={t('What is your goal with training?')}
+            field={(
+              <Input
+                type="text"
+                name="goal"
+                value={goal}
+                required={true}
+                onChange={(event) => setGoal(event.target.value)}
+              />
+            )}
+          />
 
-        <FieldWithLabel
-          label={t('Do you have any limitations when it comes to exercise?')}
-          field={(
-            <Input
-              type="text"
-              name="limitations"
-              value={limitations}
-              required={true}
-              onChange={(event) => setLimitations(event.target.value)}
-            />
-          )}
-        />
+          <FieldWithLabel
+            label={t('Do you have any limitations when it comes to exercise?')}
+            field={(
+              <Input
+                type="text"
+                name="limitations"
+                value={limitations}
+                required={true}
+                onChange={(event) => setLimitations(event.target.value)}
+              />
+            )}
+          />
 
-        <FieldWithLabel
-          label={t('Do you have any medical restrictions?')}
-          field={(
-            <Input
-              type="text"
-              name="medical-restrictions"
-              value={medicalRestrictions}
-              required={true}
-              onChange={(event) => setMedicalRestrictions(event.target.value)}
-            />
-          )}
-        />
+          <FieldWithLabel
+            label={t('Do you have any medical restrictions?')}
+            field={(
+              <Input
+                type="text"
+                name="medical-restrictions"
+                value={medicalRestrictions}
+                required={true}
+                onChange={(event) => setMedicalRestrictions(event.target.value)}
+              />
+            )}
+          />
 
-        <FieldWithLabel
-          label={t('Are you taking any medicine?')}
-          field={(
-            <Input
-              type="text"
-              name="medicine"
-              value={medicine}
-              required={true}
-              onChange={(event) => setMedicine(event.target.value)}
-            />
-          )}
-        />
+          <FieldWithLabel
+            label={t('Are you taking any medicine?')}
+            field={(
+              <Input
+                type="text"
+                name="medicine"
+                value={medicine}
+                required={true}
+                onChange={(event) => setMedicine(event.target.value)}
+              />
+            )}
+          />
 
-        <FieldWithLabel
-          label={t('I am aware of and responsible for the information provided here')}
-          field={(
-            <Input
-              type="checkbox"
-              name="confirm-information"
-              value={confirmInformation}
-              required={true}
-              onChange={(event) => setConfirmInformation(event.target.value)}
-            />
-          )}
-        />
+          <FieldWithLabel
+            label={t('I am aware of and responsible for the information provided here')}
+            field={(
+              <Input
+                type="checkbox"
+                name="confirm-information"
+                value={confirmInformation}
+                required={true}
+                onChange={(event) => setConfirmInformation(event.target.value)}
+              />
+            )}
+          />
+        </div>
+
+        <p className={styles.disclaimer}>{t('I recommend that you undergo a medical examination before starting training to obtain the professional\'s approval')}</p>
 
         <Button
           category={ButtonConstants.ButtonCategories.SUCCESS}
           icon={<UserPlusIcon />}
+          className={styles.btnSubmit}
         >
           {t('Sign up')}
         </Button>
-
-        <p>{t('I recommend that you undergo a medical examination before starting training to obtain the professional\'s approval')}</p>
       </form>
 
       {GrowlFns.renderErrorGrowl({

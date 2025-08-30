@@ -10,6 +10,7 @@
   border-radius: 5px;
   width: fit-content;
   cursor: pointer;
+  transition: background-color 0.2s;
 
   &[data-text-only="false"] {
     &[data-category="DEFAULT"] {

@@ -38,7 +38,7 @@ const SignInPage = () => {
         <p>{t('Access your content')}</p>
       </div>
 
-      <form onSubmit={onSubmitSignIn}>
+      <form onSubmit={onSubmitSignIn} className={styles.form}>
         <FieldWithLabel
           label={t('Email')}
           field={(
@@ -66,6 +66,7 @@ const SignInPage = () => {
         />
 
         <Button
+          className={styles.btnSignIn}
           category={ButtonConstants.ButtonCategories.SUCCESS}
           icon={<RightToBracketIcon />}
         >
@@ -76,6 +77,7 @@ const SignInPage = () => {
           <Button
             category={ButtonConstants.ButtonCategories.PRIMARY}
             textOnly={true}
+            className={styles.btnSignUp}
           >
             {t('Don\'t have an account? Sign up')}
           </Button>
