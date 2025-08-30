@@ -61,6 +61,21 @@ export const getMainUserLanguage = () => {
   return language;
 };
 
+export const getPublicationContentByUserLanguages = (publication) => {
+  const userLanguagesList = getUserMainLanguagesList();
+
+  const contentsByUserLanguage = userLanguagesList.map((language) => {
+    return publication.content[language] || null;
+  }).filter(Boolean);
+
+  const contentsByUserLanguageWithDefaultValues = [
+    ...contentsByUserLanguage,
+    publication.content.en || publication.content.pt,
+  ];
+
+  return contentsByUserLanguageWithDefaultValues[0];
+};
+
 export const getUniqueId = () => {
   return uuid();
 };
@@ -71,6 +86,16 @@ export const getUserLanguage = () => {
   }
   
   return navigator.language;
+};
+
+export const getUserMainLanguagesList = () => {
+  if (navigator.languages !== undefined) {
+    return navigator.languages.map(language => language.includes('-') ? language.split('-')[0] : language);
+  }
+
+  const language = navigator.language.includes('-') ? navigator.language.split('-')[0] : navigator.language;
+  
+  return [ language ];
 };
 
 export const isArrayEmpty = (array) => {

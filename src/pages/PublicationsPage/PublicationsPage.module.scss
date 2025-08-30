@@ -1,0 +1,21 @@
+.PublicationsPage {
+  
+}
+
+.PublicationCard {
+  border: 1px solid black;
+  padding: 1rem;
+}
+
+.PublicationCardContent {
+  width: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  p:has(img) {
+    display: none;
+  }
+}
+

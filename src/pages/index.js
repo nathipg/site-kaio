@@ -2,6 +2,8 @@ export * from './AthleteAreaPage';
 export * from './CheckInsPage';
 export * from './HomePage';
 export * from './Manage';
+export * from './PublicationPage';
+export * from './PublicationsPage';
 export * from './ResumePage';
 export * from './SignInPage';
 export * from './SignUpPage';

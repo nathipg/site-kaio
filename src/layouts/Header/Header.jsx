@@ -88,6 +88,8 @@ const Header = () => {
           ) : <></>
         }
 
+        <Link to={{ pathname: '/publications' }} onClick={closeMenu}>{t('Publications')}</Link>
+
         {
           isLoggedIn && loggedUser?.isAdmin ? (
             <Link to={{ pathname: '/manage' }} onClick={closeMenu}>{t('Manage')}</Link>

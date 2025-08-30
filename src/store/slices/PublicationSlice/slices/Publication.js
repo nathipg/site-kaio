@@ -47,6 +47,7 @@ const reducers = {
 // Async Thunk
 const asyncThunk = {
   loadPublications: createAsyncThunk(`${PUBLICATION_SLICE_NAME}/loadPublications`, async () => await publicationsService.loadPublications()),
+  loadPublishedPublications: createAsyncThunk(`${PUBLICATION_SLICE_NAME}/loadPublishedPublications`, async () => await publicationsService.loadPublishedPublications()),
   addPublication: createAsyncThunk(`${PUBLICATION_SLICE_NAME}/addPublication`, async (data) => await publicationsService.addPublication(data)),
   savePublication: createAsyncThunk(`${PUBLICATION_SLICE_NAME}/savePublication`, async (data) => await publicationsService.savePublication(data)),
   removePublication: createAsyncThunk(`${PUBLICATION_SLICE_NAME}/removePublication`, async (id) => await publicationsService.removePublication(id)),
@@ -65,6 +66,20 @@ const extraReducers = (builder) => {
     .addCase(asyncThunk.loadPublications.rejected, (state, action) => {
       state.loadPublicationsStatus = REQUEST_STATUS.FAILED;
       state.loadPublicationsError = t(`error-message.load-publications.${action.error.code}`);
+    });
+
+  builder
+    .addCase(asyncThunk.loadPublishedPublications.pending, (state) => {
+      state.loadPublicationsStatus = REQUEST_STATUS.LOADING;
+    })
+    .addCase(asyncThunk.loadPublishedPublications.fulfilled, (state, action) => {
+      state.loadPublicationsStatus = REQUEST_STATUS.SUCCEEDED;
+      state.publications = action.payload;
+    })
+    .addCase(asyncThunk.loadPublishedPublications.rejected, (state, action) => {
+      state.loadPublicationsStatus = REQUEST_STATUS.FAILED;
+      state.loadPublicationsError = t(`error-message.load-publications.${action.error.code}`);
+      console.error(action.error);
     });
 
   builder
