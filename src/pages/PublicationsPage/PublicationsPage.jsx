@@ -33,7 +33,7 @@ const PublicationsPage = () => {
           const content = utils.getPublicationContentByUserLanguages(publication);
 
           return (
-            <PublicationCard content={content} publication={publication} />
+            <PublicationCard key={publication.id} content={content} publication={publication} />
           );
         })}
       </div>

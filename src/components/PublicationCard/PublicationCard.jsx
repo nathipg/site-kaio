@@ -11,7 +11,7 @@ const PublicationCard = (props) => {
   const { t } = useTranslation();
 
   return (
-    <div className={styles.PublicationCard} key={publication.id}>
+    <div className={styles.PublicationCard}>
       <h2>{publication.title}</h2>
 
       <div
