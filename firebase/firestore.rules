@@ -26,7 +26,7 @@ service cloud.firestore {
     }
 
     match /publications/{publicationId} {
-    	allow read: if resource.date.isPublished || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin;
+    	allow read: if resource.data.isPublished || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin;
       allow write: if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin;
     }
   }
