@@ -98,10 +98,12 @@ const AthleteAreaPage = () => {
           description={t('Check-in history')}
           to={{ pathname: '/check-ins' }}
         >
-          {/* <div className={styles.actionCardMeta}>
+          <div className={styles.actionCardMeta}>
             <div className={styles.label}>{t('Last check-in')}:</div>
-            <div className={styles.value}>15 de Janeiro, 2025</div>
-          </div> */}
+            <div className={styles.value}>
+              {athleteData?.lastCheckInDate ? utils.getDateFormatted(new Date(athleteData.lastCheckInDate), { weekday: 'long' }) : t('No check-in found')}
+            </div>
+          </div>
         </ActionCard>
 
         {/* TODO: Confirm with Kaio how the Physical Assessment page will look. */}

@@ -36,6 +36,7 @@ const reducers = {
 const asyncThunk = {
   loadUsers: createAsyncThunk(`${USER_SLICE_NAME}/loadUsers`, async () => await usersService.loadUsers()),
   saveUserWorkouts: createAsyncThunk(`${USER_SLICE_NAME}/saveUserWorkouts`, async (data) => await usersService.saveUserWorkouts(data)),
+  saveUserLastCheckInDate: createAsyncThunk(`${USER_SLICE_NAME}/saveUserLastCheckInDate`, async (data) => await usersService.saveUserLastCheckInDate(data)),
 };
 
 // Extra Reducers
@@ -65,6 +66,19 @@ const extraReducers = (builder) => {
     .addCase(asyncThunk.saveUserWorkouts.rejected, (state, action) => {
       state.saveUserWorkoutsStatus = REQUEST_STATUS.FAILED;
       state.saveUserWorkoutsError = t(`error-message.save-user-workouts.${action.error.code}`);
+    })
+  ;
+
+  builder
+    .addCase(asyncThunk.saveUserLastCheckInDate.pending, (state) => {
+      state.saveUserLastCheckInDateStatus = REQUEST_STATUS.LOADING;
+    })
+    .addCase(asyncThunk.saveUserLastCheckInDate.fulfilled, (state) => {
+      state.saveUserLastCheckInDateStatus = REQUEST_STATUS.SUCCEEDED;
+    })
+    .addCase(asyncThunk.saveUserLastCheckInDate.rejected, (state, action) => {
+      state.saveUserLastCheckInDateStatus = REQUEST_STATUS.FAILED;
+      state.saveUserLastCheckInDateError = t(`error-message.save-user-last-check-in-date.${action.error.code}`);
     })
   ;
 };
