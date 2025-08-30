@@ -12,7 +12,6 @@ O que fica pra depois:
 - Alterar página do atleta pra ele mesmo e o admin poderem editar ele
 - Cadastro e exibição de cursos
 - Esqueci minha senha
-- Quill ajuste imagem
 
 
 Conversar com Kaio
