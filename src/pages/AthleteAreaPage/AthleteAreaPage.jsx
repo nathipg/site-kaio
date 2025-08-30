@@ -1,35 +1,41 @@
-import { memo, useCallback } from 'react';
+import { memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router';
+import { useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router';
 
-import { ActionCard, AvatarPlaceholder, Button, CalendarIcon, ClipboardCheckIcon, ClipboardListIcon, GrowlFns, Image, LinkCard, LocationPinIcon, RankingStarIcon, UserIcon } from '@/components';
-import { CheckInSlice } from '@/store/slices';
+import { ActionCard, AvatarPlaceholder, CalendarIcon, ClipboardCheckIcon, ClipboardListIcon, Image, LocationPinIcon, UserIcon } from '@/components';
+import { UserSlice } from '@/store/slices';
+import { utils } from '@/utils';
 
 import styles from './AthleteAreaPage.module.scss';
 
 const AthleteAreaPage = () => {
-  // TODO: Get real data and remove this placeholder object
-  const athleteData = {
-    name: 'Cauê da Silva',
-    age: 28,
-    plan: 'Presencial 2x/semana',
-    frequency: '5x semana',
-    trainingNumber: '#1/2025',
-    objective: 'Fortalecer ombro e joelho, definição e prevenção de lesão',
-    production: '11/1',
-    // avatar: '/professional-athlete-portrait.png',
-  };
-
   const { t } = useTranslation();
 
-  const dispatch = useDispatch();
+  const [ searchParams ] = useSearchParams();
 
-  const saveWorkoutMessage = useSelector(CheckInSlice.selectors.selectSaveCheckInMessage);
+  const athleteId = searchParams.get('uid') || null;
 
-  const onCloseSaveWorkoutSuccessGrowl = useCallback(() => {
-    dispatch(CheckInSlice.actions.clearSaveCheckInMessage());
-  }, [ dispatch ]);
+  const loggedUser = useSelector(UserSlice.selectors.selectLoggedUser);
+  const selectedAthlete = useSelector(UserSlice.selectors.selectUserByUid(athleteId));
+
+  const athleteData = useMemo(() => {
+    if(!athleteId) {
+      return {
+        plan: '',
+        frequency: '',
+        ...(loggedUser || {}),
+        age: utils.calculateAge(loggedUser?.birthdate),
+      };
+    }
+
+    return {
+      plan: '',
+      frequency: '',
+      ...(selectedAthlete || {}),
+      age: utils.calculateAge(loggedUser?.birthdate),
+    };
+  }, [ athleteId, loggedUser, selectedAthlete ]);
 
   return (
     <div className={styles.AthleteAreaPage}>
@@ -41,12 +47,12 @@ const AthleteAreaPage = () => {
             <div className={styles.profileAvatar}>
               {athleteData.avatar
                 ? <Image src={athleteData.avatar} />
-                : <AvatarPlaceholder userName={athleteData.name} />
+                : <AvatarPlaceholder userName={athleteData.fullName} />
               }
             </div>
 
             <div className={styles.profileDetails}>
-              <h2 className={styles.profileName}>{athleteData.name}</h2>
+              <h2 className={styles.profileName}>{athleteData.fullName}</h2>
 
               <div className={styles.profileGrid}>
                 <div>
@@ -66,22 +72,11 @@ const AthleteAreaPage = () => {
                     <span>{athleteData.frequency}</span>
                   </div>
                 </div>
-
-                <div>
-                  <div className={styles.profileField}>
-                    <span className={styles.profileFieldLabel}>{t('Trainning #')}:</span>
-                    <span className={styles.badge}>{athleteData.trainingNumber}</span>
-                  </div>
-                  <div className={styles.profileField}>
-                    <span className={styles.profileFieldLabel}>{t('Production')}:</span>
-                    <span>{athleteData.production}</span>
-                  </div>
-                </div>
               </div>
 
               <div className={styles.objective}>
                 <p>
-                  <strong>{t('Objective')}:</strong> {athleteData.objective}
+                  <strong>{t('Objective')}:</strong> {athleteData.goal}
                 </p>
               </div>
             </div>
@@ -95,13 +90,7 @@ const AthleteAreaPage = () => {
           title={t('Training')}
           description={t('Access your workouts')}
           to={{ pathname: '/workout' }}
-        >
-          <div className={styles.actionCardButtons}>
-            {/* TODO: Get workout data (name / link) and change from Button to Link component */}
-            <Link className={styles.linkButton}>Treino A</Link>
-            <Link className={styles.linkButton}>Treino B</Link>
-          </div>
-        </ActionCard>
+        />
 
         <ActionCard
           renderIcon={(props) => <ClipboardCheckIcon {...props} />}
@@ -109,10 +98,10 @@ const AthleteAreaPage = () => {
           description={t('Check-in history')}
           to={{ pathname: '/check-ins' }}
         >
-          <div className={styles.actionCardMeta}>
+          {/* <div className={styles.actionCardMeta}>
             <div className={styles.label}>{t('Last check-in')}:</div>
             <div className={styles.value}>15 de Janeiro, 2025</div>
-          </div>
+          </div> */}
         </ActionCard>
 
         {/* TODO: Confirm with Kaio how the Physical Assessment page will look. */}
@@ -126,11 +115,6 @@ const AthleteAreaPage = () => {
           </div>
         </ActionCard> */}
       </div>
-
-      {GrowlFns.renderSuccessGrowl({
-        message: saveWorkoutMessage,
-        onCloseGrowl: onCloseSaveWorkoutSuccessGrowl,
-      })}
     </div>
   );
 };

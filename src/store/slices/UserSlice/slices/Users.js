@@ -74,6 +74,9 @@ const selectors = {
   selectUsers: state => {
     return state.users.users;
   },
+  selectUserByUid: (userUid) => (state) => {
+    return state.users.users.find(user => user.uid === userUid);
+  },
   selectLoadUsersError: (state) => {
     return state.users.loadUsersError;
   },

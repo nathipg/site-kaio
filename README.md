@@ -14,6 +14,8 @@ O que falta:
 - Adicionar upload de foto na página do atleta
 - Publicações (Falta ajusta o layout)
 - Cadastro e exibição de cursos
+- Alterar Check-ins pra pegar os últimos 20, caso a data esteja em branco
+- Esqueci minha senha
 
 
 Conversar com Kaio
