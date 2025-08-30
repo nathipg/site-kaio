@@ -38,6 +38,13 @@ const PublicationPage = () => {
     return utils.getPublicationContentByUserLanguages(publication);
   }, [ publication ]);
 
+  const title = useMemo(() => {
+    if(!publication) {
+      return null;
+    }
+    return utils.getPublicationTitleByUserLanguages(publication);
+  }, [ publication ]);
+
   const onCloseLoadPublicationsErrorGrowl = useCallback(() => {
     dispatch(PublicationSlice.actions.clearLoadPublicationsError());
   }, [ dispatch ]);
@@ -54,7 +61,7 @@ const PublicationPage = () => {
         publication ? (
           <>
             <div className={styles.header}>
-              <h2>{publication.title}</h2>
+              <h2>{title}</h2>
               <p className={styles.date}>{utils.getDateFormatted(new Date(publication.createdAt), { weekday: 'long' })}</p>
             </div>
 

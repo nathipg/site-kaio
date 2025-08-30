@@ -23,7 +23,7 @@ const ManagePublicationsPage = () => {
     const now = utils.getDateIsoFormat(new Date());
 
     dispatch(PublicationSlice.actions.addPublication({
-      title: 'TEMP',
+      title: {},
       content: {},
       isPublished: false,
       createdAt: now,

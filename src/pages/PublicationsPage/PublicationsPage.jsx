@@ -1,11 +1,9 @@
 import { memo, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router';
 
-import { Button, ButtonConstants, GrowlFns, PublicationCard } from '@/components';
+import { GrowlFns, PublicationCard } from '@/components';
 import { PublicationSlice } from '@/store/slices';
-import { utils } from '@/utils';
 
 import styles from './PublicationsPage.module.scss';
 
@@ -30,10 +28,8 @@ const PublicationsPage = () => {
       <h2 className={styles.header}>{t('Publications')}</h2>
       <div className={styles.publicationsGrid}>
         {publications.map((publication) => {
-          const content = utils.getPublicationContentByUserLanguages(publication);
-
           return (
-            <PublicationCard key={publication.id} content={content} publication={publication} />
+            <PublicationCard key={publication.id} publication={publication} />
           );
         })}
       </div>

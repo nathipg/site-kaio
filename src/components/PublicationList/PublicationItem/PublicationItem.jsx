@@ -78,6 +78,7 @@ const PublicationItem = (props) => {
         item={item}
         editMode={editMode}
         isExpanded={isExpanded}
+        selectedLanguage={selectedLanguage}
         onChangeExpandedState={onChangeExpandedState}
         onUpdateItemProperty={onUpdateItemProperty}
       />

@@ -89,6 +89,21 @@ export const getPublicationContentByUserLanguages = (publication) => {
   return contentsByUserLanguageWithDefaultValues[0];
 };
 
+export const getPublicationTitleByUserLanguages = (publication) => {
+  const userLanguagesList = getUserMainLanguagesList();
+
+  const titlesByUserLanguage = userLanguagesList.map((language) => {
+    return publication.title[language] || null;
+  }).filter(Boolean);
+
+  const titlesByUserLanguageWithDefaultValues = [
+    ...titlesByUserLanguage,
+    publication.title.en || publication.title.pt,
+  ];
+
+  return titlesByUserLanguageWithDefaultValues[0];
+};
+
 export const getUniqueId = () => {
   return uuid();
 };

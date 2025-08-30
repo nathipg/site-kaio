@@ -3,16 +3,20 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
 import { Button, ButtonConstants } from '@/components';
+import { utils } from '@/utils';
 
 import styles from './PublicationCard.module.scss';
 
 const PublicationCard = (props) => {
-  const { content, publication } = props;
+  const { publication } = props;
   const { t } = useTranslation();
+
+  const content = utils.getPublicationContentByUserLanguages(publication);
+  const title = utils.getPublicationTitleByUserLanguages(publication);
 
   return (
     <div className={styles.PublicationCard}>
-      <h2>{publication.title}</h2>
+      <h2>{title}</h2>
 
       <div
         className={styles.PublicationCardContent}
