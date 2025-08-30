@@ -22,6 +22,9 @@ const reducers = {
   confirmPasswordError: (state) => {
     state.signUpError = t('error-message.sign-up-user.confirm-password-does-not-match');
   },
+  missingConfirmError: (state) => {
+    state.signUpError = t('error-message.sign-up-user.missing-confirm-error');
+  },
 };
 
 // Async Thunk

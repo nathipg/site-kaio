@@ -5,7 +5,8 @@
       "auth/email-already-in-use": "Já existe uma conta com esse email",
       "auth/missing-password": "Por favor, insira uma senha com pelo menos 6 caracteres",
       "auth/weak-password": "Por favor, insira uma senha com pelo menos 6 caracteres",
-      "confirm-password-does-not-match": "Sua senha e a senha de confirmação devem ser iguais"
+      "confirm-password-does-not-match": "Sua senha e a senha de confirmação devem ser iguais",
+      "missing-confirm-error": "Confirmação de informações faltando"
     },
     "sign-in-user": {
       "auth/invalid-email": "Usuário não encontrado",

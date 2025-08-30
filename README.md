@@ -8,10 +8,9 @@ Seria legal
 
 O que fica pra depois:
 - Adicionar upload de foto na página do atleta
-- Colocar dados reais na página do atleta
-- Alterar página do atleta pra ele mesmo e o admin poderem editar ele
 - Cadastro e exibição de cursos
 - Esqueci minha senha
+- Fazer com que alguns campos só possam ser editados pelo admin
 
 
 Conversar com Kaio

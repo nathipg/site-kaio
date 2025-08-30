@@ -1,0 +1,41 @@
+@use '@/styles/colors';
+
+.UserForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 1rem;
+  
+  .btnSignIn {
+    width: 100%;
+    padding: 1rem;
+    place-content: center;
+  }
+  
+  .Anamnese {
+    margin-top: 2rem;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .btnSubmit {
+    width: 100%;
+    padding: 1rem;
+    place-content: center;
+    margin: 0 auto;
+    
+    @media (min-width: 576px) {
+      width: 350px;
+    }
+  }
+  
+  .disclaimer {
+    background-color: colors.$light-gray;
+    text-align: center;
+    color: colors.$black;
+    border-radius: 5px;
+    padding: 1rem;
+  }
+}

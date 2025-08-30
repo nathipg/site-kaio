@@ -1,9 +1,10 @@
-import { memo, useMemo } from 'react';
+import { memo, useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router';
 
-import { ActionCard, AvatarPlaceholder, CalendarIcon, ClipboardCheckIcon, ClipboardListIcon, Image, LocationPinIcon, UserIcon } from '@/components';
+import { ActionCard, AvatarPlaceholder, CalendarIcon, ClipboardCheckIcon, ClipboardListIcon, GrowlFns, Image, LocationPinIcon, UserForm, UserFormConstants, UserIcon } from '@/components';
+import { REQUEST_STATUS } from '@/constants';
 import { UserSlice } from '@/store/slices';
 import { utils } from '@/utils';
 
@@ -12,12 +13,17 @@ import styles from './AthleteAreaPage.module.scss';
 const AthleteAreaPage = () => {
   const { t } = useTranslation();
 
+  const dispatch = useDispatch();
+
   const [ searchParams ] = useSearchParams();
 
   const athleteId = searchParams.get('uid') || null;
 
   const loggedUser = useSelector(UserSlice.selectors.selectLoggedUser);
   const selectedAthlete = useSelector(UserSlice.selectors.selectUserByUid(athleteId));
+  const saveUserError = useSelector(UserSlice.selectors.selectSaveUserError);
+  const saveUserStatus = useSelector(UserSlice.selectors.selectSaveUserStatus);
+  const saveUserSuccessMessage = useSelector(UserSlice.selectors.selectSaveUserSuccessMessage);
 
   const athleteData = useMemo(() => {
     if(!athleteId) {
@@ -36,6 +42,28 @@ const AthleteAreaPage = () => {
       age: utils.calculateAge(loggedUser?.birthdate),
     };
   }, [ athleteId, loggedUser, selectedAthlete ]);
+
+  const onSubmitSaveUser = useCallback((data) => {
+    dispatch(UserSlice.actions.saveUser({
+      ...data,
+      uid: athleteData.uid,
+    }));
+  }, [ athleteData.uid, dispatch ]);
+
+  const onCloseSaveUserErrorGrowl = useCallback(() => {
+    dispatch(UserSlice.actions.clearSaveUserError());
+  }, [ dispatch ]);
+
+  const onCloseSaveUserSuccessGrowl = useCallback(() => {
+    dispatch(UserSlice.actions.clearSaveUserSuccessMessage());
+  }, [ dispatch ]);
+
+  useEffect(() => {
+    if(saveUserStatus == REQUEST_STATUS.SUCCEEDED) {
+      dispatch(UserSlice.actions.loadUser(loggedUser));
+      dispatch(UserSlice.actions.clearSaveUserState());
+    }
+  }, [ dispatch, loggedUser, saveUserStatus ]);
 
   return (
     <div className={styles.AthleteAreaPage}>
@@ -117,6 +145,30 @@ const AthleteAreaPage = () => {
           </div>
         </ActionCard> */}
       </div>
+
+      <div className={styles.AthleteCard}>
+        <div className={styles.content}>
+          <div className={styles.profileInfo}>
+            <div className={styles.profileDetails}>
+              <UserForm
+                mode={UserFormConstants.USER_FORM_MODES.ADMIN_EDIT}
+                initialData={athleteData}
+                onSubmit={onSubmitSaveUser}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {GrowlFns.renderSuccessGrowl({
+        message: saveUserSuccessMessage,
+        onCloseGrowl: onCloseSaveUserSuccessGrowl,
+      })}
+
+      {GrowlFns.renderErrorGrowl({
+        message: saveUserError,
+        onCloseGrowl: onCloseSaveUserErrorGrowl,
+      })}
     </div>
   );
 };

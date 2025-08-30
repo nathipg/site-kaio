@@ -46,12 +46,14 @@ export const loadUsers = async () => {
   return users;
 };
 
-export const saveUserLastCheckInDate = async (data) => {
-  const { uid, lastCheckInDate } = data;
+export const saveUser = async (data) => {
+  const { uid, ...otherData } = data;
 
   const userRef = doc(db, DB_KEYS.USERS, uid);
 
-  await setDoc(userRef, { lastCheckInDate }, { merge: true });
+  await setDoc(userRef, { ...otherData }, { merge: true });
+
+  return data;
 };
 
 export const saveUserWorkouts = async (data) => {

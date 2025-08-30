@@ -5,7 +5,8 @@
       "auth/email-already-in-use": "An account with that email already exists",
       "auth/missing-password": "Please, insert a password with at least 6 characters",
       "auth/weak-password": "Please, insert a password with at least 6 characters",
-      "error-message.sign-up-user.confirm-password-does-not-match": "Your password and confirmation password must match"
+      "confirm-password-does-not-match": "Your password and confirmation password must match",
+      "missing-confirm-error": "Missing confirm info"
     },
     "sign-in-user": {
       "auth/invalid-email": "User not found",

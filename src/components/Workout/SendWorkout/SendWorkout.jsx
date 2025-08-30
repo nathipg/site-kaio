@@ -34,7 +34,7 @@ const SendWorkout = (props) => {
     };
 
     dispatch(CheckInSlice.actions.saveCheckIn(workoutData));
-    dispatch(UserSlice.actions.saveUserLastCheckInDate({
+    dispatch(UserSlice.actions.saveUser({
       lastCheckInDate: now,
       uid: loggedUser.uid,
     }));
